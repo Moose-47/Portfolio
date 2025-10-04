@@ -92,6 +92,10 @@ h2 {
     color: #fff;
 }
 
+#about p {
+    margin-bottom: 1rem; /* adds space after each paragraph */
+}
+
 /* Project Blocks */
 .project {
     background: #2a2a2a;
