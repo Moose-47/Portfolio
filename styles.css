@@ -19,8 +19,17 @@ header {
     color: #fff;
     padding: 1rem;
     text-align: center;
-    position: relative; /* ⬅️ important: allows icons to anchor top-right */
+    position: relative; /* important: allows icons to anchor top-right */
 }
+    /* Logo */
+    .logo {
+        max-width: 400px; /* adjust size */
+        height: auto;
+    }
+
+    .logo-container {
+        text-align: center; 
+    }
 
     /* Name & Subtitle */
     header h1 {
