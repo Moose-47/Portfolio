@@ -14,6 +14,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background: #1e1e1e !important;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII='); /* optional 1px image trick */
     color: #e0e0e0 !important;
     overflow-x: hidden;
 }
