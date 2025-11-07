@@ -3,20 +3,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    forced-color-adjust: none !important;
+    -webkit-print-color-adjust: exact !important;
 }
 
 html {
     color-scheme: dark !important;
-    forced-color-adjust: none !important; 
+    background-color: #1e1e1e !important;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII=') !important;
+    color: #e0e0e0 !important;
+    forced-color-adjust: none !important;
 }
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background: #1e1e1e !important;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII='); /* optional 1px image trick */
+    background-color: #1e1e1e !important;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII=') !important;
     color: #e0e0e0 !important;
     overflow-x: hidden;
+    forced-color-adjust: none !important;
 }
 
 /* HEADER */
@@ -26,6 +32,7 @@ header {
     padding: 1rem;
     text-align: center;
     position: relative;
+    forced-color-adjust: none !important;
 }
 
 .logo {
@@ -81,12 +88,15 @@ main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
-    background-color: #1e1e1e !important; /* explicit background */
+    background-color: #1e1e1e !important;
+    color: #ddd !important;
+    forced-color-adjust: none !important;
 }
 
 section {
     margin-bottom: 3rem;
-    background-color: #1e1e1e !important; /* explicit background */
+    background-color: #1e1e1e !important;
+    color: #ddd !important;
 }
 
 h2 {
@@ -97,32 +107,34 @@ h2 {
     color: #fff;
 }
 
+/* ABOUT & PROJECT TEXT */
 #about p,
 .project-content p {
     margin-bottom: 1rem;
     line-height: 1.6;
-    color: #ddd; /* soft white text */
+    color: #ddd;
     font-size: 1rem;
 }
 
 #about em,
 .project-content em {
-    color: #aaa; /* muted italic text */
+    color: #aaa;
     font-style: italic;
 }
 
 #about strong,
 .project-content strong {
-    color: #fff; /* keep bold text bright */
+    color: #fff;
 }
 
 /* PROJECT CONTAINERS */
 .project {
-    background-color: #2a2a2a !important; /* explicit background */
+    background-color: #2a2a2a !important;
     border-radius: 8px;
     margin-bottom: 1.2rem;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    forced-color-adjust: none !important;
 }
 
 /* DROPDOWN HEADER (clickable bar) */
@@ -153,7 +165,6 @@ h2 {
         font-size: 1.1rem;
     }
 
-/* GITHUB LINK (in bar) */
 .github-link {
     color: #fff;
     font-size: 1.2rem;
@@ -172,17 +183,13 @@ h2 {
     transition: transform 0.3s ease;
 }
 
-    .dropdown-icon.rotated {
-        transform: rotate(180deg);
-    }
-
     .dropdown-icon.rotated,
     .dropdown-arrow.rotated {
         transform: rotate(180deg);
         transition: transform 0.3s ease;
     }
 
-/* Keep project title links always white, even after visiting */
+/* PROJECT TITLE LINKS */
 .project-bar .title a,
 .project-bar .title a:visited,
 .project-bar .title a:active {
@@ -199,18 +206,17 @@ h2 {
     max-height: 0;
     overflow: hidden;
     padding: 0 1rem;
-    background-color: #2a2a2a; /* explicit background */
+    background-color: #2a2a2a !important;
     transition: max-height 0.4s ease, padding 0.4s ease;
+    forced-color-adjust: none !important;
 }
 
     .project-content.open {
-        max-height: 1500px; /* allow large sections */
+        max-height: 1500px;
         padding: 1rem;
     }
 
     .project-content p {
-        margin-bottom: 1rem;
-        line-height: 1.6;
         color: #ddd;
     }
 
@@ -229,12 +235,8 @@ h2 {
         line-height: 1.5;
     }
 
-    .project-content strong {
-        color: #fff;
-    }
-
     .project-content code {
-        background-color: #1a1a1a; /* explicit background */
+        background-color: #1a1a1a !important;
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
         font-family: monospace;
@@ -297,12 +299,32 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    body, main, section {
+    body, main, section, .project, .project-content {
         background-color: #1e1e1e !important;
         color: #e0e0e0 !important;
     }
 
-    .project, .project-content {
-        background-color: #2a2a2a !important;
+    main {
+        padding: 0 0.75rem;
+    }
+
+    .header-icons {
+        position: static;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    header nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        max-width: 70%;
+    }
+
+    .project-bar {
+        flex-direction: row;
+        gap: 0.5rem;
     }
 }
