@@ -290,6 +290,28 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+    body {
+        background: #1e1e1e; /* ensure body background stays consistent */
+        color: #e0e0e0; /* reaffirm text color */
+    }
+
+    main {
+        padding: 0 0.75rem;
+        background: inherit; /* ensures main uses body background */
+    }
+
+    section {
+        background: inherit; /* ensures sections maintain proper background */
+    }
+
+    .project {
+        background: #2a2a2a; /* reinforce project container background */
+    }
+
+    .project-content {
+        background: #2a2a2a; /* reinforce dropdown content background */
+    }
+
     .header-icons {
         position: static;
         justify-content: center;
@@ -303,10 +325,6 @@ footer {
 
     .logo {
         max-width: 70%;
-    }
-
-    main {
-        padding: 0 0.75rem;
     }
 
     .project-bar {
