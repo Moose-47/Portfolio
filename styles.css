@@ -7,7 +7,6 @@
 
 html {
     color-scheme: dark;
-    forced-color-adjust: none; /* prevents automatic inversion on some browsers */
 }
 
 body {
