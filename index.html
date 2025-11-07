@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewpoer" content="width-device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Dixon's Portfolio</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,13 +13,9 @@
         <div class="logo-container">
             <img src="Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
         </div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
+
         <div class="header-icons">
-            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+            <a href="https://github.com/Moose-47?tab=repositories" target="_blank" aria-label="GitHub">
                 <i class="fab fa-github"></i>
             </a>
             <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
@@ -29,8 +25,14 @@
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
+
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
-    
+
     <main>
         <section id="about">
             <h2>About Me</h2>
@@ -40,7 +42,6 @@
                 Film School's <strong>Video game design and development</strong> program. I enjoy building experiences
                 that bring people together, whether through fast-paced co-op mechanics, immersive systems, or
                 tools that make development smoother for teams.
-
             </p>
 
             <p>
@@ -49,14 +50,12 @@
                 using <strong>Mirror</strong> and <strong>Steamworks</strong>. My work often bridges technical
                 systems with player-facing features, including lobby systems, communication tools, and gameplay
                 mechanics that feel responsive and engaging.
-
             </p>
 
             <p>
-                While Unity and C# are my strongest areas, I’ve recently started dedicating time to learning
-                <strong>Unreal Engine 5</strong> and C++ to broaden my development skills and explore new
+                While <strong>Unity</strong> and <strong>C#</strong> are my strongest areas, I’ve recently started dedicating time to learning
+                <strong>Unreal Engine 5</strong> and <strong>C++</strong> to broaden my development skills and explore new
                 workflows. I’m excited to apply my multiplayer and systems design knowledge across both engines.
-
             </p>
 
             <p>
@@ -65,199 +64,253 @@
                 continue growing as a developer while contributing to projects that push creativity and teamwork
                 forward in game development.
             </p>
-            <h2></h2>
         </section>
 
         <section id="projects">
             <h2>Projects</h2>
 
             <div class="project">
-                <div class="project-header">
-                    <h3>
-                            CryptInc
-                    </h3>
+                <div class="project-bar">
+                    <div class="left">
+                        <span class="title">CryptInc</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </div>
-
-                <p><em>Currently in development in Unity</em></p>
-                <p><em>Created collaboratively with fellow students as our capstone project</em></p>
-                <p>
-                    CryptInc is a tense multiplayer horror puzzle game where players, alone or with friends,
-                    must explore the environment to gather clues and document sightings of cryptids. Using
-                    these clues and photographs, players identify cryptid species and strategize their next move..
-                </p>
-                <p>
-                    As the lead developer, I focused on the multiplayer backend and integration. I implemented
-                    networking using Steamworks and Mirror, enabling lobby creation, search, and quick join features,
-                    as well as direct game invites via the Steam friend list. I also designed in-game communication
-                    systems, including a text chat with a custom profanity filter. Beyond networking, I am overseeing
-                    gameplay-related scripts and game objects to ensure full multiplayer functionality.
-                </p>
-                <p>
-                    Upcoming additions include proximity voice chat, which will further enhance player coordination
-                    and immersion as the project continues development.
-                </p>
+                <div class="project-content">
+                    <p><em>Currently in development in Unity</em></p>
+                    <p><em>Created collaboratively with fellow students as our capstone project</em></p>
+                    <p>
+                        CryptInc is a tense multiplayer horror puzzle game where players, alone or with friends,
+                        must explore the environment to gather clues and document sightings of cryptids. Using
+                        these clues and photographs, players identify cryptid species and strategize their next move..
+                    </p>
+                    <p>
+                        As the lead developer, I focused on the multiplayer backend and integration. I implemented
+                        networking using Steamworks and Mirror, enabling lobby creation, search, and quick join features,
+                        as well as direct game invites via the Steam friend list. I also designed in-game communication
+                        systems, including a text chat with a custom profanity filter. Beyond networking, I am overseeing
+                        gameplay-related scripts and game objects to ensure full multiplayer functionality.
+                    </p>
+                    <p>
+                        Upcoming additions include proximity voice chat, which will further enhance player coordination
+                        and immersion as the project continues development.
+                    </p>
+                </div>
             </div>
 
             <div class="project">
-                <div class="project-header">
-                    <h3>
-                        <a href="https://prismaticglace.itch.io/crypt-survivors" target="_blank" rel="noopener noreferrer">Crypt Survivors</a>
-                        <a href="https://github.com/Moose-47/Crypt_Survivors" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </h3>
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            <a href="https://prismaticglace.itch.io/crypt-survivors" target="_blank" rel="noopener noreferrer">Crypt Survivors</a>
+                            <a href="https://github.com/Moose-47/Crypt_Survivors" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </div>
-
-                <p><em>Developed in Unity</em></p>
-                <p><em>Made for the Toronto Film School Spring 2025 game jam</em></p>
-                <p><em>Placed 1st</em></p>
-                <p>
-                    Crypt Survivors is an action rogue-like built around a rock-paper-scissors combat system, where attack types (sword, bow, magic) counter specific enemy types (knight, archer, mage). I was the lead programmer and designed both the combat and upgrade systems, emphasizing dynamic player progression and responsive input-based attacks.
-                </p>
-                <p>
-                    Key technical highlights:
-                    <ul>
-                        <li><strong>Directional Combat System:</strong> Player attack direction is calculated using the mouse position and Unity's Camera.ScreenToWorldPoint, dynamically determining attack angles for melee, ranged, and spell attacks.</li>
-                        <li><strong>Weighted Upgrade System:</strong> The RewardUI script defines upgrades via a modular Upgrade class containing a name, description, button color, weight for random selection, and an applyUpgrade action. This allows for both player stats and attack style modifications.</li>
-                        <li><strong>Randomized Reward Selection:</strong> At runtime, 3 upgrades are selected using weighted random selection to ensure varied gameplay and strategic choices.</li>
-                        <li><strong>Dynamic UI Integration:</strong> Upgrade buttons display contextual information including name, description, and category-specific colors. Clicking a button applies the upgrade immediately and resumes gameplay.</li>
-                        <li><strong>Flexible Attack and Spell Modifiers:</strong> Upgrades include increasing damage, attack speed, projectile behavior, spell size, or completely changing attack types (e.g., switching to spin slash or burst fire) while handling stacking and conditional upgrades automatically.</li>
-                        <li><strong>Player Feedback and Sound Integration:</strong> UI interactions trigger sound events, giving immediate auditory feedback for upgrade selection.</li>
-                    </ul>
-                </p>
-                <p>
-                    This project demonstrates my ability to implement modular, data-driven systems for combat, upgrades, and UI interaction, while ensuring a responsive and engaging gameplay loop. It showcases design decisions that balance randomness, player choice, and strategic progression.
-                </p>
-            </div>
-
-            <div class="project">
-
-                <div class="project-header">
-                    <h3>
-                        <a href="https://h00ver4ever.itch.io/chronoswap" target="_blank" rel="noopener noreferrer">ChronoSwap</a>
-                        <a href="https://github.com/Moose-47/ChronoSwap" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </h3>
+                <div class="project-content">
+                    <p><em>Developed in Unity</em></p>
+                    <p><em>Made for the Toronto Film School Spring 2025 game jam</em></p>
+                    <p><em>Placed 1st</em></p>
+                    <p>
+                        Crypt Survivors is an action rogue-like built around a rock-paper-scissors combat system, where attack types (sword, bow, magic) counter specific enemy types (knight, archer, mage). I was the lead programmer and designed both the combat and upgrade systems, emphasizing dynamic player progression and responsive input-based attacks.
+                    </p>
+                    <p>
+                        Key technical highlights:
+                        <ul>
+                            <li><strong>Directional Combat System:</strong> Player attack direction is calculated using the mouse position and Unity's Camera.ScreenToWorldPoint, dynamically determining attack angles for melee, ranged, and spell attacks.</li>
+                            <li><strong>Weighted Upgrade System:</strong> The RewardUI script defines upgrades via a modular Upgrade class containing a name, description, button color, weight for random selection, and an applyUpgrade action. This allows for both player stats and attack style modifications.</li>
+                            <li><strong>Randomized Reward Selection:</strong> At runtime, 3 upgrades are selected using weighted random selection to ensure varied gameplay and strategic choices.</li>
+                            <li><strong>Dynamic UI Integration:</strong> Upgrade buttons display contextual information including name, description, and category-specific colors. Clicking a button applies the upgrade immediately and resumes gameplay.</li>
+                            <li><strong>Flexible Attack and Spell Modifiers:</strong> Upgrades include increasing damage, attack speed, projectile behavior, spell size, or completely changing attack types (e.g., switching to spin slash or burst fire) while handling stacking and conditional upgrades automatically.</li>
+                            <li><strong>Player Feedback and Sound Integration:</strong> UI interactions trigger sound events, giving immediate auditory feedback for upgrade selection.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        This project demonstrates my ability to implement modular, data-driven systems for combat, upgrades, and UI interaction, while ensuring a responsive and engaging gameplay loop. It showcases design decisions that balance randomness, player choice, and strategic progression.
+                    </p>
                 </div>
-
-                <p><em>Developed in Unity</em></p>
-                <p><em>Made for the Game Makers Toolkit 2025 game jam</em></p>
-                <p>
-                    ChronoSwap is a puzzle game centered around a looping 30-second timeframe where players perform actions across multiple timelines to solve environmental puzzles. The core mechanic allows the player to rewind and repeat actions, creating "ghost" versions of themselves that perform previously recorded actions.
-                </p>
-                <p>
-                    Key design and technical highlights:
-                    <ul>
-                        <li><strong>Player Action Recording:</strong> The PlayerRecorder system records player position, rotation, animation state, and interactions at 60 FPS, allowing for precise playback during rewinds.</li>
-                        <li><strong>Ghost Playback:</strong> GhostPlayer objects replay recorded actions with frame interpolation, faithfully reproducing prior movements and interactions to enable complex puzzle-solving.</li>
-                        <li><strong>Rewind Mechanic:</strong> Players can trigger rewinds, which reset their position while simultaneously creating ghost players that repeat their prior actions. Interactions with environment objects are replayed automatically.</li>
-                        <li><strong>Level Loop Management:</strong> The LoopManager handles looping logic, ghost instantiation, and ensures seamless transitions between loops, while limiting the number of active ghosts for clarity and performance.</li>
-                        <li><strong>Physics & Interaction Integration:</strong> Player and ghost interactions with objects are managed with radius checks and interactable state handling, ensuring consistent gameplay across multiple timelines.</li>
-                        <li><strong>Animation & Visual Feedback:</strong> Player and ghost animations are synchronized with recorded X/Y movement speeds and sprite flipping, preserving visual continuity during playback and rewinds.</li>
-                    </ul>
-                </p>
-                <p>
-                    This project demonstrates my ability to implement advanced gameplay mechanics including real-time recording, time-based gameplay loops, ghost object replication, and player feedback systems. It showcases modular design, precise physics integration, and careful animation syncing to create engaging and complex puzzle interactions.
-                </p>
             </div>
 
             <div class="project">
 
-                <div class="project-header">
-                    <h3>
-                        <a href="https://moose-47.itch.io/ez-racer" target="_blank" rel="noopener noreferrer">EZ Racer</a>
-                        <a href="https://github.com/Moose-47/EZ_Racer" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </h3>
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            <a href="https://h00ver4ever.itch.io/chronoswap" target="_blank" rel="noopener noreferrer">ChronoSwap</a>
+                            <a href="https://github.com/Moose-47/ChronoSwap" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
                 </div>
+                <div class="project-content">
 
-                <p><em>Developed in Unity</em></p>
-                <p><em>Side project</em></p>
-                <p>
-                    Ez Racer is a top-down racing game where the player races against AI-controlled cars around a track.
-                    The AI is powered by a custom waypoint-based racing system that ensures smooth navigation, adapting to the track layout.
-                </p>
-                <p>
-                    Core systems and design highlights include:
-                    <ul>
-                        <li><strong>AI Pathfinding & Racing Line:</strong> Each AI car follows a racing line defined by waypoints. A lookahead system calculates the optimal target point ahead, allowing the AI to anticipate turns and adjust movement smoothly.</li>
-                        <li><strong>Dynamic Speed & Steering:</strong> AI cars dynamically adjust acceleration and deceleration based on turn sharpness, target speed, and off-track penalties, creating believable driving behavior that challenges the player.</li>
-                        <li><strong>Off-Track Handling:</strong> Cars slow down when leaving the track, using physics checks and layer masks to ensure consistent off-road behavior.</li>
-                        <li><strong>Waypoint Queue & Randomization:</strong> To avoid robotic motion, AI cars interpolate between randomized points within each waypoint’s bounds, adding slight variation in paths for realism.</li>
-                        <li><strong>Lap Timing System:</strong> Each car tracks lap times and calculates averages, supporting performance analysis and gameplay feedback.</li>
-                        <li><strong>Component-Based Architecture:</strong> The AI system integrates Rigidbody2D physics, colliders, and sprite management while maintaining flexibility for new cars or tracks.</li>
-                    </ul>
-                </p>
-                <p>
-                    This project demonstrates my ability to design complex AI systems, integrate physics-based movement, and manage smooth, responsive gameplay mechanics in Unity.
-                    I handled both the AI car controller and overall racing system logic, ensuring competitive, fun, and consistent gameplay.
-                </p>
+                    <p><em>Developed in Unity</em></p>
+                    <p><em>Made for the Game Makers Toolkit 2025 game jam</em></p>
+                    <p>
+                        ChronoSwap is a puzzle game centered around a looping 30-second timeframe where players perform actions across multiple timelines to solve environmental puzzles. The core mechanic allows the player to rewind and repeat actions, creating "ghost" versions of themselves that perform previously recorded actions.
+                    </p>
+                    <p>
+                        Key design and technical highlights:
+                        <ul>
+                            <li><strong>Player Action Recording:</strong> The PlayerRecorder system records player position, rotation, animation state, and interactions at 60 FPS, allowing for precise playback during rewinds.</li>
+                            <li><strong>Ghost Playback:</strong> GhostPlayer objects replay recorded actions with frame interpolation, faithfully reproducing prior movements and interactions to enable complex puzzle-solving.</li>
+                            <li><strong>Rewind Mechanic:</strong> Players can trigger rewinds, which reset their position while simultaneously creating ghost players that repeat their prior actions. Interactions with environment objects are replayed automatically.</li>
+                            <li><strong>Level Loop Management:</strong> The LoopManager handles looping logic, ghost instantiation, and ensures seamless transitions between loops, while limiting the number of active ghosts for clarity and performance.</li>
+                            <li><strong>Physics & Interaction Integration:</strong> Player and ghost interactions with objects are managed with radius checks and interactable state handling, ensuring consistent gameplay across multiple timelines.</li>
+                            <li><strong>Animation & Visual Feedback:</strong> Player and ghost animations are synchronized with recorded X/Y movement speeds and sprite flipping, preserving visual continuity during playback and rewinds.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        This project demonstrates my ability to implement advanced gameplay mechanics including real-time recording, time-based gameplay loops, ghost object replication, and player feedback systems. It showcases modular design, precise physics integration, and careful animation syncing to create engaging and complex puzzle interactions.
+                    </p>
+                </div>
             </div>
 
             <div class="project">
 
-                <div class="project-header">
-                    <h3>
-                        <a href="https://moose-47.itch.io/target-practice" target="_blank" rel="noopener noreferrer">Target Practice</a>
-                        <a href="https://github.com/Moose-47/Target_Practice" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </h3>
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            <a href="https://moose-47.itch.io/ez-racer" target="_blank" rel="noopener noreferrer">EZ Racer</a>
+                            <a href="https://github.com/Moose-47/EZ_Racer" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
                 </div>
-
-                <p><em>Developed in Unity</em></p>
-                <p><em>Side project</em></p>
-                <p>
-                    This project is a simple but polished game where the player clicks and drags the mouse to set both the shot angle and power, then releases to fire an arrow.
-                    A real-time trajectory preview is rendered using Unity’s <code>LineRenderer</code>, showing the parabolic path the arrow will follow under gravity.
-                </p>
-                <p>
-                    Core systems and design highlights include:
-                    <ul>
-                        <li><strong>Click-and-Drag Aiming:</strong> Mouse input dynamically adjusts the launch angle (clamped between -20° and 90°) and shot power (within a minimum and maximum range).</li>
-                        <li><strong>Physics-Based Projectile Motion:</strong> Arrows follow realistic parabolic trajectories using Unity's 2D physics and custom velocity calculations based on angle and power.</li>
-                        <li><strong>Trajectory Visualization:</strong> A LineRenderer calculates and renders ~45 points along the projected path, giving players real-time aiming feedback.</li>
-                        <li><strong>Animation & Sound Integration:</strong> Bow draw and release animations, paired with corresponding sound effects, provide tactile feedback during aiming and firing.</li>
-                        <li><strong>Gameplay State Management:</strong> Firing is disabled when the game is paused, when no arrows remain, or when an arrow is already active, ensuring consistent gameplay flow.</li>
-                    </ul>
-                </p>
-                <p>
-                    This project demonstrates my ability to integrate player input with physics-based gameplay, visualize mechanics in real-time, and design responsive systems with polished animation and audio feedback.
-                    I implemented the core arrow firing system, trajectory preview, and state management to create a satisfying and interactive experience.
-                </p>
+                <div class="project-content">
+                    <p><em>Developed in Unity</em></p>
+                    <p><em>Side project</em></p>
+                    <p>
+                        Ez Racer is a top-down racing game where the player races against AI-controlled cars around a track.
+                        The AI is powered by a custom waypoint-based racing system that ensures smooth navigation, adapting to the track layout.
+                    </p>
+                    <p>
+                        Core systems and design highlights include:
+                        <ul>
+                            <li><strong>AI Pathfinding & Racing Line:</strong> Each AI car follows a racing line defined by waypoints. A lookahead system calculates the optimal target point ahead, allowing the AI to anticipate turns and adjust movement smoothly.</li>
+                            <li><strong>Dynamic Speed & Steering:</strong> AI cars dynamically adjust acceleration and deceleration based on turn sharpness, target speed, and off-track penalties, creating believable driving behavior that challenges the player.</li>
+                            <li><strong>Off-Track Handling:</strong> Cars slow down when leaving the track, using physics checks and layer masks to ensure consistent off-road behavior.</li>
+                            <li><strong>Waypoint Queue & Randomization:</strong> To avoid robotic motion, AI cars interpolate between randomized points within each waypoint’s bounds, adding slight variation in paths for realism.</li>
+                            <li><strong>Lap Timing System:</strong> Each car tracks lap times and calculates averages, supporting performance analysis and gameplay feedback.</li>
+                            <li><strong>Component-Based Architecture:</strong> The AI system integrates Rigidbody2D physics, colliders, and sprite management while maintaining flexibility for new cars or tracks.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        This project demonstrates my ability to design complex AI systems, integrate physics-based movement, and manage smooth, responsive gameplay mechanics in Unity.
+                        I handled both the AI car controller and overall racing system logic, ensuring competitive, fun, and consistent gameplay.
+                    </p>
+                </div>
             </div>
 
             <div class="project">
-                <div class="project-header">
-                    <h3>
-                        BlackJack
-                        <a href="https://github.com/Moose-47/Text_Based_BlackJack" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </h3>
+
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            <a href="https://moose-47.itch.io/target-practice" target="_blank" rel="noopener noreferrer">Target Practice</a>
+                            <a href="https://github.com/Moose-47/Target_Practice" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
                 </div>
-                <p><em>Developed in C++ (console-based)</em></p>
-                <p>
-                    A fully featured text-based Blackjack game built entirely in C++. The game implements a shuffled deck 
-                    using the Fisher–Yates algorithm, betting and credit management, dealer AI, and full support for Blackjack
-                    mechanics including hits, stands, doubling down, splitting, and passing.
-                </p>
-                <p>
-                    It features input validation to prevent crashes, clean hand evaluation logic that handles multiple Aces correctly,
-                    and clear console output for player and dealer actions. This project demonstrates strong fundamentals in algorithm 
-                    design, object-oriented programming, and state management in C++.
-                </p>
+                <div class="project-content">
+                    <p><em>Developed in Unity</em></p>
+                    <p><em>Side project</em></p>
+                    <p>
+                        This project is a simple but polished game where the player clicks and drags the mouse to set both the shot angle and power, then releases to fire an arrow.
+                        A real-time trajectory preview is rendered using Unity’s LineRenderer, showing the parabolic path the arrow will follow under gravity.
+                    </p>
+                    <p>
+                        Core systems and design highlights include:
+                        <ul>
+                            <li><strong>Click-and-Drag Aiming:</strong> Mouse input dynamically adjusts the launch angle (clamped between -20° and 90°) and shot power (within a minimum and maximum range).</li>
+                            <li><strong>Physics-Based Projectile Motion:</strong> Arrows follow realistic parabolic trajectories using Unity's 2D physics and custom velocity calculations based on angle and power.</li>
+                            <li><strong>Trajectory Visualization:</strong> A LineRenderer calculates and renders ~45 points along the projected path, giving players real-time aiming feedback.</li>
+                            <li><strong>Animation & Sound Integration:</strong> Bow draw and release animations, paired with corresponding sound effects, provide tactile feedback during aiming and firing.</li>
+                            <li><strong>Gameplay State Management:</strong> Firing is disabled when the game is paused, when no arrows remain, or when an arrow is already active, ensuring consistent gameplay flow.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        This project demonstrates my ability to integrate player input with physics-based gameplay, visualize mechanics in real-time, and design responsive systems with polished animation and audio feedback.
+                        I implemented the core arrow firing system, trajectory preview, and state management to create a satisfying and interactive experience.
+                    </p>
+                </div>
             </div>
 
             <div class="project">
-                <h3></h3>
-                <p><em></em></p>
-                <p>
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            Oryx
+                            <a href="https://github.com/Moose-47/Oryx" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
 
-                </p>
+                <div class="project-content">
+                    <p><em>Currently in development in Unreal Engine 5</em></p>
+                    <p><em>Side Project</em></p>
+                    <p>
+                        Oryx is a physics-driven action-adventure game where players pilot a small spacecraft through an autonomous facility, land to explore on foot, and use a gravity gun to manipulate objects and solve puzzles. Combat emphasizes creative use of the environment rather than traditional weaponry.
+                    </p>
+                    <p>
+                        Core systems and design highlights include:
+                        <ul>
+                            <li><strong>Physics-Based Flight:</strong> Momentum-driven ship controls, requiring careful management of thrust, rotation, and braking to navigate the facility.</li>
+                            <li><strong>On-Foot Exploration:</strong> Players can exit their ship to walk, jump, and interact with the environment using a gravity gun.</li>
+                            <li><strong>Gravity Gun Mechanics:</strong> Pick up, spin, and launch objects to solve puzzles or destroy enemies; object physics are simulated in real-time for accurate interaction.</li>
+                            <li><strong>Environmental Combat:</strong> Defensive turrets and hazards challenge the player, encouraging creative solutions using physics rather than conventional weapons.</li>
+                            <li><strong>Seamless Transition Systems:</strong> Smooth switching between piloting and on-foot gameplay, maintaining consistent physics and control responsiveness.</li>
+                            <li><strong>Dynamic Damage and Interaction:</strong> Ship integrity and destructible objects respond realistically to collisions and forces applied by the player.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        This project showcases my ability to integrate physics-based gameplay, design interactive tools like the gravity gun, and create dynamic systems that connect multiple gameplay modes in a cohesive experience.
+                    </p>
+                </div>
+                </div>
+
+            <div class="project">
+                <div class="project-bar">
+                    <div class="left">
+                        <h3 class="title">
+                            BlackJack
+                            <a href="https://github.com/Moose-47/Text_Based_BlackJack" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
+
+                <div class="project-content">
+                    <p><em>Developed in C++ (console-based)</em></p>
+                    <p>
+                        A fully featured text-based Blackjack game built entirely in C++. The game implements a shuffled deck
+                        using the Fisher–Yates algorithm, betting and credit management, dealer AI, and full support for Blackjack
+                        mechanics including hits, stands, doubling down, splitting, and passing.
+                    </p>
+                    <p>
+                        It features input validation to prevent crashes, clean hand evaluation logic that handles multiple Aces correctly,
+                        and clear console output for player and dealer actions. This project demonstrates strong fundamentals in algorithm
+                        design, object-oriented programming, and state management in C++.
+                    </p>
+                </div>
             </div>
+
+
         </section>
 
         <section id="contact">
@@ -282,5 +335,21 @@
     <footer>
         <p>&copy; 2025 Dylan Dixon</p>
     </footer>
+
+    <script>
+        document.querySelectorAll('.project-bar').forEach(bar => {
+            bar.addEventListener('click', (e) => {
+                //Ignore clicks on links
+                if (e.target.closest('a')) return;
+
+                const project = bar.parentElement;
+                const content = project.querySelector('.project-content');
+                const icon = bar.querySelector('.dropdown-icon, .dropdown-arrow');
+
+                content.classList.toggle('open');
+                icon.classList.toggle('rotated');
+            });
+        });
+    </script>
 </body>
 </html>

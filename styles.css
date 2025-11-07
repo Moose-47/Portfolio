@@ -1,67 +1,37 @@
-﻿/* General Reset */
+﻿/* RESET & BASE STYLES */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body & Global Text */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background: #1e1e1e; /* dark background */
-    color: #e0e0e0; /* light text */
+    background: #1e1e1e;
+    color: #e0e0e0;
+    overflow-x: hidden;
 }
 
-/* Header */
+/* HEADER */
 header {
     background: #111;
     color: #fff;
     padding: 1rem;
     text-align: center;
-    position: relative; /* important: allows icons to anchor top-right */
+    position: relative;
 }
-    /* Logo */
-    .logo {
-        max-width: 400px; /* adjust size */
-        height: auto;
-    }
 
-    .logo-container {
-        text-align: center; 
-    }
+.logo {
+    max-width: 20%;
+    height: auto;
+}
 
-    /* Name & Subtitle */
-    header h1 {
-        margin-bottom: 0.2rem;
-        font-size: 3rem;
-    }
+.logo-container {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
 
-    header h4 {
-        margin-top: 0;
-        font-weight: normal;
-        font-size: 1.2rem;
-        color: #bbb;
-    }
-
-    /* Navigation */
-    header nav {
-        margin-top: 0.8rem;
-    }
-
-        header nav a {
-            color: #fff;
-            margin: 0 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-            header nav a:hover {
-                color: #1da1f2;
-            }
-
-/* Header Icons (top-right corner) */
 .header-icons {
     position: absolute;
     top: 1rem;
@@ -71,8 +41,8 @@ header {
 }
 
     .header-icons a {
-        font-size: 1.2rem; /* smaller */
         color: #fff;
+        font-size: 1.2rem;
         transition: color 0.3s, transform 0.2s;
     }
 
@@ -81,7 +51,26 @@ header {
             transform: scale(1.1);
         }
 
-/* Main Content */
+header nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+    gap: 0.8rem;
+}
+
+    header nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+        header nav a:hover {
+            color: #1da1f2;
+        }
+
+/* MAIN CONTENT */
 main {
     max-width: 900px;
     margin: 2rem auto;
@@ -92,7 +81,6 @@ section {
     margin-bottom: 3rem;
 }
 
-/* Section Headings */
 h2 {
     border-bottom: 2px solid #444;
     padding-bottom: 0.3rem;
@@ -100,75 +88,153 @@ h2 {
     font-size: 1.5rem;
     color: #fff;
 }
-
-#about p {
-    margin-bottom: 1rem; /* adds space after each paragraph */
+#about p,
+.project-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #ddd; /* soft white text */
+    font-size: 1rem;
 }
 
-/* Project Blocks */
+#about em,
+.project-content em {
+    color: #aaa; /* muted italic text */
+    font-style: italic;
+}
+
+#about strong,
+.project-content strong {
+    color: #fff; /* keep bold text bright */
+}
+/* PROJECT CONTAINERS */
 .project {
     background: #2a2a2a;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-    .project h3 {
-        margin-bottom: 0.5rem;
-        color: #fff;
-        font-size: 1.3rem;
-    }
-
-    .project p {
-        margin-bottom: 0.5rem;
-        white-space: pre-line; /* preserves your formatting */
-        color: #fff;
-    }
-
-        .project p em {
-            color: #fff;
-        }
-
-/* Make the project header flex so title and icon sit on same line */
-.project-header h3 {
+/* DROPDOWN HEADER (clickable bar) */
+.project-bar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem; /* space between title and icon */
+    background: #333;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s;
+}
+
+    .project-bar:hover {
+        background: #3d3d3d;
+    }
+
+    .project-bar .left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .project-bar .title {
+        font-weight: bold;
+        color: #fff;
+        font-size: 1.1rem;
+    }
+
+/* GITHUB LINK (in bar) */
+.github-link {
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    transition: color 0.3s, transform 0.2s;
 }
 
-    /* Project title link */
-    .project-header h3 a:first-child {
-        color: #fff; /* default white */
-        text-decoration: none;
-        transition: color 0.3s, transform 0.2s;
+    .github-link:hover {
+        color: #1da1f2;
+        transform: scale(1.1);
     }
 
-    /* Hover effect for project title */
-    .project-header h3 a:first-child:hover {
-        color: #1da1f2; /* blue on hover */
-        transform: scale(1.05); /* subtle zoom to indicate interactivity */
-    }
-
-    /* GitHub icon next to title */
-    .project-header h3 a.github-link {
-        color: #fff; /* default white */
-        font-size: 1.3rem; /* same size as title or slightly bigger */
-        transition: color 0.3s, transform 0.2s;
-    }
-
-        .project-header h3 a.github-link:hover {
-            color: #1da1f2; /* blue on hover */
-            transform: scale(1.2);
-        }
-
-/* Make project container relative so the icon can be positioned absolutely */
-.project {
-    position: relative;
+/* DROPDOWN ICON (arrow) */
+.dropdown-icon {
+    color: #ccc;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
 }
-/* Contact Section */
+
+    .dropdown-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    /* Ensure all dropdown arrows rotate smoothly */
+    .dropdown-icon.rotated,
+    .dropdown-arrow.rotated {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+
+/* Keep project title links always white, even after visiting */
+.project-bar .title a,
+.project-bar .title a:visited,
+.project-bar .title a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+    /* hover color for project titles */
+    .project-bar .title a:hover {
+        color: #1da1f2;
+    }
+
+/* HIDDEN PROJECT CONTENT */
+.project-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1rem;
+    background: #2a2a2a;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+    .project-content.open {
+        max-height: 1500px; /* allow large sections */
+        padding: 1rem;
+    }
+
+    /* PROJECT CONTENT TEXT FORMATTING */
+    .project-content p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        color: #ddd;
+    }
+
+    .project-content em {
+        color: #ddd;
+    }
+
+    .project-content ul {
+        margin: 0.5rem 0 1rem 1.5rem;
+        padding-left: 1rem;
+        list-style-type: disc;
+    }
+
+    .project-content li {
+        margin-bottom: 0.4rem;
+        line-height: 1.5;
+    }
+
+    .project-content strong {
+        color: #fff;
+    }
+
+    .project-content code {
+        background: #1a1a1a;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #1da1f2;
+    }
+
+/* CONTACT */
 #contact {
     text-align: center;
     margin-top: 2rem;
@@ -177,6 +243,7 @@ h2 {
 .contact-icons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 1rem;
 }
@@ -192,34 +259,58 @@ h2 {
             transform: scale(1.2);
         }
 
-/* Back to Top Button */
 .back-to-top {
     text-align: center;
     margin: 2rem 0;
 }
 
     .back-to-top a {
-        display: inline-block;
-        padding: 0.6rem 1.2rem;
         background: #333;
         color: #fff;
-        font-size: 1rem;
-        font-weight: bold;
+        padding: 0.6rem 1.2rem;
         border-radius: 8px;
         text-decoration: none;
+        font-weight: bold;
         transition: background 0.3s, transform 0.2s;
     }
 
         .back-to-top a:hover {
-            background: #1da1f2; 
+            background: #1da1f2;
             transform: scale(1.1);
         }
 
-/* Footer */
+/* FOOTER */
 footer {
     background: #111;
     color: #888;
     text-align: center;
     padding: 1rem;
     font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header-icons {
+        position: static;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    header nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        max-width: 70%;
+    }
+
+    main {
+        padding: 0 0.75rem;
+    }
+
+    .project-bar {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
 }
