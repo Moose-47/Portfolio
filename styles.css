@@ -7,6 +7,7 @@
 
 html {
     color-scheme: dark;
+    forced-color-adjust: none; /* prevents automatic inversion on some browsers */
 }
 
 body {
@@ -79,10 +80,12 @@ main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
+    background-color: #1e1e1e; /* explicit background */
 }
 
 section {
     margin-bottom: 3rem;
+    background-color: #1e1e1e; /* explicit background */
 }
 
 h2 {
@@ -92,6 +95,7 @@ h2 {
     font-size: 1.5rem;
     color: #fff;
 }
+
 #about p,
 .project-content p {
     margin-bottom: 1rem;
@@ -110,9 +114,10 @@ h2 {
 .project-content strong {
     color: #fff; /* keep bold text bright */
 }
+
 /* PROJECT CONTAINERS */
 .project {
-    background: #2a2a2a;
+    background-color: #2a2a2a; /* explicit background */
     border-radius: 8px;
     margin-bottom: 1.2rem;
     overflow: hidden;
@@ -124,7 +129,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #333;
+    background-color: #333;
     padding: 0.8rem 1rem;
     cursor: pointer;
     user-select: none;
@@ -132,7 +137,7 @@ h2 {
 }
 
     .project-bar:hover {
-        background: #3d3d3d;
+        background-color: #3d3d3d;
     }
 
     .project-bar .left {
@@ -170,7 +175,6 @@ h2 {
         transform: rotate(180deg);
     }
 
-    /* Ensure all dropdown arrows rotate smoothly */
     .dropdown-icon.rotated,
     .dropdown-arrow.rotated {
         transform: rotate(180deg);
@@ -185,7 +189,6 @@ h2 {
     text-decoration: none;
 }
 
-    /* hover color for project titles */
     .project-bar .title a:hover {
         color: #1da1f2;
     }
@@ -195,7 +198,7 @@ h2 {
     max-height: 0;
     overflow: hidden;
     padding: 0 1rem;
-    background: #2a2a2a;
+    background-color: #2a2a2a; /* explicit background */
     transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
@@ -204,7 +207,6 @@ h2 {
         padding: 1rem;
     }
 
-    /* PROJECT CONTENT TEXT FORMATTING */
     .project-content p {
         margin-bottom: 1rem;
         line-height: 1.6;
@@ -231,7 +233,7 @@ h2 {
     }
 
     .project-content code {
-        background: #1a1a1a;
+        background-color: #1a1a1a; /* explicit background */
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
         font-family: monospace;
@@ -269,7 +271,7 @@ h2 {
 }
 
     .back-to-top a {
-        background: #333;
+        background-color: #333;
         color: #fff;
         padding: 0.6rem 1.2rem;
         border-radius: 8px;
@@ -279,13 +281,13 @@ h2 {
     }
 
         .back-to-top a:hover {
-            background: #1da1f2;
+            background-color: #1da1f2;
             transform: scale(1.1);
         }
 
 /* FOOTER */
 footer {
-    background: #111;
+    background-color: #111;
     color: #888;
     text-align: center;
     padding: 1rem;
@@ -295,25 +297,25 @@ footer {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     body {
-        background: #1e1e1e; /* ensure body background stays consistent */
-        color: #e0e0e0; /* reaffirm text color */
+        background-color: #1e1e1e;
+        color: #e0e0e0;
     }
 
     main {
         padding: 0 0.75rem;
-        background: inherit; /* ensures main uses body background */
+        background-color: #1e1e1e; 
     }
 
     section {
-        background: inherit; /* ensures sections maintain proper background */
+        background-color: #1e1e1e; 
     }
 
     .project {
-        background: #2a2a2a; /* reinforce project container background */
+        background-color: #2a2a2a; 
     }
 
     .project-content {
-        background: #2a2a2a; /* reinforce dropdown content background */
+        background-color: #2a2a2a; 
     }
 
     .header-icons {
