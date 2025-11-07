@@ -3,47 +3,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-print-color-adjust: exact !important;
-    forced-color-adjust: none !important;
 }
 
 html {
-    color-scheme: dark !important;
-    background-color: #1e1e1e !important;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII=') !important;
-    color: #e0e0e0 !important;
-    font-family: Arial, sans-serif;
+    color-scheme: dark;
+    forced-color-adjust: none; /* prevents automatic inversion on some browsers */
 }
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #1e1e1e !important;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgF+3H20AAAAASUVORK5CYII=') !important;
-    color: #e0e0e0 !important;
+    background: #1e1e1e;
+    color: #e0e0e0;
     overflow-x: hidden;
-    forced-color-adjust: none !important;
 }
 
 /* HEADER */
 header {
-    background-color: #111 !important;
-    color: #fff !important;
+    background: #111;
+    color: #fff;
     padding: 1rem;
     text-align: center;
     position: relative;
 }
 
+.logo {
+    max-width: 20%;
+    height: auto;
+}
+
 .logo-container {
     text-align: center;
     margin-bottom: 0.5rem;
-}
-
-.logo {
-    width: 40%; /* scales with container */
-    max-width: 200px; /* prevents oversized logos */
-    min-width: 120px; /* prevents tiny logos */
-    height: auto;
 }
 
 .header-icons {
@@ -89,14 +80,12 @@ main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
-    background-color: #1e1e1e !important;
-    color: #ddd !important;
+    background-color: #1e1e1e; /* explicit background */
 }
 
 section {
     margin-bottom: 3rem;
-    background-color: #1e1e1e !important;
-    color: #ddd !important;
+    background-color: #1e1e1e; /* explicit background */
 }
 
 h2 {
@@ -106,38 +95,35 @@ h2 {
     font-size: 1.5rem;
     color: #fff;
 }
-
-/* ABOUT & PROJECT TEXT */
 #about p,
 .project-content p {
     margin-bottom: 1rem;
     line-height: 1.6;
-    color: #ddd;
+    color: #ddd; /* soft white text */
     font-size: 1rem;
 }
 
 #about em,
 .project-content em {
-    color: #aaa;
+    color: #aaa; /* muted italic text */
     font-style: italic;
 }
 
 #about strong,
 .project-content strong {
-    color: #fff;
+    color: #fff; /* keep bold text bright */
 }
 
 /* PROJECT CONTAINERS */
 .project {
-    background-color: #2a2a2a !important;
+    background-color: #2a2a2a; /* explicit background */
     border-radius: 8px;
     margin-bottom: 1.2rem;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-    forced-color-adjust: none !important;
 }
 
-/* PROJECT BAR (CLICKABLE) */
+/* DROPDOWN HEADER (clickable bar) */
 .project-bar {
     display: flex;
     justify-content: space-between;
@@ -165,18 +151,7 @@ h2 {
         font-size: 1.1rem;
     }
 
-        .project-bar .title a,
-        .project-bar .title a:visited,
-        .project-bar .title a:active {
-            color: #fff;
-            text-decoration: none;
-        }
-
-            .project-bar .title a:hover {
-                color: #1da1f2;
-            }
-
-/* GITHUB LINK */
+/* GITHUB LINK (in bar) */
 .github-link {
     color: #fff;
     font-size: 1.2rem;
@@ -188,17 +163,33 @@ h2 {
         transform: scale(1.1);
     }
 
-/* DROPDOWN ICON */
-.dropdown-icon,
-.dropdown-arrow {
+/* DROPDOWN ICON (arrow) */
+.dropdown-icon {
     color: #ccc;
     font-size: 1.1rem;
     transition: transform 0.3s ease;
 }
 
+    .dropdown-icon.rotated {
+        transform: rotate(180deg);
+    }
+
     .dropdown-icon.rotated,
     .dropdown-arrow.rotated {
         transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+
+/* Keep project title links always white, even after visiting */
+.project-bar .title a,
+.project-bar .title a:visited,
+.project-bar .title a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+    .project-bar .title a:hover {
+        color: #1da1f2;
     }
 
 /* HIDDEN PROJECT CONTENT */
@@ -206,16 +197,18 @@ h2 {
     max-height: 0;
     overflow: hidden;
     padding: 0 1rem;
-    background-color: #2a2a2a !important;
+    background-color: #2a2a2a; /* explicit background */
     transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
     .project-content.open {
-        max-height: 1500px;
+        max-height: 1500px; /* allow large sections */
         padding: 1rem;
     }
 
     .project-content p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
         color: #ddd;
     }
 
@@ -234,8 +227,12 @@ h2 {
         line-height: 1.5;
     }
 
+    .project-content strong {
+        color: #fff;
+    }
+
     .project-content code {
-        background-color: #1a1a1a !important;
+        background-color: #1a1a1a; /* explicit background */
         padding: 0.2rem 0.4rem;
         border-radius: 4px;
         font-family: monospace;
@@ -296,15 +293,28 @@ footer {
     font-size: 0.9rem;
 }
 
-/*  RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    body, main, section, .project, .project-content {
-        background-color: #1e1e1e !important;
-        color: #e0e0e0 !important;
+    body {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
     }
 
     main {
         padding: 0 0.75rem;
+        background-color: #1e1e1e; /* explicit */
+    }
+
+    section {
+        background-color: #1e1e1e; /* explicit */
+    }
+
+    .project {
+        background-color: #2a2a2a; /* explicit */
+    }
+
+    .project-content {
+        background-color: #2a2a2a; /* explicit */
     }
 
     .header-icons {
@@ -319,21 +329,11 @@ footer {
     }
 
     .logo {
-        width: 60%;
-        max-width: 250px;
-        min-width: 120px;
+        max-width: 70%;
     }
 
     .project-bar {
         flex-direction: row;
         gap: 0.5rem;
-    }
-}
-
-/*  SAMSUNG INTERNET DARK MODE SAFEGUARDS */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    img, pre, code {
-        background-color: #1e1e1e !important;
-        color: #e0e0e0 !important;
     }
 }
