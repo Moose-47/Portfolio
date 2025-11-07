@@ -6,22 +6,22 @@
 }
 
 html {
-    color-scheme: dark;
-    forced-color-adjust: none; /* prevents automatic inversion on some browsers */
+    color-scheme: dark !important;
+    forced-color-adjust: none !important; 
 }
 
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background: #1e1e1e;
-    color: #e0e0e0;
+    background: #1e1e1e !important;
+    color: #e0e0e0 !important;
     overflow-x: hidden;
 }
 
 /* HEADER */
 header {
-    background: #111;
-    color: #fff;
+    background: #111 !important;
+    color: #fff !important;
     padding: 1rem;
     text-align: center;
     position: relative;
@@ -80,12 +80,12 @@ main {
     max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
-    background-color: #1e1e1e; /* explicit background */
+    background-color: #1e1e1e !important; /* explicit background */
 }
 
 section {
     margin-bottom: 3rem;
-    background-color: #1e1e1e; /* explicit background */
+    background-color: #1e1e1e !important; /* explicit background */
 }
 
 h2 {
@@ -117,7 +117,7 @@ h2 {
 
 /* PROJECT CONTAINERS */
 .project {
-    background-color: #2a2a2a; /* explicit background */
+    background-color: #2a2a2a !important; /* explicit background */
     border-radius: 8px;
     margin-bottom: 1.2rem;
     overflow: hidden;
@@ -296,45 +296,12 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    body {
-        background-color: #1e1e1e;
-        color: #e0e0e0;
+    body, main, section {
+        background-color: #1e1e1e !important;
+        color: #e0e0e0 !important;
     }
 
-    main {
-        padding: 0 0.75rem;
-        background-color: #1e1e1e; 
-    }
-
-    section {
-        background-color: #1e1e1e; 
-    }
-
-    .project {
-        background-color: #2a2a2a; 
-    }
-
-    .project-content {
-        background-color: #2a2a2a; 
-    }
-
-    .header-icons {
-        position: static;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
-
-    header nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo {
-        max-width: 70%;
-    }
-
-    .project-bar {
-        flex-direction: row;
-        gap: 0.5rem;
+    .project, .project-content {
+        background-color: #2a2a2a !important;
     }
 }
