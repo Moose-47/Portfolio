@@ -99,6 +99,9 @@ main > * {
 video,
 .back-to-top {
     grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 section {
@@ -221,6 +224,7 @@ h2 {
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     text-decoration: none;
+    justify-content: center;
     font-weight: bold;
 }
 
