@@ -1,0 +1,529 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crypt Survivors | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            <h3>Crypt Survivors</h3>
+        </div>
+
+        <!-- VIDEO -->
+        <div class="about-video" style="margin-bottom: 1rem;">
+            <video controls preload="metadata">
+                <source src="../videos/placeholder.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="../downloads/Crypt Survivors.zip" download>Download</a>
+            <a class="btn" href="https://github.com/Moose-47/Crypt_Survivors" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- PROJECT META & DESCRIPTION -->
+        <p class="project-meta">Unity · Action Roguelike</p>
+        <p><strong>Developed for and placed first in the Toronto Film School spring 2025 game jam.</strong></p>
+        <p>
+            Crypt Survivors is a fast-paced 2D action roguelike with melee, ranged, and magic combat.
+            Players strategically select attacks, manage resources, and survive waves of enemies while
+            collecting upgrades through a weighted reward system.
+        </p>
+
+        <!-- MY ROLE (full-width) -->
+        <section>
+            <h2>My Role</h2>
+            <p>
+                I led development of all gameplay systems for Crypt Survivors, including:
+            </p>
+            <ul>
+                <li>Directional combat system with melee, bow, and magic attacks</li>
+                <li>Weighted reward and upgrade system</li>
+                <li>Projectile mechanics and spell scaling (Fireball, LightningBolt, IceFan)</li>
+                <li>Input handling and dynamic spawning logic for attacks</li>
+            </ul>
+            <p>
+                The focus was on creating responsive, satisfying combat while allowing players to feel meaningful
+                progression through upgrades.
+            </p>
+        </section>
+
+        <!-- GAMEPLAY HIGHLIGHTS -->
+        <section>
+            <h2>Gameplay Highlights</h2>
+            <div class="highlights-grid">
+
+                <!-- Directional Melee Combat -->
+                <div class="highlight-card">
+                    <img src="../Images/melee.gif" alt="Melee" class="highlight-img" draggable="false">
+                    <h4>Directional Melee Combat</h4>
+                    <p>
+                        Sword attacks in Crypt Survivors are designed to respond directly to mouse direction,
+                        allowing the player to aim slashes, spins, or thrusts dynamically. Each attack type is
+                        handled with a combination of instantiation, rotation, and scale adjustments based on
+                        player stats and combat modifiers.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Directional melee allows precise, skill-based combat, giving players control over swing direction.</li>
+                            <li>Separating <code>PlayerCombat</code> and <code>Sword</code> scripts ensures input vs. animation logic is modular and maintainable.</li>
+                            <li>Cooldowns and attack speed scaling allow player stats to directly influence responsiveness, giving a sense of progression.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>
+                                <strong>FireSword()</strong>:
+                                <ul style="margin-left: 1rem;">
+                                    <li>Calculates mouse direction.</li>
+                                    <li>Computes spawn position offset from player.</li>
+                                    <li>Applies rotation depending on slash type.</li>
+                                    <li>Adjusts size and collider to match scaling stats.</li>
+                                    <li>Instantiates the sword prefab.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Sword.cs</strong>:
+                                <ul style="margin-left: 1rem;">
+                                    <li>Animates slash over time for Slash/Spin types.</li>
+                                    <li>Moves the sword linearly for Thrust type.</li>
+                                    <li>Handles collisions for different enemy types.</li>
+                                    <li>Plays sound effects for each hit type.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>FireSword()</code> in <em>PlayerCombat.cs</em> – calculates direction, spawn, rotation, and initializes the sword.</li>
+                            <li><code>Update()</code> in <em>Sword.cs</em> – rotates the sword through the sweep angle and handles destruction.</li>
+                            <li>Optional: <code>OnTriggerEnter2D()</code> in <em>Sword.cs</em> – demonstrates per-enemy hit logic and sound integration.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/swordfire.png" alt="Sword Fire Method" class="media-img">
+                        <img src="../Images/swordupdate.png" alt="Sword Script Update" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Bow Mechanics -->
+                <div class="highlight-card">
+                    <img src="../Images/bow.gif" alt="Bow" class="highlight-img" draggable="false">
+                    <h4>Bow Mechanics</h4>
+                    <p>
+                        The bow system in Crypt Survivors allows players to engage at range with precision, offering multiple firing modes and projectile behaviors.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Supports both precision shots and area spread attacks for variety in combat.</li>
+                            <li>Separate <code>PlayerBow</code> and <code>Arrow</code> scripts for modularity and maintainability.</li>
+                            <li>Cooldown and draw time mechanics create a sense of skill-based timing.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>
+                                <strong>FireArrow()</strong>:
+                                <ul style="margin-left: 1rem;">
+                                    <li>Calculates direction based on mouse or controller aim.</li>
+                                    <li>Spawns arrow prefab with speed, rotation, and damage values.</li>
+                                    <li>Supports multiple modes: single shot, spread (multiple arrows at slight angles), and burst.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Arrow.cs</strong>:
+                                <ul style="margin-left: 1rem;">
+                                    <li>Moves arrow forward each frame based on speed.</li>
+                                    <li>Detects collisions with enemies or environment.</li>
+                                    <li>Handles piercing or bouncing logic for advanced arrow types.</li>
+                                    <li>Optional particle/sound effects on hit.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>FireArrow()</code> in <em>PlayerBow.cs</em> – handles aiming, spawning, and arrow type selection.</li>
+                            <li><code>Update()</code> in <em>Arrow.cs</em> – moves the arrow and manages collisions/damage.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/bowfire.png" alt="Fire Bow Method" class="media-img">
+                        <img src="../Images/firearrow.png" alt="Fire Arrow Method" class="media-img">
+                        <img src="../Images/arrowupdate.png" alt="Arrow Script Update" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Magic Spells -->
+                <div class="highlight-card">
+                    <img src="../Images/magic.gif" alt="Magic Spells" class="highlight-img" draggable="false">
+                    <h4>Magic Spells</h4>
+                    <p>
+                        Players can cast a variety of magic spells, each with distinct behaviors and effects.
+                        Spells scale dynamically based on player stats, allowing meaningful progression.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Provides variety in combat styles: ranged, area, and directional spells.</li>
+                            <li>Allows scaling with player stats (damage, size, casting speed) for progression.</li>
+                            <li>Separate spell scripts (<code>Fireball.cs</code>, <code>LightningBolt.cs</code>, <code>IceShard.cs</code>) keep behavior modular and maintainable.</li>
+                            <li>Audio and visual feedback reinforces impact and helps communicate spell mechanics.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>
+                                <strong>Fireball:</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Travels forward at a set speed and explodes on impact.</li>
+                                    <li>Collider activates after a short delay to avoid self-hit.</li>
+                                    <li>Damage varies by enemy type; sound and explosion prefab triggered on hit.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>LightningBolt:</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Instant effect with very short duration.</li>
+                                    <li>Deals variable damage based on enemy type.</li>
+                                    <li>Plays lightning and hit sounds; collider scales with spell size.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>IceFan (IceShard):</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Fires multiple shards in a fan pattern with slight angular offsets.</li>
+                                    <li>Shards move forward, scale with player stats, and detect collisions with enemies and walls.</li>
+                                    <li>Plays ice sound effects on impact or block.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>CastSpell()</code> in <em>PlayerCombat.cs</em> – chooses spell type, calculates direction, spawns prefab, and initializes spell.</li>
+                            <li><code>Init()</code> in <em>Fireball.cs</em>, <em>LightningBolt.cs</em>, <em>IceShard.cs</em> – handles scaling, movement, collision, and audio.</li>
+                            <li><code>CastIceFan()</code> – rotates vectors to create a fan of shards, each with its own collision and visual effect.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/castspell.png" alt="Fireball Spell" class="media-img">
+                        <img src="../Images/casticefan.png" alt="Lightning Bolt Spell" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Reward UI -->
+                <div class="highlight-card">
+                    <img src="../Images/reward_ui.gif" alt="Reward UI" class="highlight-img" draggable="false">
+                    <h4>Reward UI</h4>
+                    <p>
+                        After leveling up, players are presented with a selection of random upgrades.
+                        Each upgrade can enhance weapons, spells, or player stats, offering strategic choices
+                        and progression tailored to the player's playstyle.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li>Provides meaningful choices on level-up without overwhelming the player.</li>
+                            <li>Supports modular upgrades for melee, bow, spells, and player stats.</li>
+                            <li>Uses visual cues like button color and text to indicate type of upgrade.</li>
+                            <li>Includes smooth UI interactions and audio feedback for selecting upgrades.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Key Implementation Features</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li>
+                                <strong>Lambda expressions:</strong>
+                                Each upgrade's effect is defined inline using a <code>System.Action</code>,
+                                which is a lambda function in C#. This allows you to say:
+                                <pre style="color:#aaa;">applyUpgrade = () => GameManager.Instance.UpgradeMeleeDamage(3);</pre>
+                                The <code>() =&gt;</code> is the lambda operator: it defines a small function without a separate method.
+                            </li>
+                            <li>
+                                <strong>Weighted random selection:</strong>
+                                Each upgrade has a <code>weight</code> (a number ≥ 0). When picking upgrades, the system does the following:
+                                <ol>
+                                    <li>Sum all weights: <code>totalWeight = sum(weights)</code></li>
+                                    <li>Pick a random number <code>r</code> between 0 and <code>totalWeight</code></li>
+                                    <li>Iterate through upgrades, adding their weights cumulatively until <code>runningWeight ≥ r</code></li>
+                                    <li>Select that upgrade and remove it from the pool</li>
+                                </ol>
+                                <strong>Example:</strong>
+                                Suppose three upgrades with weights 1, 3, 6. <br>
+                                Total weight = 1+3+6 = 10. <br>
+                                Generate random r = 4. <br>
+                                Cumulative weights: 1, 4, 10 → the second upgrade is picked because 4 ≤ cumulative weight 4.
+                            </li>
+                            <li>
+                                <strong>Dynamic UI assignment:</strong>
+                                Button colors, titles, descriptions, and click events are assigned at runtime using the chosen upgrades.
+                                Audio feedback is also triggered using the <code>SoundCreate</code> system when an upgrade is selected.
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works in game</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li>When the player levels up, the game pauses (<code>Time.timeScale = 0</code>).</li>
+                            <li>The reward UI spawns and randomly selects 3 upgrades using weighted randomness.</li>
+                            <li>Each button shows the upgrade name, description, and a color-coded button indicating type (melee, bow, spell, or player).</li>
+                            <li>The player clicks a button to apply the upgrade; the lambda executes the corresponding function in <code>GameManager</code>.</li>
+                            <li>Game resumes immediately after selection.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/upgradeclass.png" alt="Upgrade Class" class="media-img">
+                        <img src="../Images/upgradeexample.png" alt="Upgrade Example" class="media-img">
+                        <img src="../Images/getweight.png" alt="Get Weight Function" class="media-img">
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Dylan Dixon</p>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="prevBtn" class="nav-btn">&#10094;</button>
+        <img src="" alt="Full View" id="lightboxImg">
+        <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+                cursor: zoom-in;
+            }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 1010;
+            user-select: none;
+        }
+
+        #prevBtn {
+            left: 2%;
+        }
+
+        #nextBtn {
+            right: 2%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(29,161,242,0.8);
+        }
+    </style>
+
+    <script>
+        // LIGHTBOX ELEMENTS
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentGallery = [];
+        let currentIndex = 0;
+        let scale = 1;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        // --- OPEN LIGHTBOX ---
+        function openLightbox(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            scale = 1;
+            currentX = 0;
+            currentY = 0;
+            updateTransform();
+        }
+
+        // --- CLOSE LIGHTBOX ---
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                updateTransform();
+            }
+        });
+
+        // --- NAVIGATION ---
+        function showNext() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+        function showPrev() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+        // --- KEYBOARD NAVIGATION ---
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'Escape') lightbox.style.display = 'none';
+        });
+
+        // --- ZOOM & PAN FUNCTIONS ---
+        function updateTransform() {
+            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        }
+
+        function limitPan() {
+            const rect = lightboxImg.getBoundingClientRect();
+            const parentRect = lightbox.getBoundingClientRect();
+            const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+            const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+            currentX = Math.min(Math.max(currentX, -maxX), maxX);
+            currentY = Math.min(Math.max(currentY, -maxY), maxY);
+        }
+
+        // --- MOUSE WHEEL ZOOM ---
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const prevScale = scale;
+            scale += e.deltaY < 0 ? 0.1 : -0.1;
+            scale = Math.min(Math.max(1, scale), 3);
+
+            // optional: zoom towards mouse
+            const rect = lightboxImg.getBoundingClientRect();
+            const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+            const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+            currentX -= dx;
+            currentY -= dy;
+
+            limitPan();
+            updateTransform();
+        });
+
+        // --- DRAG TO PAN ---
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (scale <= 1) return;
+            isDragging = true;
+            startX = e.clientX - currentX;
+            startY = e.clientY - currentY;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX - startX;
+            currentY = e.clientY - startY;
+            limitPan();
+            updateTransform();
+        });
+
+        document.addEventListener('mouseup', () => { isDragging = false; });
+
+        // --- INIT GALLERIES PER CARD ---
+        document.querySelectorAll('.highlight-card').forEach(card => {
+            const images = Array.from(card.querySelectorAll('img'));
+            images.forEach((img, index) => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    currentGallery = images;  // only images inside this card
+                    currentIndex = index;
+                    scale = 1;
+                    currentX = 0;
+                    currentY = 0;
+                    openLightbox(currentGallery[currentIndex]);
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>
