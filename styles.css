@@ -84,7 +84,17 @@ main > * {
     grid-column: span 2; /* full-width sections like headers, videos */
 }
 
-.project-header,
+.project-header {
+    background: #333; 
+    color: #fff; 
+    text-align: center; 
+    padding: 0.5rem 0.5rem; 
+    border-radius: 12px; 
+    font-size: 2rem; 
+    font-weight: bold; 
+    margin-bottom: 0.8rem; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4); 
+}
 .project-meta,
 video,
 .back-to-top {
