@@ -57,42 +57,78 @@
             <a class="btn" href="https://github.com/Moose-47/Crypt_Survivors" target="_blank">View on GitHub</a>
         </div>
 
-        <!-- PROJECT META & DESCRIPTION -->
+        <!-- PROJECT META -->
         <p class="project-meta">Unity · Action Roguelike</p>
-        <p><strong>Developed for and placed first in the Toronto Film School spring 2025 game jam.</strong></p>
-        <p>
-            Crypt Survivors is a fast-paced 2D action roguelike with melee, ranged, and magic combat.
-            Players strategically select attacks, manage resources, and survive waves of enemies while
-            collecting upgrades through a weighted reward system.
-        </p>
-        <p>
-            Key technical highlights:
-            <ul>
-                <li><strong>Directional Combat System:</strong> Player attack direction is calculated using the mouse position and Unity's Camera.ScreenToWorldPoint, dynamically determining attack angles for melee, ranged, and spell attacks.</li>
-                <li><strong>Weighted Upgrade System:</strong> The RewardUI script defines upgrades via a modular Upgrade class containing a name, description, button color, weight for random selection, and an applyUpgrade action. This allows for both player stats and attack style modifications.</li>
-                <li><strong>Randomized Reward Selection:</strong> At runtime, 3 upgrades are selected using weighted random selection to ensure varied gameplay and strategic choices.</li>
-                <li><strong>Dynamic UI Integration:</strong> Upgrade buttons display contextual information including name, description, and category-specific colors. Clicking a button applies the upgrade immediately and resumes gameplay.</li>
-                <li><strong>Flexible Attack and Spell Modifiers:</strong> Upgrades include increasing damage, attack speed, projectile behavior, spell size, or completely changing attack types (e.g., switching to spin slash or burst fire) while handling stacking and conditional upgrades automatically.</li>
-                <li><strong>Player Feedback and Sound Integration:</strong> UI interactions trigger sound events, giving immediate auditory feedback for upgrade selection.</li>
-            </ul>
-        </p>
 
-        <!-- MY ROLE (full-width) -->
+        <!-- PROJECT OVERVIEW -->
+        <section>
+            <h2>Project Overview</h2>
+            <p><strong>Developed for and placed first in the Toronto Film School Spring 2025 Game Jam.</strong></p>
+            <p>
+                Crypt Survivors is a fast-paced 2D action roguelike featuring melee, ranged,
+                and magic combat. Players strategically select attacks, manage resources,
+                and survive escalating enemy waves while collecting powerful upgrades
+                through a weighted reward system.
+            </p>
+        </section>
+
+        <!-- MY ROLE -->
         <section>
             <h2>My Role</h2>
             <p>
-                I led development of all gameplay systems for Crypt Survivors, including:
+                I led development of the core gameplay systems for Crypt Survivors, with a
+                focus on responsive combat, modular upgrades, and clear player feedback.
             </p>
             <ul>
-                <li>Directional combat system with melee, bow, and magic attacks</li>
-                <li>Weighted reward and upgrade system</li>
-                <li>Projectile mechanics and spell scaling (Fireball, LightningBolt, IceFan)</li>
-                <li>Input handling and dynamic spawning logic for attacks</li>
+                <li>Designed and implemented the directional combat system</li>
+                <li>Built the weighted reward and upgrade selection system</li>
+                <li>Developed projectile mechanics and scalable spell behaviors</li>
+                <li>Handled input processing and dynamic attack spawning logic</li>
             </ul>
             <p>
-                The focus was on creating responsive, satisfying combat while allowing players to feel meaningful
-                progression through upgrades.
+                The primary goal was to make combat feel immediate and satisfying while
+                ensuring upgrades meaningfully altered player strategy.
             </p>
+        </section>
+
+        <!-- KEY TECHNICAL HIGHLIGHTS -->
+        <section>
+            <h2>Key Technical Highlights</h2>
+            <ul>
+                <li>
+                    <strong>Directional Combat System:</strong>
+                    Player attack direction is calculated using mouse position and
+                    <code>Camera.ScreenToWorldPoint</code>, dynamically determining angles
+                    for melee, ranged, and magic attacks.
+                </li>
+                <li>
+                    <strong>Weighted Upgrade System:</strong>
+                    Upgrades are defined through a modular <code>Upgrade</code> class
+                    containing name, description, button color, selection weight, and
+                    an <code>applyUpgrade</code> action.
+                </li>
+                <li>
+                    <strong>Randomized Reward Selection:</strong>
+                    Three upgrades are selected at runtime using weighted random logic,
+                    ensuring varied and replayable runs.
+                </li>
+                <li>
+                    <strong>Dynamic UI Integration:</strong>
+                    Upgrade buttons display contextual information and apply effects
+                    instantly while resuming gameplay seamlessly.
+                </li>
+                <li>
+                    <strong>Flexible Attack & Spell Modifiers:</strong>
+                    Upgrades can modify damage, attack speed, projectile behavior, spell
+                    size, or fully replace attack types while safely handling stacking
+                    and conditional logic.
+                </li>
+                <li>
+                    <strong>Player Feedback & Audio:</strong>
+                    UI interactions trigger sound events to reinforce player choice
+                    and provide immediate feedback.
+                </li>
+            </ul>
         </section>
 
         <!-- GAMEPLAY HIGHLIGHTS -->
@@ -552,7 +588,5 @@
             });
         });
     </script>
-
-
 </body>
 </html>

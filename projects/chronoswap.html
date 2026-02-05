@@ -1,11 +1,656 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>ChronoSwap | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            ChronoSwap
+        </div>
+
+        <!-- VIDEO -->
+        <div class="about-video" style="margin-bottom: 1rem;">
+            <video controls preload="metadata">
+                <source src="../videos/chronoswapfull.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="/downloads/ChronoSwap.zip" download>Download</a>
+            <a class="btn" href="https://github.com/Moose-47/ChronoSwap" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- PROJECT META -->
+        <div class="project-meta">
+            Unity • Puzzle
+        </div>
+        <!-- DESCRIPTION -->
+        <section>
+            <h2>Project Overview</h2>
+            <p>
+                <strong>ChronoSwap</strong> is a time-loop puzzle game created for the
+                <strong>Game Makers Toolkit 2025 Game Jam</strong>. Players solve spatial
+                and logic-based challenges by recording their actions, rewinding time,
+                and cooperating with past versions of themselves.
+            </p>
+            <p>
+                Each rewind spawns a ghost player that faithfully replays previously
+                recorded actions, allowing players to stack interactions across
+                multiple timelines. The core challenge lies in planning movement,
+                timing interactions, and managing multiple simultaneous loops.
+            </p>
+        </section>
+
+        <!-- MY ROLE -->
+        <section>
+            <h2>My Role</h2>
+            <p>
+                I was responsible for designing and implementing the <strong>
+                    core
+                    recording, rewind, and looping systems
+                </strong>. This included building
+                the frame-based player recorder, ghost playback logic, loop management,
+                and ensuring animation and interaction consistency across timelines.
+            </p>
+            <p>
+                My focus was on creating a system that was deterministic, memory-safe,
+                and flexible enough to support complex puzzle interactions while
+                remaining performant during repeated rewinds.
+            </p>
+        </section>
+
+        <!-- KEY TECHNICAL HIGHLIGHTS -->
+        <section>
+            <h2>Key Technical Highlights</h2>
+            <ul style="color:#ccc; padding-left:1.2rem;">
+                <li>
+                    <strong>Player Action Recording:</strong> Records player position,
+                    rotation, animation state, and interactions at 60 FPS for precise
+                    and deterministic playback.
+                </li>
+                <li>
+                    <strong>Ghost Playback System:</strong> Ghost players replay recorded
+                    frames with interpolation, accurately reproducing movement and
+                    interactions across timelines.
+                </li>
+                <li>
+                    <strong>Rewind Mechanic:</strong> Rewinding resets the player while
+                    spawning ghosts that automatically repeat prior actions, enabling
+                    layered puzzle-solving.
+                </li>
+                <li>
+                    <strong>Loop Management:</strong> A centralized LoopManager handles
+                    ghost instantiation, cleanup, and loop transitions while limiting
+                    active ghosts for clarity and performance.
+                </li>
+                <li>
+                    <strong>Physics & Interaction Sync:</strong> Interaction replay uses
+                    radius checks and interactable state handling to ensure consistency
+                    across multiple timelines.
+                </li>
+                <li>
+                    <strong>Animation Fidelity:</strong> X/Y movement speeds and sprite
+                    flipping are recorded and replayed to preserve visual continuity
+                    during ghost playback.
+                </li>
+            </ul>
+        </section>
+
+        <!-- TECH DEEP DIVE -->
+        <section>
+            <h2>System Breakdown</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <img src="../Images/rewind_recording.gif" alt="Frame Recording" class="highlight-img" draggable="false">
+
+                    <h4>Frame-Based Player Recording</h4>
+                    <p>
+                        The rewind system records player state at a fixed 60 FPS, capturing
+                        only essential movement, animation, and interaction data. This
+                        lightweight frame snapshot approach allows accurate playback while
+                        keeping memory usage predictable across repeated loops.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Recording minimal frame data avoids storing raw input history or full physics state.</li>
+                            <li>Fixed-rate sampling (60 FPS) guarantees deterministic rewind and ghost playback.</li>
+                            <li>Explicit animation parameter capture prevents visual desync during playback.</li>
+                            <li>Bounded memory usage allows repeated time loops without runtime allocation spikes.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>
+                                <strong>PlayerRecordingFrame</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Stores position (<code>Vector3</code>), rotation (<code>Quaternion</code>).</li>
+                                    <li>Records animator X/Y movement speeds and sprite flip state.</li>
+                                    <li>Captures interaction input for deterministic replay.</li>
+                                    <li>Contains only the minimum data required to reproduce player intent and visuals.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Recording loop</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Runs in <code>FixedUpdate</code> at 60 FPS for consistent timing.</li>
+                                    <li>Recording is disabled during rewind playback to prevent data corruption.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Memory Characteristics</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>
+                                <strong>Per-frame size:</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Position (<code>Vector3</code>) — 12 bytes</li>
+                                    <li>Rotation (<code>Quaternion</code>) — 16 bytes</li>
+                                    <li>Animation parameters & flags — ~8 bytes</li>
+                                    <li><strong>Total raw data:</strong> ~36 bytes per frame</li>
+                                    <li>Including C# object overhead: ~64 bytes per frame</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Per 30-second loop:</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>60 FPS × 30 seconds ≈ <strong>1,800 frames</strong></li>
+                                    <li>~64 bytes × 1,800 frames ≈ <strong>~115 KB per recording</strong></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Memory safety:</strong>
+                                <ul style="margin-left: 1rem;">
+                                    <li>Recordings are explicitly cleared after rewind completion.</li>
+                                    <li>All frame lists are released on object destruction.</li>
+                                    <li>Prevents memory accumulation across repeated loops.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>PlayerRecordingFrame</code> – lightweight per-frame data container.</li>
+                            <li><code>RecordFrame()</code> – captures and stores frame snapshots.</li>
+                            <li><code>ClearRecording()</code> / <code>OnDestroy()</code> – enforces bounded memory usage.</li>
+                        </ul>
+                    </div>
+                    <div class="snippet-images">
+                        <img src="../Images/playerrecordingframe.png" alt="PlayerRecordingFrame Struct">
+                        <img src="../Images/recordframe.png" alt="RecordFrame Method">
+                        <img src="../Images/clearrecording.png" alt="Clear Recording Logic">
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <img src="../Images/ghost_playback.gif" alt="Ghost Playback" class="highlight-img" draggable="false">
+
+                    <h4>Ghost Playback & Rewind Execution</h4>
+                    <p>
+                        Each rewind spawns a <strong>GhostPlayer</strong> that replays a previously
+                        recorded timeline. Ghosts interpolate between recorded frames to ensure
+                        smooth movement, accurately replay interactions, and remain visually
+                        synchronized with player animations.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li>Frame interpolation prevents jitter caused by discrete recordings.</li>
+                            <li>Playback is time-driven rather than frame-driven for consistency.</li>
+                            <li>Ghosts are physics-isolated to avoid unintended interactions.</li>
+                            <li>Interaction replay ensures puzzles remain deterministic.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li>
+                                <strong>Time-based playback:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Playback uses an elapsed time counter divided by a fixed interval.</li>
+                                    <li>Base frames are calculated dynamically to support interpolation.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Frame interpolation:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Position and rotation are interpolated using <code>Lerp</code>.</li>
+                                    <li>Animation parameters (X/Y speed) are smoothly blended.</li>
+                                    <li>Sprite flipping preserves directional intent.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Interaction replay:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Ghosts replay recorded interaction presses.</li>
+                                    <li>Radius-based checks ensure correct interactable selection.</li>
+                                    <li>State tracking prevents duplicate presses within a single frame.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Ghost rewind support:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Ghosts themselves can rewind during loop resets.</li>
+                                    <li>Rewind traverses recorded frames in reverse order.</li>
+                                    <li>Playback resumes automatically after rewind completion.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Collision & Safety</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li>Ghosts are assigned to a dedicated physics layer.</li>
+                            <li>Ghost–player and ghost–ghost collisions are ignored.</li>
+                            <li>Rigidbodies are set to kinematic to avoid physics drift.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li><code>LateUpdate()</code> – interpolated playback loop</li>
+                            <li><code>HandleRewind()</code> – reverse traversal of recorded frames</li>
+                            <li><code>TryInteract()</code> – deterministic interaction replay</li>
+                            <li><code>SetGhostLayerCollision()</code> – physics isolation</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images">
+                        <img src="../Images/ghost_playback_code.png" alt="Ghost Playback Logic">
+                        <img src="../Images/ghost_rewind.png" alt="Ghost Rewind Logic">
+                        <img src="../Images/ghost_interaction.png" alt="Ghost Interaction Handling">
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img src="../Images/loop_manager.gif" alt="Loop Manager" class="highlight-img" draggable="false">
+
+                    <h4>Loop Management & Ghost Lifecycle</h4>
+                    <p>
+                        The <strong>LoopManager</strong> orchestrates the player’s time loop,
+                        handling rewind transitions, ghost instantiation, and loop resets. It
+                        ensures each loop is deterministic, memory-safe, and visually coherent
+                        for multi-timeline puzzles.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>Centralized loop logic keeps timing, rewinds, and ghost management consistent.</li>
+                            <li>Limits the number of active ghosts to avoid clutter and performance drops.</li>
+                            <li>Ensures seamless transitions between player and ghost playback states.</li>
+                            <li>Memory-conscious: old recordings and ghost objects are cleared on loop reset.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>
+                                <strong>Loop timing:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Tracks elapsed time per loop using <code>loopTimer</code>.</li>
+                                    <li>Triggers rewind and ghost spawning when <code>loopDuration</code> is reached.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Ghost lifecycle:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Player recording is cloned to create a ghost at loop end.</li>
+                                    <li>Ghosts replay the recorded frames with interpolation for smooth motion.</li>
+                                    <li>Old ghost objects are destroyed if the maximum ghost limit is reached.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Rewind coordination:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Player and ghosts enter a rewind state simultaneously.</li>
+                                    <li><code>WaitUntil</code> ensures rewinds complete before new ghost playback begins.</li>
+                                    <li>Recording resumes automatically after rewind completion if under ghost limit.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Memory & safety:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Recordings are cleared from the player recorder after spawning a ghost.</li>
+                                    <li>Ghost lists are cleared on level reset or destruction.</li>
+                                    <li>Prevents unbounded memory growth across repeated loops.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li><code>Update()</code> – tracks loop time and triggers rewind.</li>
+                            <li><code>HandleLoopTransition()</code> – coordinates rewind, ghost creation, and playback.</li>
+                            <li><code>ResetLevel()</code> – cleans up ghosts, recordings, and resets the player.</li>
+                            <li><code>activeGhosts</code> & <code>ghostRecordings</code> – store runtime ghost state for management.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/loop_manager_update.png" alt="LoopManager Logic" class="media-img">
+                        <img src="../Images/transition.png" alt="Ghost Spawn Logic" class="media-img">
+                        <img src="../Images/resetlevel.png" alt="Ghost Spawn Logic" class="media-img">
+                    </div>
+                </div>
+
+                <div class="highlight-card">
+                    <img src="../Images/interactables.gif" alt="Interactables & Puzzle Pieces" class="highlight-img" draggable="false">
+
+                    <h4>Interactables & Puzzle Pieces</h4>
+                    <p>
+                        ChronoSwap’s puzzles are built around <strong>interactable objects</strong> such as
+                        buttons, pressure plates, and switches. These objects communicate with targets like
+                        mirrors, lasers, and doors to create layered puzzle mechanics that respond to
+                        both the player and ghost timelines.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>Abstract interactables decouple input (press/release) from puzzle effects (doors, mirrors, lasers).</li>
+                            <li>Supports multi-timeline consistency: ghosts can trigger the same interactions as the player.</li>
+                            <li>Visual feedback via sprite changes reinforces player understanding of puzzle state.</li>
+                            <li>Audio feedback provides intuitive cues for successful interaction.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>
+                                <strong>Interactable Types:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li><code>Button</code> – single-press triggers an effect with audio feedback.</li>
+                                    <li><code>Switch</code> – toggles target states; can remain on or off.</li>
+                                    <li><code>Plate</code> – pressure-sensitive; automatically releases when no objects are pressing.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Targets:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li><code>Door</code> – opens or closes with collision and visual feedback.</li>
+                                    <li><code>Mirror</code> – rotates to reflect lasers when activated.</li>
+                                    <li><code>LaserEmitter</code> – fires a laser beam that can activate other interactables via raycast hits.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Ghost & Player Interaction:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Interactables track pressing objects (player or ghosts) to handle multi-timeline interactions.</li>
+                                    <li>Pressure plates and lasers maintain state per frame for deterministic puzzle solving.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Visual & Audio Feedback:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Sprites switch between <code>onSprite</code> and <code>offSprite</code> states.</li>
+                                    <li>Sounds are played for each type: button press, switch flip, plate depression, door opening/closing.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li><code>Press()</code> / <code>Release()</code> – handle state change and trigger effects.</li>
+                            <li><code>HandleInteractableType()</code> – calls target-specific logic based on type.</li>
+                            <li><code>ToggleDoor()</code>, <code>ToggleRotation()</code>, <code>ToggleLaser()</code> – execute the puzzle effect.</li>
+                            <li><code>LaserEmitter</code> – raycasts with reflection and triggers interactables it hits.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/interactable_object.png" alt="Interactable Object Logic" class="media-img">
+                        <img src="../Images/laser_emitter.png" alt="Laser Emitter Logic" class="media-img">
+                        <img src="../Images/door.png" alt="Door & Mirror Logic" class="media-img">
+                        <img src="../Images/mirror.png" alt="Door & Mirror Logic" class="media-img">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2>Contact</h2>
+
+            <div class="contact-icons">
+                <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Dylan Dixon</p>
+    </footer>
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="prevBtn" class="nav-btn">&#10094;</button>
+        <img src="" alt="Full View" id="lightboxImg">
+        <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+                cursor: zoom-in;
+            }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 1010;
+            user-select: none;
+        }
+
+        #prevBtn {
+            left: 2%;
+        }
+
+        #nextBtn {
+            right: 2%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(29,161,242,0.8);
+        }
+    </style>
+
+    <script>
+     // LIGHTBOX ELEMENTS
+     const lightbox = document.getElementById('lightbox');
+     const lightboxImg = document.getElementById('lightboxImg');
+     const prevBtn = document.getElementById('prevBtn');
+     const nextBtn = document.getElementById('nextBtn');
+
+     let currentGallery = [];
+     let currentIndex = 0;
+     let scale = 1;
+     let isDragging = false;
+     let startX = 0;
+     let startY = 0;
+     let currentX = 0;
+     let currentY = 0;
+
+     // --- OPEN LIGHTBOX ---
+     function openLightbox(img) {
+         lightbox.style.display = 'flex';
+         lightboxImg.src = img.src;
+         scale = 1;
+         currentX = 0;
+         currentY = 0;
+         updateTransform();
+     }
+
+     // --- CLOSE LIGHTBOX ---
+     lightbox.addEventListener('click', (e) => {
+         if (e.target === lightbox) {
+             lightbox.style.display = 'none';
+             scale = 1;
+             currentX = 0;
+             currentY = 0;
+             updateTransform();
+         }
+     });
+
+     // --- NAVIGATION ---
+     function showNext() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex + 1) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+     function showPrev() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+
+     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+     // --- KEYBOARD NAVIGATION ---
+     document.addEventListener('keydown', (e) => {
+         if (lightbox.style.display !== 'flex') return;
+         if (e.key === 'ArrowRight') showNext();
+         else if (e.key === 'ArrowLeft') showPrev();
+         else if (e.key === 'Escape') lightbox.style.display = 'none';
+     });
+
+     // --- ZOOM & PAN FUNCTIONS ---
+     function updateTransform() {
+         lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+     }
+
+     function limitPan() {
+         const rect = lightboxImg.getBoundingClientRect();
+         const parentRect = lightbox.getBoundingClientRect();
+         const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+         const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+         currentX = Math.min(Math.max(currentX, -maxX), maxX);
+         currentY = Math.min(Math.max(currentY, -maxY), maxY);
+     }
+
+     // --- MOUSE WHEEL ZOOM ---
+     lightboxImg.addEventListener('wheel', (e) => {
+         e.preventDefault();
+         const prevScale = scale;
+         scale += e.deltaY < 0 ? 0.1 : -0.1;
+         scale = Math.min(Math.max(1, scale), 3);
+
+         // optional: zoom towards mouse
+         const rect = lightboxImg.getBoundingClientRect();
+         const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+         const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+         currentX -= dx;
+         currentY -= dy;
+
+         limitPan();
+         updateTransform();
+     });
+
+     // --- DRAG TO PAN ---
+     lightboxImg.addEventListener('mousedown', (e) => {
+         if (scale <= 1) return;
+         isDragging = true;
+         startX = e.clientX - currentX;
+         startY = e.clientY - currentY;
+         e.preventDefault();
+     });
+
+     document.addEventListener('mousemove', (e) => {
+         if (!isDragging) return;
+         currentX = e.clientX - startX;
+         currentY = e.clientY - startY;
+         limitPan();
+         updateTransform();
+     });
+
+     document.addEventListener('mouseup', () => { isDragging = false; });
+
+     // --- INIT GALLERIES PER CARD ---
+     document.querySelectorAll('.highlight-card').forEach(card => {
+         const images = Array.from(card.querySelectorAll('img'));
+         images.forEach((img, index) => {
+             img.style.cursor = 'pointer';
+             img.addEventListener('click', () => {
+                 currentGallery = images;  // only images inside this card
+                 currentIndex = index;
+                 scale = 1;
+                 currentX = 0;
+                 currentY = 0;
+                 openLightbox(currentGallery[currentIndex]);
+             });
+         });
+     });
+    </script>
 </body>
 </html>
