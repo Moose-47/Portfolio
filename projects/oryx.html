@@ -1,11 +1,277 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Oryx | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            Oryx
+        </div>
+
+        <!-- VIDEO -->
+        <div class="about-video" style="margin-bottom: 1rem;">
+            <video controls preload="metadata">
+                <source src="../videos/OryxFull.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="/downloads/Oryx.zip" download>Download</a>
+            <a class="btn" href="https://github.com/Moose-47/Oryx" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- PROJECT META -->
+        <div class="project-meta">
+            Ureal Engine 5 • Physics Simulation
+        </div>
+
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2>Contact</h2>
+
+            <div class="contact-icons">
+                <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Dylan Dixon</p>
+    </footer>
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="prevBtn" class="nav-btn">&#10094;</button>
+        <img src="" alt="Full View" id="lightboxImg">
+        <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+                cursor: zoom-in;
+            }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 1010;
+            user-select: none;
+        }
+
+        #prevBtn {
+            left: 2%;
+        }
+
+        #nextBtn {
+            right: 2%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(29,161,242,0.8);
+        }
+    </style>
+
+    <script>
+     // LIGHTBOX ELEMENTS
+     const lightbox = document.getElementById('lightbox');
+     const lightboxImg = document.getElementById('lightboxImg');
+     const prevBtn = document.getElementById('prevBtn');
+     const nextBtn = document.getElementById('nextBtn');
+
+     let currentGallery = [];
+     let currentIndex = 0;
+     let scale = 1;
+     let isDragging = false;
+     let startX = 0;
+     let startY = 0;
+     let currentX = 0;
+     let currentY = 0;
+
+     // --- OPEN LIGHTBOX ---
+     function openLightbox(img) {
+         lightbox.style.display = 'flex';
+         lightboxImg.src = img.src;
+         scale = 1;
+         currentX = 0;
+         currentY = 0;
+         updateTransform();
+     }
+
+     // --- CLOSE LIGHTBOX ---
+     lightbox.addEventListener('click', (e) => {
+         if (e.target === lightbox) {
+             lightbox.style.display = 'none';
+             scale = 1;
+             currentX = 0;
+             currentY = 0;
+             updateTransform();
+         }
+     });
+
+     // --- NAVIGATION ---
+     function showNext() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex + 1) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+     function showPrev() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+
+     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+     // --- KEYBOARD NAVIGATION ---
+     document.addEventListener('keydown', (e) => {
+         if (lightbox.style.display !== 'flex') return;
+         if (e.key === 'ArrowRight') showNext();
+         else if (e.key === 'ArrowLeft') showPrev();
+         else if (e.key === 'Escape') lightbox.style.display = 'none';
+     });
+
+     // --- ZOOM & PAN FUNCTIONS ---
+     function updateTransform() {
+         lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+     }
+
+     function limitPan() {
+         const rect = lightboxImg.getBoundingClientRect();
+         const parentRect = lightbox.getBoundingClientRect();
+         const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+         const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+         currentX = Math.min(Math.max(currentX, -maxX), maxX);
+         currentY = Math.min(Math.max(currentY, -maxY), maxY);
+     }
+
+     // --- MOUSE WHEEL ZOOM ---
+     lightboxImg.addEventListener('wheel', (e) => {
+         e.preventDefault();
+         const prevScale = scale;
+         scale += e.deltaY < 0 ? 0.1 : -0.1;
+         scale = Math.min(Math.max(1, scale), 3);
+
+         // optional: zoom towards mouse
+         const rect = lightboxImg.getBoundingClientRect();
+         const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+         const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+         currentX -= dx;
+         currentY -= dy;
+
+         limitPan();
+         updateTransform();
+     });
+
+     // --- DRAG TO PAN ---
+     lightboxImg.addEventListener('mousedown', (e) => {
+         if (scale <= 1) return;
+         isDragging = true;
+         startX = e.clientX - currentX;
+         startY = e.clientY - currentY;
+         e.preventDefault();
+     });
+
+     document.addEventListener('mousemove', (e) => {
+         if (!isDragging) return;
+         currentX = e.clientX - startX;
+         currentY = e.clientY - startY;
+         limitPan();
+         updateTransform();
+     });
+
+     document.addEventListener('mouseup', () => { isDragging = false; });
+
+     // --- INIT GALLERIES PER CARD ---
+     document.querySelectorAll('.highlight-card').forEach(card => {
+         const images = Array.from(card.querySelectorAll('img'));
+         images.forEach((img, index) => {
+             img.style.cursor = 'pointer';
+             img.addEventListener('click', () => {
+                 currentGallery = images;  // only images inside this card
+                 currentIndex = index;
+                 scale = 1;
+                 currentX = 0;
+                 currentY = 0;
+                 openLightbox(currentGallery[currentIndex]);
+             });
+         });
+     });
+    </script>
 </body>
 </html>
