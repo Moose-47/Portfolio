@@ -124,6 +124,10 @@ h2 {
     gap: 2rem;
 }
 
+.about-text p + p {
+    margin-top: 1rem;
+}
+
 .about-video video {
     width: 100%;
     border-radius: 8px;

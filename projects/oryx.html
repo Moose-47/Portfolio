@@ -35,11 +35,12 @@
         </div>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main>
 
         <!-- PROJECT HEADER -->
         <div class="project-header">
-            Oryx
+            <h3>Oryx</h3>
         </div>
 
         <!-- VIDEO -->
@@ -57,31 +58,275 @@
         </div>
 
         <!-- PROJECT META -->
-        <div class="project-meta">
-            Unreal Engine 5 • Physics Simulation
-        </div>
+        <p class="project-meta">Unreal Engine 5 · Physics Simulation</p>
 
+        <!-- PROJECT OVERVIEW -->
+        <section>
+            <h2>Project Overview</h2>
+            <p><strong>A physics-driven Unreal Engine 5 simulation focused on force-based spaceship control, structured landing systems, and custom manual player physics.</strong></p>
+            <p>
+                This project explores fully physics-driven gameplay systems built entirely in C++ within Unreal Engine 5.
+                The core focus was designing a thruster-based spaceship controller that applies forces at specific attachment
+                points to generate real torque, rather than relying on transform manipulation.
+
+                In addition to the ship system, the project includes a custom first-person physics pawn with manual gravity
+                implementation, a structured multi-stage landing sequence controlled by a state machine, dynamic possession
+                swapping between player and ship, and interactive object mechanics such as a gravity gun system.
+
+                The primary goal of this simulation was to deeply explore force application, rotational math, physics
+                constraints, and clean system transitions between multiple gameplay states.
+            </p>
+        </section>
+
+        <!-- MY ROLE -->
+        <section>
+            <h2>My Role</h2>
+            <p>
+                I developed all gameplay systems and physics mechanics for this project using Unreal Engine 5 and C++.
+                The focus was on building reusable, system-driven architecture rather than relying on Blueprint-only logic.
+            </p>
+            <ul>
+                <li>Designed and implemented physics-based spaceship thruster system using AddForceAtLocation</li>
+                <li>Built multi-stage landing state machine with structured transition logic</li>
+                <li>Created custom manual gravity-based first-person pawn (no CharacterMovementComponent)</li>
+                <li>Implemented dynamic possession system between player and spaceship</li>
+                <li>Integrated Enhanced Input system with multiple mapping contexts</li>
+                <li>Developed gravity gun interaction hooks with rotation and snap controls</li>
+            </ul>
+            <p>
+                The technical focus of this project was accurate force simulation, clean state management,
+                and building modular gameplay systems that interact reliably under physics constraints.
+            </p>
+        </section>
+
+        <!-- KEY TECHNICAL HIGHLIGHTS -->
+        <section>
+            <h2>Key Technical Highlights</h2>
+            <ul>
+                <li><strong>Physics-Based Thruster System:</strong> Applied directional forces at individual thruster components using AddForceAtLocation to generate torque-based movement and rotational control.</li>
+                <li><strong>Circular Mouse Steering Implementation:</strong> Constrained mouse input within a configurable radius to normalize directional control and drive smooth pitch, yaw, and roll interpolation.</li>
+                <li><strong>Multi-Stage Landing State Machine:</strong> Implemented custom ELandingStage enum handling rotation alignment, approach, braking, descent, and final physics locking.</li>
+                <li><strong>Physics Lock & DOF Constraints:</strong> Dynamically toggled physics simulation and constrained all axes upon landing to eliminate drift and ensure stable docking.</li>
+                <li><strong>Custom Manual Gravity System:</strong> Implemented gravity, acceleration smoothing, ground detection via line trace, and terminal velocity clamping without using CharacterMovementComponent.</li>
+                <li><strong>Dynamic Possession & Input Context Switching:</strong> Swapped player control between ship and pawn while updating Enhanced Input mapping contexts and cursor behavior.</li>
+            </ul>
+        </section>
+
+        <!-- GAMEPLAY HIGHLIGHTS -->
+        <section>
+            <h2>Gameplay Highlights</h2>
+            <div class="highlights-grid">
+
+                <!-- Highlight Card 1 -->
+                <div class="highlight-card">
+                    <img src="../Images/ue5_ship_movement.gif" alt="Physics-Based Ship Movement" class="highlight-img" draggable="false">
+                    <h4>Hybrid Physics Ship Controller</h4>
+                    <p>
+                        A hybrid spaceship movement system combining physics-driven thrust for translation
+                        with smooth interpolated rotation based on circular mouse steering.
+                        Linear motion is handled through force application, while rotation is
+                        manually interpolated for responsive directional control.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Maintains realistic acceleration using physics forces.</li>
+                            <li>Prevents unstable physics-based spinning by controlling rotation manually.</li>
+                            <li>Allows tighter, more responsive mouse-based steering.</li>
+                            <li>Players can exit the ship while landed, spawning and transferring control to their character.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Thruster scene components define force application points.</li>
+                            <li><code>AddForceAtLocation()</code> applies forward and side thrust.</li>
+                            <li>Mouse input is clamped within a circular radius for normalized steering.</li>
+                            <li><code>FMath::RInterpTo()</code> smoothly rotates the ship toward a target rotation.</li>
+                            <li>Niagara FX activate dynamically based on active thrusters.</li>
+                            <li><code>OnExitShip()</code> spawns the player beside the ship and restores their control.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>RestrictMouseToCircle()</code> – Normalizes mouse offset for directional control.</li>
+                            <li><code>UpdateRotation()</code> – Interpolates toward pitch/yaw/roll targets.</li>
+                            <li><code>ApplyThrusters()</code> – Applies force at thruster component locations.</li>
+                            <li><code>OnExitShip()</code> – Transfers control from ship back to the player pawn.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/ue5_thruster_force_snippet.png" alt="AddForceAtLocation Code" class="media-img">
+                        <img src="../Images/ue5_restrict_mouse_snippet.png" alt="Restrict Mouse to Circle Code" class="media-img">
+                        <img src="../Images/ue5_rotation_interp_snippet.png" alt="Rotation Interpolation Code" class="media-img">
+                        <img src="../Images/ue5_exit_ship_snippet.png" alt="On Exit Ship Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 2 -->
+                <div class="highlight-card">
+                    <img src="../Images/ue5_ship_landing.gif" alt="Spaceship Landing Sequence" class="highlight-img" draggable="false">
+                    <h4>Multi-Stage Landing Sequence</h4>
+                    <p>
+                        A procedural landing system for spaceships that guides the player through
+                        approach, alignment, braking, and descent onto a landing pad. The sequence
+                        temporarily overrides normal controls, smoothly interpolates rotation, and
+                        locks the ship physically once landed.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Ensures a smooth, cinematic landing experience without abrupt movement.</li>
+                            <li>Prevents collisions or misalignment by guiding the ship through predefined stages.</li>
+                            <li>Automatically locks the ship on the pad for player boarding or takeoff.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>LandingTrigger</code> detects when the ship is above a landing pad.</li>
+                            <li>Player presses <code>E</code> to initiate landing, setting <code>bIsLanding = true</code>.</li>
+                            <li>
+                                Landing proceeds through <code>ELandingStage</code> states:
+                                <ul>
+                                    <li><code>RotateToPad</code> – Rotate to face the pad.</li>
+                                    <li><code>MoveToPad</code> – Approach pad along forward vector.</li>
+                                    <li><code>ApplyBrakes</code> – Reduce speed and activate brake FX.</li>
+                                    <li><code>AlignRotation</code> – Match pad yaw and horizontally drift into position.</li>
+                                    <li><code>Descend</code> – Lower vertically to pad surface and lock.</li>
+                                    <li><code>Landed</code> – Ship is immobilized and ready for player exit or takeoff.</li>
+                                </ul>
+                            </li>
+                            <li>Niagara FX are toggled dynamically for thrusters and brakes during stages.</li>
+                            <li><code>LockShipOnPad(true)</code> freezes physics once landed.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>StartLanding(ALandingPad* LandingPad)</code> – Initializes landing and disables normal thrusters.</li>
+                            <li><code>LandingSequence(float DeltaTime)</code> – Handles stage-based interpolation, braking, and descent.</li>
+                            <li><code>LockShipOnPad(bool bLock)</code> – Enables/disables physics and constrains the ship on the pad.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/ue5_landing_sequence_snippet_1.png" alt="Landing Sequence Code Snippet" class="media-img">
+                        <img src="../Images/ue5_landing_sequence_snippet_2.png" alt="Landing Sequence Code Snippet" class="media-img">
+                        <img src="../Images/ue5_lock_on_pad_snippet.png" alt="Landing Pad Trigger Snippet" class="media-img">
+                        <img src="../Images/ue5_pad_trigger_snippet.png" alt="Landing Pad Trigger Snippet" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 3 -->
+                <div class="highlight-card">
+                    <img src="../Images/ue5_player_controller.gif" alt="Player Controller Input & Movement" class="highlight-img" draggable="false">
+                    <h4>Player Controller & Input Handling</h4>
+                    <p>
+                        Handles player movement, camera rotation, jumping, and interactions with the gravity gun.
+                        Movement uses physics-based velocity with smooth acceleration, while camera rotation is manually
+                        controlled for precise first-person control. Also handles detecting nearby ships for boarding.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Physics-based capsule allows smooth collisions and manual gravity control.</li>
+                            <li>Manual camera rotation gives precise pitch and yaw control without unwanted rotations.</li>
+                            <li>Input system uses Enhanced Input for flexible bindings.</li>
+                            <li>Nearby ship detection uses a sphere overlap for seamless boarding interaction.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>Tick()</code> applies manual gravity and updates horizontal velocity.</li>
+                            <li><code>Look()</code> rotates the pawn (yaw) and camera (pitch) independently.</li>
+                            <li>Movement input is smoothed via <code>CurrentHorizontalVelocity</code> and acceleration.</li>
+                            <li><code>CheckGrounded()</code> uses a line trace to determine if the player is on the ground.</li>
+                            <li>Gravity gun input functions directly call methods on the attached <code>GravityGun</code> actor.</li>
+                            <li><code>TryBoardShip()</code> finds the nearest ship and triggers boarding logic.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>ForwardPressed/Released()</code> – Updates MoveInput.X based on input.</li>
+                            <li><code>Look()</code> – Rotates pawn yaw and camera pitch independently.</li>
+                            <li><code>Tick()</code> – Applies gravity, smooth acceleration, and sets capsule velocity.</li>
+                            <li><code>TryBoardShip()</code> – Detects nearby ship and destroys the gravity gun before boarding.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/ue5_tick_snippet.png" alt="Tick Code" class="media-img">
+                        <img src="../Images/ue5_player_movement_snippet.png" alt="Player Movement Code" class="media-img">
+                        <img src="../Images/ue5_camera_look_snippet.png" alt="Camera Look Code" class="media-img">
+                        <img src="../Images/ue5_grounded_snippet.png" alt="Player Grounded Code" class="media-img">
+                        <img src="../Images/ue5_find_ship_snippet.png" alt="Find Ship Code" class="media-img">
+                        <img src="../Images/ue5_board_ship_snippet.png" alt="Board Ship Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 4 -->
+                <div class="highlight-card">
+                    <img src="../Images/ue5_gravity_gun_hold.gif" alt="Gravity Gun Hold" class="highlight-img" draggable="false">
+                    <img src="../Images/ue5_gravity_gun_fire.gif" alt="Gravity Gun Fire" class="highlight-img" draggable="false">
+                    <h4>Gravity Gun</h4>
+                    <p>
+                        A versatile physics-based gravity gun allowing the player to pick up, rotate,
+                        spin, snap, and launch objects within the environment.
+                        Smooth physics interactions ensure objects respond naturally while held or thrown.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Enables intuitive manipulation of physics objects in first-person view.</li>
+                            <li>Combines manual rotation, snapping, and spinning for precise control.</li>
+                            <li>Objects can be launched dynamically, enhancing puzzle and combat mechanics.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Line trace detects objects in front of the player within a configurable range.</li>
+                            <li><code>UPhysicsHandleComponent</code> moves objects smoothly based on camera position.</li>
+                            <li>Held objects can be rotated manually or snapped to horizontal/vertical/forward orientations.</li>
+                            <li>Objects can spin continuously at a configurable speed with smooth acceleration.</li>
+                            <li><code>AddImpulse()</code> fires objects forward with configurable force.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>ToggleGrab()</code> – Grab or release objects dynamically.</li>
+                            <li><code>StartSpin()/StopSpin()</code> – Control continuous spinning of held objects.</li>
+                            <li><code>SnapRotationToHorizontal()/Vertical()/Forward()</code> – Snap held objects to standard orientations.</li>
+                            <li><code>FireObject()</code> – Launch objects forward using physics impulse.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/ue5_gravity_gun_tick_snippet.png" alt="Gravity Gun Tick Code" class="media-img">
+                        <img src="../Images/ue5_gravity_gun_hold_snippet.png" alt="Physics Handle Grab Code" class="media-img">
+                        <img src="../Images/ue5_gravity_gun_fire_snippet.png" alt="Fire Object Code" class="media-img">
+                        <img src="../Images/ue5_gravity_gun_rotate_snippet.png" alt="Rotation and Snap Code" class="media-img">
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- BACK TO MAIN -->
         <div class="back-to-top">
             <a href="../index.html">Back to Projects</a>
         </div>
+
         <!-- CONTACT -->
         <section id="contact">
             <h2>Contact</h2>
-
             <div class="contact-icons">
-                <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
+                <a href="https://github.com/Moose-47" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:DylanDixon-@outlook.com"><i class="fas fa-envelope"></i></a>
             </div>
-
         </section>
     </main>
 
@@ -147,131 +392,131 @@
     </style>
 
     <script>
-     // LIGHTBOX ELEMENTS
-     const lightbox = document.getElementById('lightbox');
-     const lightboxImg = document.getElementById('lightboxImg');
-     const prevBtn = document.getElementById('prevBtn');
-     const nextBtn = document.getElementById('nextBtn');
+        // LIGHTBOX ELEMENTS
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-     let currentGallery = [];
-     let currentIndex = 0;
-     let scale = 1;
-     let isDragging = false;
-     let startX = 0;
-     let startY = 0;
-     let currentX = 0;
-     let currentY = 0;
+        let currentGallery = [];
+        let currentIndex = 0;
+        let scale = 1;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
 
-     // --- OPEN LIGHTBOX ---
-     function openLightbox(img) {
-         lightbox.style.display = 'flex';
-         lightboxImg.src = img.src;
-         scale = 1;
-         currentX = 0;
-         currentY = 0;
-         updateTransform();
-     }
+        // --- OPEN LIGHTBOX ---
+        function openLightbox(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            scale = 1;
+            currentX = 0;
+            currentY = 0;
+            updateTransform();
+        }
 
-     // --- CLOSE LIGHTBOX ---
-     lightbox.addEventListener('click', (e) => {
-         if (e.target === lightbox) {
-             lightbox.style.display = 'none';
-             scale = 1;
-             currentX = 0;
-             currentY = 0;
-             updateTransform();
-         }
-     });
+        // --- CLOSE LIGHTBOX ---
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                updateTransform();
+            }
+        });
 
-     // --- NAVIGATION ---
-     function showNext() {
-         if (!currentGallery.length) return;
-         currentIndex = (currentIndex + 1) % currentGallery.length;
-         openLightbox(currentGallery[currentIndex]);
-     }
-     function showPrev() {
-         if (!currentGallery.length) return;
-         currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-         openLightbox(currentGallery[currentIndex]);
-     }
+        // --- NAVIGATION ---
+        function showNext() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+        function showPrev() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
 
-     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
 
-     // --- KEYBOARD NAVIGATION ---
-     document.addEventListener('keydown', (e) => {
-         if (lightbox.style.display !== 'flex') return;
-         if (e.key === 'ArrowRight') showNext();
-         else if (e.key === 'ArrowLeft') showPrev();
-         else if (e.key === 'Escape') lightbox.style.display = 'none';
-     });
+        // --- KEYBOARD NAVIGATION ---
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'Escape') lightbox.style.display = 'none';
+        });
 
-     // --- ZOOM & PAN FUNCTIONS ---
-     function updateTransform() {
-         lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
-     }
+        // --- ZOOM & PAN FUNCTIONS ---
+        function updateTransform() {
+            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        }
 
-     function limitPan() {
-         const rect = lightboxImg.getBoundingClientRect();
-         const parentRect = lightbox.getBoundingClientRect();
-         const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
-         const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
-         currentX = Math.min(Math.max(currentX, -maxX), maxX);
-         currentY = Math.min(Math.max(currentY, -maxY), maxY);
-     }
+        function limitPan() {
+            const rect = lightboxImg.getBoundingClientRect();
+            const parentRect = lightbox.getBoundingClientRect();
+            const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+            const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+            currentX = Math.min(Math.max(currentX, -maxX), maxX);
+            currentY = Math.min(Math.max(currentY, -maxY), maxY);
+        }
 
-     // --- MOUSE WHEEL ZOOM ---
-     lightboxImg.addEventListener('wheel', (e) => {
-         e.preventDefault();
-         const prevScale = scale;
-         scale += e.deltaY < 0 ? 0.1 : -0.1;
-         scale = Math.min(Math.max(1, scale), 3);
+        // --- MOUSE WHEEL ZOOM ---
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const prevScale = scale;
+            scale += e.deltaY < 0 ? 0.1 : -0.1;
+            scale = Math.min(Math.max(1, scale), 3);
 
-         // optional: zoom towards mouse
-         const rect = lightboxImg.getBoundingClientRect();
-         const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
-         const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
-         currentX -= dx;
-         currentY -= dy;
+            // optional: zoom towards mouse
+            const rect = lightboxImg.getBoundingClientRect();
+            const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+            const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+            currentX -= dx;
+            currentY -= dy;
 
-         limitPan();
-         updateTransform();
-     });
+            limitPan();
+            updateTransform();
+        });
 
-     // --- DRAG TO PAN ---
-     lightboxImg.addEventListener('mousedown', (e) => {
-         if (scale <= 1) return;
-         isDragging = true;
-         startX = e.clientX - currentX;
-         startY = e.clientY - currentY;
-         e.preventDefault();
-     });
+        // --- DRAG TO PAN ---
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (scale <= 1) return;
+            isDragging = true;
+            startX = e.clientX - currentX;
+            startY = e.clientY - currentY;
+            e.preventDefault();
+        });
 
-     document.addEventListener('mousemove', (e) => {
-         if (!isDragging) return;
-         currentX = e.clientX - startX;
-         currentY = e.clientY - startY;
-         limitPan();
-         updateTransform();
-     });
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX - startX;
+            currentY = e.clientY - startY;
+            limitPan();
+            updateTransform();
+        });
 
-     document.addEventListener('mouseup', () => { isDragging = false; });
+        document.addEventListener('mouseup', () => { isDragging = false; });
 
-     // --- INIT GALLERIES PER CARD ---
-     document.querySelectorAll('.highlight-card').forEach(card => {
-         const images = Array.from(card.querySelectorAll('img'));
-         images.forEach((img, index) => {
-             img.style.cursor = 'pointer';
-             img.addEventListener('click', () => {
-                 currentGallery = images;  // only images inside this card
-                 currentIndex = index;
-                 scale = 1;
-                 currentX = 0;
-                 currentY = 0;
-                 openLightbox(currentGallery[currentIndex]);
-             });
-         });
-     });
+        // --- INIT GALLERIES PER CARD ---
+        document.querySelectorAll('.highlight-card').forEach(card => {
+            const images = Array.from(card.querySelectorAll('img'));
+            images.forEach((img, index) => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    currentGallery = images;  // only images inside this card
+                    currentIndex = index;
+                    scale = 1;
+                    currentX = 0;
+                    currentY = 0;
+                    openLightbox(currentGallery[currentIndex]);
+                });
+            });
+        });
     </script>
 </body>
 </html>
