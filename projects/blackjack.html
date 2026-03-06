@@ -1,11 +1,570 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blackjack | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            <h3>Blackjack</h3>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="https://github.com/Moose-47/Text_Based_BlackJack/releases/download/v1.0/Blackjack.exe">Download</a>
+            <a class="btn" href="https://github.com/Moose-47/Text_Based_BlackJack" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- PROJECT META -->
+        <p class="project-meta">C++ • Console Application</p>
+
+        <!-- PROJECT OVERVIEW -->
+        <section>
+            <h2>Project Overview</h2>
+
+            <p>
+                <strong>A fully playable Blackjack game implemented in C++ using console input and object-oriented design.</strong>
+            </p>
+
+            <p>
+                This project focuses on implementing the complete gameplay loop of Blackjack using
+                structured C++ systems including deck management, card shuffling, betting logic,
+                player decision handling, and dealer AI behavior.
+            </p>
+
+            <p>
+                The goal of the project was to explore procedural game logic, input validation,
+                state management, and object-oriented design patterns while implementing a
+                classic casino card game entirely in code without external libraries or
+                graphical frameworks.
+            </p>
+
+            <p>
+                The game supports advanced Blackjack mechanics such as card splitting,
+                double-down betting, dealer draw rules, dynamic credit tracking, and
+                full round resolution with win/loss evaluation.
+            </p>
+
+        </section>
+
+
+        <!-- MY ROLE -->
+        <section>
+
+            <h2>My Role</h2>
+
+            <p>
+                I developed the entire game system including the card logic, game loop,
+                betting mechanics, and player input handling using C++.
+            </p>
+
+            <ul>
+                <li>Designed object-oriented game architecture using classes and structs</li>
+                <li>Implemented Fisher–Yates shuffle algorithm for random deck generation</li>
+                <li>Built full Blackjack rule logic including splitting and doubling down</li>
+                <li>Created dynamic credit and betting system</li>
+                <li>Implemented dealer AI following standard Blackjack rules</li>
+                <li>Developed robust console input validation and game state flow</li>
+            </ul>
+
+            <p>
+                This project served as an exercise in structuring complex gameplay systems
+                and managing multiple interacting rulesets within a clean and maintainable
+                code architecture.
+            </p>
+
+        </section>
+
+
+        <!-- KEY TECHNICAL HIGHLIGHTS -->
+        <section>
+
+            <h2>Key Technical Highlights</h2>
+
+            <ul>
+
+                <li>
+                    <strong>Fisher–Yates Shuffle Algorithm:</strong>
+                    The deck is randomized using the Fisher–Yates shuffle, ensuring unbiased card
+                    distribution and realistic gameplay randomness.
+                </li>
+
+                <li>
+                    <strong>Object-Oriented Game Structure:</strong>
+                    The project uses a central <code>Game</code> class alongside
+                    <code>Card</code> and <code>Hand</code> structures to encapsulate deck data,
+                    player state, and round management.
+                </li>
+
+                <li>
+                    <strong>Dynamic Hand Evaluation System:</strong>
+                    Hand totals are calculated dynamically with special handling for Aces,
+                    allowing them to count as either 1 or 11 depending on the hand value.
+                </li>
+
+                <li>
+                    <strong>Advanced Blackjack Mechanics:</strong>
+                    The game supports double-down betting, hand splitting,
+                    dealer draw rules, and multiple hand resolution within a single round.
+                </li>
+
+                <li>
+                    <strong>Robust Input Validation:</strong>
+                    Console input is sanitized to prevent invalid bets or incorrect
+                    player commands from breaking the game loop.
+                </li>
+
+                <li>
+                    <strong>State-Based Round Flow:</strong>
+                    Each round transitions through clear gameplay phases:
+                    deal → player turn → dealer turn → result evaluation.
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- GAMEPLAY HIGHLIGHTS -->
+        <section>
+
+            <h2>Gameplay Highlights</h2>
+
+            <div class="highlights-grid">
+
+                <!-- Highlight Card 1 -->
+                <div class="highlight-card">
+
+                    <h4>Deck Generation & Shuffle</h4>
+
+                    <p>
+                        The game dynamically generates a full 52-card deck and randomizes
+                        its order using the Fisher–Yates shuffle algorithm to ensure fair
+                        and unpredictable gameplay.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+
+                            <li>A 52-card array is generated using nested loops.</li>
+
+                            <li>Each card contains suit, rank, and numeric value.</li>
+
+                            <li>The Fisher–Yates algorithm swaps card positions randomly.</li>
+
+                            <li>The shuffled deck is then used sequentially for dealing.</li>
+
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Key Code Systems</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;">
+
+                            <li><code>initializeDeck()</code> – Creates the card deck.</li>
+
+                            <li><code>shuffleDeck()</code> – Randomizes card order.</li>
+
+                            <li><code>dealCard()</code> – Returns the next card in the deck.</li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/blackjack_card_struct.png" alt="Card Struct Code Snippet" class="media-img">
+                        <img src="../Images/blackjack_initialize_deck_and_shuffle.png" alt="Shuffle Code Snippet" class="media-img">
+                    </div>
+
+                </div>
+
+                <!-- Highlight Card 2 -->
+                <div class="highlight-card">
+
+                    <h4>Player Decision System</h4>
+
+                    <p>
+                        Players can interact with the game using console commands
+                        to hit, stand, double down, split hands, or pass a round.
+                        The system dynamically checks rules and available credits
+                        before allowing each action.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+
+                            <li>Ensures Blackjack rules are followed correctly.</li>
+
+                            <li>Prevents invalid actions such as splitting with mismatched cards.</li>
+
+                            <li>Allows dynamic gameplay based on the player's credits and hand state.</li>
+
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Key Systems</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;">
+
+                            <li><code>playerTurn()</code> – Handles all player input decisions.</li>
+
+                            <li><code>calculateHandValue()</code> – Evaluates current hand total.</li>
+
+                            <li><code>displayHand()</code> – Prints cards and hand values.</li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/blackjack_hand_struct.png" alt="Hand Struct Code" class="media-img">
+                        <img src="../Images/blackjack_playerturn.png" alt="Player Turn Code" class="media-img">
+                    </div>
+
+                </div>
+
+                <!-- Highlight Card 3 -->
+                <div class="highlight-card">
+
+                    <img src="../Images/blackjack_dealer_logic.gif" alt="Dealer Logic" class="highlight-img" draggable="false">
+
+                    <h4>Dealer AI & Round Resolution</h4>
+
+                    <p>
+                        The dealer follows standard Blackjack rules, drawing cards
+                        until reaching a minimum hand value of 17. After the dealer
+                        turn, the game compares results and adjusts player credits
+                        based on win/loss outcomes.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+
+                            <li>The dealer automatically draws cards until reaching 17.</li>
+
+                            <li>Both hands are evaluated for busts or higher totals.</li>
+
+                            <li>The player’s credits are updated based on the result.</li>
+
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Key Systems</h5>
+
+                        <ul style="color:#ccc;font-size:0.95rem;">
+
+                            <li><code>dealerTurn()</code> – Handles dealer card drawing.</li>
+
+                            <li><code>finishRound()</code> – Evaluates winners and payouts.</li>
+
+                            <li><code>resetGame()</code> – Resets credits and hands for a new session.</li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/blackjack_dealerturn.png" alt="Dealer Logic Code" class="media-img">
+                        <img src="../Images/blackjack_roundfinish.png" alt="Finish Round Code" class="media-img">
+                        <img src="../Images/blackjack_calculate_value.png" alt="calculate value Code" class="media-img">
+                        <img src="../Images/blackjack_gameplay_loop.png" alt="calculate value Code" class="media-img">
+                    </div>
+
+                </div>
+
+                <!-- Highlight Card: Input Validation -->
+                <div class="highlight-card">
+                    <img src="../Images/cpp_input_validation.gif" alt="C++ Input Validation Logic" class="highlight-img" draggable="false">
+
+                    <h4>Robust Input Validation System</h4>
+
+                    <p>
+                        The blackjack game uses a dedicated input validation function to ensure
+                        that player bets are always valid numeric values. Since console programs
+                        rely heavily on user input, invalid values such as characters or malformed
+                        numbers could otherwise break the game logic.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Prevents crashes caused by invalid console input.</li>
+                            <li>Ensures only valid numeric bets are processed.</li>
+                            <li>Keeps the game loop stable without restarting the program.</li>
+                            <li>Improves user experience by prompting for corrected input.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Checks if the input stream entered a failure state using <code>std::cin.fail()</code>.</li>
+                            <li>Uses <code>std::cin.peek()</code> to detect leftover invalid characters in the input buffer.</li>
+                            <li>If invalid input is detected, the error state is cleared.</li>
+                            <li>The input buffer is flushed using <code>std::cin.ignore()</code>.</li>
+                            <li>The player is prompted again until valid input is entered.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippet</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>inputValidation(int &bet)</code> – Ensures the player's bet input is a valid number.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/blackjack_input_validation.png" alt="Input Validation Code Snippet" class="media-img">
+                        <img src="../Images/blackjack_playagain_validation.png" alt="Play Again Validation Code Snippet" class="media-img">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-icons">
+                <a href="https://github.com/Moose-47" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:DylanDixon-@outlook.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Dylan Dixon</p>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="prevBtn" class="nav-btn">&#10094;</button>
+        <img src="" alt="Full View" id="lightboxImg">
+        <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+                cursor: zoom-in;
+            }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 1010;
+            user-select: none;
+        }
+
+        #prevBtn {
+            left: 2%;
+        }
+
+        #nextBtn {
+            right: 2%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(29,161,242,0.8);
+        }
+    </style>
+
+    <script>
+    // LIGHTBOX ELEMENTS
+     const lightbox = document.getElementById('lightbox');
+     const lightboxImg = document.getElementById('lightboxImg');
+     const prevBtn = document.getElementById('prevBtn');
+     const nextBtn = document.getElementById('nextBtn');
+
+     let currentGallery = [];
+     let currentIndex = 0;
+     let scale = 1;
+     let isDragging = false;
+     let startX = 0;
+     let startY = 0;
+     let currentX = 0;
+     let currentY = 0;
+
+     // --- OPEN LIGHTBOX ---
+     function openLightbox(img) {
+         lightbox.style.display = 'flex';
+         lightboxImg.src = img.src;
+         scale = 1;
+         currentX = 0;
+         currentY = 0;
+         updateTransform();
+     }
+
+     // --- CLOSE LIGHTBOX ---
+     lightbox.addEventListener('click', (e) => {
+         if (e.target === lightbox) {
+             lightbox.style.display = 'none';
+             scale = 1;
+             currentX = 0;
+             currentY = 0;
+             updateTransform();
+         }
+     });
+
+     // --- NAVIGATION ---
+     function showNext() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex + 1) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+     function showPrev() {
+         if (!currentGallery.length) return;
+         currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+         openLightbox(currentGallery[currentIndex]);
+     }
+
+     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+     // --- KEYBOARD NAVIGATION ---
+     document.addEventListener('keydown', (e) => {
+         if (lightbox.style.display !== 'flex') return;
+         if (e.key === 'ArrowRight') showNext();
+         else if (e.key === 'ArrowLeft') showPrev();
+         else if (e.key === 'Escape') lightbox.style.display = 'none';
+     });
+
+     // --- ZOOM & PAN FUNCTIONS ---
+     function updateTransform() {
+         lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+     }
+
+     function limitPan() {
+         const rect = lightboxImg.getBoundingClientRect();
+         const parentRect = lightbox.getBoundingClientRect();
+         const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+         const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+         currentX = Math.min(Math.max(currentX, -maxX), maxX);
+         currentY = Math.min(Math.max(currentY, -maxY), maxY);
+     }
+
+     // --- MOUSE WHEEL ZOOM ---
+     lightboxImg.addEventListener('wheel', (e) => {
+         e.preventDefault();
+         const prevScale = scale;
+         scale += e.deltaY < 0 ? 0.1 : -0.1;
+         scale = Math.min(Math.max(1, scale), 3);
+
+         // optional: zoom towards mouse
+         const rect = lightboxImg.getBoundingClientRect();
+         const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+         const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+         currentX -= dx;
+         currentY -= dy;
+
+         limitPan();
+         updateTransform();
+     });
+
+     // --- DRAG TO PAN ---
+     lightboxImg.addEventListener('mousedown', (e) => {
+         if (scale <= 1) return;
+         isDragging = true;
+         startX = e.clientX - currentX;
+         startY = e.clientY - currentY;
+         e.preventDefault();
+     });
+
+     document.addEventListener('mousemove', (e) => {
+         if (!isDragging) return;
+         currentX = e.clientX - startX;
+         currentY = e.clientY - startY;
+         limitPan();
+         updateTransform();
+     });
+
+     document.addEventListener('mouseup', () => { isDragging = false; });
+
+     // --- INIT GALLERIES PER CARD ---
+     document.querySelectorAll('.highlight-card').forEach(card => {
+         const images = Array.from(card.querySelectorAll('img'));
+         images.forEach((img, index) => {
+             img.style.cursor = 'pointer';
+             img.addEventListener('click', () => {
+                 currentGallery = images;  // only images inside this card
+                 currentIndex = index;
+                 scale = 1;
+                 currentX = 0;
+                 currentY = 0;
+                 openLightbox(currentGallery[currentIndex]);
+             });
+         });
+     });</script>
 
 </body>
 </html>
