@@ -1,11 +1,532 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Target Practice | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            Target Practice
+        </div>
+
+        <!-- VIDEO -->
+        <div class="about-video" style="margin-bottom: 1rem;">
+            <video controls preload="metadata">
+                <source src="../videos/TargetPracticeFull.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="https://github.com/Moose-47/Target_Practice/releases/download/v1.0/Target.Practice.zip">Download</a>
+            <a class="btn" href="https://github.com/Moose-47/Target_Practice" target="_blank">View on GitHub</a>
+        </div>
+
+        <div class="project-meta">
+            Unity • Physics-Based Archery
+        </div>
+
+        <section>
+            <h2>Project Overview</h2>
+
+            <p>
+                Target Practice is a 2D physics-driven archery game where players control both the
+                angle and power of their shots using a click-and-drag input system. A real-time
+                trajectory preview helps players line up their shots before firing arrows at moving
+                targets.
+            </p>
+
+            <p>
+                The project focuses on implementing projectile physics, responsive player input,
+                and clear gameplay feedback through trajectory visualization, scoring systems,
+                and dynamic target behaviour.
+            </p>
+
+        </section>
+
+        <section>
+            <h2>My Role</h2>
+
+            <p>
+                I developed all gameplay systems for this project in Unity using C#.
+                The primary focus was building a responsive projectile system and
+                supporting gameplay systems around it.
+            </p>
+
+            <ul>
+                <li>Implemented a physics-based arrow shooting system</li>
+                <li>Built a real-time trajectory prediction system using projectile equations</li>
+                <li>Created dynamic targets with randomized movement patterns</li>
+                <li>Developed a centralized GameManager to control score, arrows, and spawning</li>
+                <li>Implemented HUD systems for player feedback including power, angle, and score</li>
+            </ul>
+
+        </section>
+
+        <section>
+            <h2>Key Technical Highlights</h2>
+
+            <ul>
+
+                <li>
+                    <strong>Physics-Based Projectile System:</strong>
+                    Arrow movement is simulated manually using velocity and gravity,
+                    allowing precise control over projectile behaviour.
+                </li>
+
+                <li>
+                    <strong>Real-Time Trajectory Visualization:</strong>
+                    A LineRenderer predicts the arrow's path using the projectile motion
+                    equation so players can preview their shot before firing.
+                </li>
+
+                <li>
+                    <strong>Drag-Based Input System:</strong>
+                    Mouse dragging dynamically adjusts shot angle and power,
+                    creating an intuitive aiming mechanic.
+                </li>
+
+                <li>
+                    <strong>Dynamic Target Behaviour:</strong>
+                    Targets spawn with randomized movement types including stationary,
+                    horizontal, and vertical motion to vary gameplay difficulty.
+                </li>
+
+                <li>
+                    <strong>Event-Driven UI Updates:</strong>
+                    UnityEvents are used to notify the HUD when score or arrow counts change,
+                    keeping gameplay systems loosely coupled from UI systems.
+                </li>
+
+            </ul>
+
+        </section>
+
+        <!-- GAMEPLAY HIGHLIGHTS -->
+        <section>
+            <h2>Gameplay Highlights</h2>
+
+            <div class="highlights-grid">
+
+                <!-- Physics-Driven Archery Aiming -->
+                <div class="highlight-card">
+
+                    <img src="../Images/archeryaim.gif" alt="Archery Aiming System" class="highlight-img" draggable="false">
+
+                    <h4>Physics-Driven Archery Aiming</h4>
+
+                    <p>
+                        The aiming system uses mouse drag input to control both the angle and
+                        power of each shot while displaying a real-time trajectory preview.
+                        Vertical drag adjusts launch angle, horizontal drag modifies shot power,
+                        and the predicted arrow path is visualized using a LineRenderer.
+                        This gives players precise control over their shots while clearly
+                        communicating how the underlying projectile physics behaves.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Drag input mimics pulling back a bowstring, making the control scheme intuitive.</li>
+                            <li>Separating power and angle into two axes gives players precise shot control.</li>
+                            <li>Real-time trajectory visualization helps players understand the projectile physics.</li>
+                            <li>Immediate visual feedback improves readability and shot planning.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li><strong>Mouse Down:</strong> stores the initial mouse position and enters aiming mode.</li>
+                            <li><strong>Mouse Drag:</strong> calculates drag delta to adjust launch angle and shot power.</li>
+                            <li><strong>Velocity Calculation:</strong> converts angle and power into a velocity vector.</li>
+                            <li><strong>Trajectory Prediction:</strong> projectile motion is simulated to generate trajectory points.</li>
+                            <li><strong>Visualization:</strong> points are rendered using a LineRenderer to preview the shot arc.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;">
+                            <li><code>Update()</code> in <em>PlayerController.cs</em> – drag input and shot parameter calculation.</li>
+                            <li><code>GetArrowVelocity()</code> – converts angle and power into velocity.</li>
+                            <li><code>DrawTrajectory()</code> – predicts projectile path and renders the preview arc.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images">
+                        <img src="../Images/aiminput.png" alt="Aim Input Code" class="media-img">
+                        <img src="../Images/trajectorycode.png" alt="Trajectory Code" class="media-img">
+                    </div>
+
+                </div>
+
+                <div class="highlight-card">
+
+                    <h4>Centralized Game State & Event System</h4>
+
+                    <p>
+                        A singleton GameManager controls the core state of the game including
+                        score tracking, arrow count, target spawning, and game over logic.
+                        Gameplay systems communicate through UnityEvents to keep systems
+                        loosely coupled and avoid direct references between UI and gameplay logic.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Centralizes game state in a single authority.</li>
+                            <li>UnityEvents allow UI systems to react to gameplay changes without tight coupling.</li>
+                            <li>Systems remain modular and easier to maintain.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>GameManager stores score, arrows remaining, and targets destroyed.</li>
+                            <li>Property setters trigger UnityEvents when values change.</li>
+                            <li>HUD elements subscribe to these events to update the UI.</li>
+                            <li>Targets notify the GameManager when destroyed.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;">
+                            <li><code>Score property</code> invoking <em>OnScoreGained</em></li>
+                            <li><code>ArrowsRemaining property</code> invoking <em>OnArrowsChanged</em></li>
+                            <li><code>SpawnTarget()</code> for randomized spawning</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images">
+                        <img src="../Images/onscoregained.png" alt="Game Manager Code" class="media-img">
+                        <img src="../Images/onarrowschanged.png" alt="Game Manager Code" class="media-img">
+                        <img src="../Images/targetspawning.png" alt="Game Manager Code" class="media-img">
+                    </div>
+
+                </div>
+
+                <!-- Arrow Physics -->
+                <div class="highlight-card">
+                    <img src="../Images/arrowflight.gif" alt="Arrow Physics" class="highlight-img" draggable="false">
+                    <h4>Physics-Based Arrow Simulation</h4>
+
+                    <p>
+                        Arrow movement is simulated manually rather than relying on Unity’s
+                        Rigidbody physics. This allows precise control over velocity updates,
+                        gravity application, and arrow rotation during flight.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Ensures trajectory preview perfectly matches arrow motion.</li>
+                            <li>Provides consistent behaviour regardless of physics settings.</li>
+                            <li>Allows custom rotation to align arrow with velocity.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Arrow stores velocity when launched.</li>
+                            <li>Gravity is applied each physics update.</li>
+                            <li>Position updates using velocity * deltaTime.</li>
+                            <li>Arrow rotates along the velocity vector.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;">
+                            <li><code>Launch()</code> in <em>Arrow.cs</em></li>
+                            <li><code>FixedUpdate()</code> updates movement and rotation.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images">
+                        <img src="../Images/arrowphysics.png" alt="Arrow Physics Code" class="media-img">
+                    </div>
+
+                </div>
+
+                <!-- Target Behaviour -->
+                <div class="highlight-card">
+                    <img src="../Images/targets.gif" alt="Target Movement" class="highlight-img" draggable="false">
+                    <h4>Dynamic Target Behaviour</h4>
+
+                    <p>
+                        Targets spawn with randomized movement patterns including stationary,
+                        horizontal, and vertical motion, creating varied difficulty and
+                        encouraging players to adapt their aim.
+                    </p>
+
+                    <div class="highlight-box">
+
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Movement variety increases challenge.</li>
+                            <li>Different scoring rewards riskier targets.</li>
+                            <li>Randomized patterns prevent repetitive gameplay.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;margin-bottom:1rem;">
+                            <li>Targets randomly choose a movement type when spawned.</li>
+                            <li>Sine-wave motion controls horizontal or vertical movement.</li>
+                            <li>Destroying targets awards score and spawns replacements.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc;font-size:0.95rem;">
+                            <li><code>MovementType enum</code> in <em>Target.cs</em></li>
+                            <li><code>Update()</code> handles movement patterns.</li>
+                            <li><code>OnTriggerEnter2D()</code> awards score.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="snippet-images">
+                        <img src="../Images/targetmovement.png" alt="Target Movement Code" class="media-img">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-icons">
+                <a href="https://github.com/Moose-47" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:DylanDixon-@outlook.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+    </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2025 Dylan Dixon</p>
+        </footer>
+
+        <!-- LIGHTBOX -->
+        <div id="lightbox">
+            <button id="prevBtn" class="nav-btn">&#10094;</button>
+            <img src="" alt="Full View" id="lightboxImg">
+            <button id="nextBtn" class="nav-btn">&#10095;</button>
+        </div>
+
+        <style>
+            #lightbox {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+                #lightbox img {
+                    max-width: 80%;
+                    max-height: 80%;
+                    border-radius: 8px;
+                    transition: transform 0.2s;
+                    cursor: zoom-in;
+                }
+
+            .nav-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 3rem;
+                background: rgba(0,0,0,0.4);
+                border: none;
+                color: #fff;
+                padding: 0.5rem 1rem;
+                cursor: pointer;
+                border-radius: 6px;
+                z-index: 1010;
+                user-select: none;
+            }
+
+            #prevBtn {
+                left: 2%;
+            }
+
+            #nextBtn {
+                right: 2%;
+            }
+
+            .nav-btn:hover {
+                background: rgba(29,161,242,0.8);
+            }
+        </style>
+
+        <script>// LIGHTBOX ELEMENTS
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentGallery = [];
+        let currentIndex = 0;
+        let scale = 1;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        // --- OPEN LIGHTBOX ---
+        function openLightbox(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            scale = 1;
+            currentX = 0;
+            currentY = 0;
+            updateTransform();
+        }
+
+        // --- CLOSE LIGHTBOX ---
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                updateTransform();
+            }
+        });
+
+        // --- NAVIGATION ---
+        function showNext() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+        function showPrev() {
+            if (!currentGallery.length) return;
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+        // --- KEYBOARD NAVIGATION ---
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'Escape') lightbox.style.display = 'none';
+        });
+
+        // --- ZOOM & PAN FUNCTIONS ---
+        function updateTransform() {
+            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        }
+
+        function limitPan() {
+            const rect = lightboxImg.getBoundingClientRect();
+            const parentRect = lightbox.getBoundingClientRect();
+            const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+            const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+            currentX = Math.min(Math.max(currentX, -maxX), maxX);
+            currentY = Math.min(Math.max(currentY, -maxY), maxY);
+        }
+
+        // --- MOUSE WHEEL ZOOM ---
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const prevScale = scale;
+            scale += e.deltaY < 0 ? 0.1 : -0.1;
+            scale = Math.min(Math.max(1, scale), 3);
+
+            // optional: zoom towards mouse
+            const rect = lightboxImg.getBoundingClientRect();
+            const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+            const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+            currentX -= dx;
+            currentY -= dy;
+
+            limitPan();
+            updateTransform();
+        });
+
+        // --- DRAG TO PAN ---
+        lightboxImg.addEventListener('mousedown', (e) => {
+            if (scale <= 1) return;
+            isDragging = true;
+            startX = e.clientX - currentX;
+            startY = e.clientY - currentY;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX - startX;
+            currentY = e.clientY - startY;
+            limitPan();
+            updateTransform();
+        });
+
+        document.addEventListener('mouseup', () => { isDragging = false; });
+
+        // --- INIT GALLERIES PER CARD ---
+        document.querySelectorAll('.highlight-card').forEach(card => {
+            const images = Array.from(card.querySelectorAll('img'));
+            images.forEach((img, index) => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    currentGallery = images;  // only images inside this card
+                    currentIndex = index;
+                    scale = 1;
+                    currentX = 0;
+                    currentY = 0;
+                    openLightbox(currentGallery[currentIndex]);
+                });
+            });
+        });</script>
 </body>
 </html>
