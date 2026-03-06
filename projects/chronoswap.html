@@ -45,7 +45,7 @@
         <!-- VIDEO -->
         <div class="about-video" style="margin-bottom: 1rem;">
             <video controls preload="metadata">
-                <source src="../videos/chronoswapfull.mp4" type="video/mp4">
+                <source src="../videos/ChronoSwapFull.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -137,7 +137,7 @@
             <h2>System Breakdown</h2>
             <div class="highlights-grid">
                 <div class="highlight-card">
-                    <img src="../Images/rewind_recording.gif" alt="Frame Recording" class="highlight-img" draggable="false">
+                    <!--<img src="../Images/rewind_recording.gif" alt="Frame Recording" class="highlight-img" draggable="false">-->
 
                     <h4>Frame-Based Player Recording</h4>
                     <p>
@@ -219,6 +219,78 @@
                     </div>
                 </div>
 
+
+                <div class="highlight-card">
+                    <!--<img src="../Images/loop_manager.gif" alt="Loop Manager" class="highlight-img" draggable="false">-->
+
+                    <h4>Loop Management & Ghost Lifecycle</h4>
+                    <p>
+                        The <strong>LoopManager</strong> orchestrates the player’s time loop,
+                        handling rewind transitions, ghost instantiation, and loop resets. It
+                        ensures each loop is deterministic, memory-safe, and visually coherent
+                        for multi-timeline puzzles.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>Centralized loop logic keeps timing, rewinds, and ghost management consistent.</li>
+                            <li>Limits the number of active ghosts to avoid clutter and performance drops.</li>
+                            <li>Ensures seamless transitions between player and ghost playback states.</li>
+                            <li>Memory-conscious: old recordings and ghost objects are cleared on loop reset.</li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">How it works</h5>
+                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
+                            <li>
+                                <strong>Loop timing:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Tracks elapsed time per loop using <code>loopTimer</code>.</li>
+                                    <li>Triggers rewind and ghost spawning when <code>loopDuration</code> is reached.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Ghost lifecycle:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Player recording is cloned to create a ghost at loop end.</li>
+                                    <li>Ghosts replay the recorded frames with interpolation for smooth motion.</li>
+                                    <li>Old ghost objects are destroyed if the maximum ghost limit is reached.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Rewind coordination:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Player and ghosts enter a rewind state simultaneously.</li>
+                                    <li><code>WaitUntil</code> ensures rewinds complete before new ghost playback begins.</li>
+                                    <li>Recording resumes automatically after rewind completion if under ghost limit.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Memory & safety:</strong>
+                                <ul style="margin-left:1rem;">
+                                    <li>Recordings are cleared from the player recorder after spawning a ghost.</li>
+                                    <li>Ghost lists are cleared on level reset or destruction.</li>
+                                    <li>Prevents unbounded memory growth across repeated loops.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 style="color:#1da1f2;">Code Snippets</h5>
+                        <ul style="color:#ccc; font-size:0.95rem;">
+                            <li><code>Update()</code> – tracks loop time and triggers rewind.</li>
+                            <li><code>HandleLoopTransition()</code> – coordinates rewind, ghost creation, and playback.</li>
+                            <li><code>ResetLevel()</code> – cleans up ghosts, recordings, and resets the player.</li>
+                            <li><code>activeGhosts</code> & <code>ghostRecordings</code> – store runtime ghost state for management.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top:1rem;">
+                        <img src="../Images/loop_manager_update.png" alt="LoopManager Logic" class="media-img">
+                        <img src="../Images/transition.png" alt="Ghost Spawn Logic" class="media-img">
+                        <img src="../Images/resetlevel.png" alt="Ghost Spawn Logic" class="media-img">
+                    </div>
+                </div>
+
                 <div class="highlight-card">
                     <img src="../Images/ghost_playback.gif" alt="Ghost Playback" class="highlight-img" draggable="false">
 
@@ -294,76 +366,6 @@
                         <img src="../Images/ghost_playback_code.png" alt="Ghost Playback Logic">
                         <img src="../Images/ghost_rewind.png" alt="Ghost Rewind Logic">
                         <img src="../Images/ghost_interaction.png" alt="Ghost Interaction Handling">
-                    </div>
-                </div>
-                <div class="highlight-card">
-                    <img src="../Images/loop_manager.gif" alt="Loop Manager" class="highlight-img" draggable="false">
-
-                    <h4>Loop Management & Ghost Lifecycle</h4>
-                    <p>
-                        The <strong>LoopManager</strong> orchestrates the player’s time loop,
-                        handling rewind transitions, ghost instantiation, and loop resets. It
-                        ensures each loop is deterministic, memory-safe, and visually coherent
-                        for multi-timeline puzzles.
-                    </p>
-
-                    <div class="highlight-box">
-                        <h5 style="color:#1da1f2;">Why it’s done this way</h5>
-                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
-                            <li>Centralized loop logic keeps timing, rewinds, and ghost management consistent.</li>
-                            <li>Limits the number of active ghosts to avoid clutter and performance drops.</li>
-                            <li>Ensures seamless transitions between player and ghost playback states.</li>
-                            <li>Memory-conscious: old recordings and ghost objects are cleared on loop reset.</li>
-                        </ul>
-
-                        <h5 style="color:#1da1f2;">How it works</h5>
-                        <ul style="color:#ccc; font-size:0.95rem; margin-bottom:1rem;">
-                            <li>
-                                <strong>Loop timing:</strong>
-                                <ul style="margin-left:1rem;">
-                                    <li>Tracks elapsed time per loop using <code>loopTimer</code>.</li>
-                                    <li>Triggers rewind and ghost spawning when <code>loopDuration</code> is reached.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>Ghost lifecycle:</strong>
-                                <ul style="margin-left:1rem;">
-                                    <li>Player recording is cloned to create a ghost at loop end.</li>
-                                    <li>Ghosts replay the recorded frames with interpolation for smooth motion.</li>
-                                    <li>Old ghost objects are destroyed if the maximum ghost limit is reached.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>Rewind coordination:</strong>
-                                <ul style="margin-left:1rem;">
-                                    <li>Player and ghosts enter a rewind state simultaneously.</li>
-                                    <li><code>WaitUntil</code> ensures rewinds complete before new ghost playback begins.</li>
-                                    <li>Recording resumes automatically after rewind completion if under ghost limit.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>Memory & safety:</strong>
-                                <ul style="margin-left:1rem;">
-                                    <li>Recordings are cleared from the player recorder after spawning a ghost.</li>
-                                    <li>Ghost lists are cleared on level reset or destruction.</li>
-                                    <li>Prevents unbounded memory growth across repeated loops.</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <h5 style="color:#1da1f2;">Code Snippets</h5>
-                        <ul style="color:#ccc; font-size:0.95rem;">
-                            <li><code>Update()</code> – tracks loop time and triggers rewind.</li>
-                            <li><code>HandleLoopTransition()</code> – coordinates rewind, ghost creation, and playback.</li>
-                            <li><code>ResetLevel()</code> – cleans up ghosts, recordings, and resets the player.</li>
-                            <li><code>activeGhosts</code> & <code>ghostRecordings</code> – store runtime ghost state for management.</li>
-                        </ul>
-                    </div>
-
-                    <div class="snippet-images" style="margin-top:1rem;">
-                        <img src="../Images/loop_manager_update.png" alt="LoopManager Logic" class="media-img">
-                        <img src="../Images/transition.png" alt="Ghost Spawn Logic" class="media-img">
-                        <img src="../Images/resetlevel.png" alt="Ghost Spawn Logic" class="media-img">
                     </div>
                 </div>
 
