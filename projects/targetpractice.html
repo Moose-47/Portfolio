@@ -403,130 +403,238 @@
             }
         </style>
 
-        <script>// LIGHTBOX ELEMENTS
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        <script>
+            // LIGHTBOX ELEMENTS
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
 
-        let currentGallery = [];
-        let currentIndex = 0;
-        let scale = 1;
-        let isDragging = false;
-        let startX = 0;
-        let startY = 0;
-        let currentX = 0;
-        let currentY = 0;
+            let currentGallery = [];
+            let currentIndex = 0;
 
-        // --- OPEN LIGHTBOX ---
-        function openLightbox(img) {
-            lightbox.style.display = 'flex';
-            lightboxImg.src = img.src;
-            scale = 1;
-            currentX = 0;
-            currentY = 0;
-            updateTransform();
-        }
+            let scale = 1;
+            let isDragging = false;
+            let dragMoved = false;
 
-        // --- CLOSE LIGHTBOX ---
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.style.display = 'none';
+            let startX = 0;
+            let startY = 0;
+
+            let startMouseX = 0;
+            let startMouseY = 0;
+
+            let currentX = 0;
+            let currentY = 0;
+
+            const DRAG_THRESHOLD = 5;
+
+
+            // --- OPEN LIGHTBOX ---
+            function openLightbox(img) {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+
                 scale = 1;
                 currentX = 0;
                 currentY = 0;
+
                 updateTransform();
             }
-        });
 
-        // --- NAVIGATION ---
-        function showNext() {
-            if (!currentGallery.length) return;
-            currentIndex = (currentIndex + 1) % currentGallery.length;
-            openLightbox(currentGallery[currentIndex]);
-        }
-        function showPrev() {
-            if (!currentGallery.length) return;
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-            openLightbox(currentGallery[currentIndex]);
-        }
 
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+            // --- CLOSE LIGHTBOX ---
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
 
-        // --- KEYBOARD NAVIGATION ---
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.style.display !== 'flex') return;
-            if (e.key === 'ArrowRight') showNext();
-            else if (e.key === 'ArrowLeft') showPrev();
-            else if (e.key === 'Escape') lightbox.style.display = 'none';
-        });
-
-        // --- ZOOM & PAN FUNCTIONS ---
-        function updateTransform() {
-            lightboxImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
-        }
-
-        function limitPan() {
-            const rect = lightboxImg.getBoundingClientRect();
-            const parentRect = lightbox.getBoundingClientRect();
-            const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
-            const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
-            currentX = Math.min(Math.max(currentX, -maxX), maxX);
-            currentY = Math.min(Math.max(currentY, -maxY), maxY);
-        }
-
-        // --- MOUSE WHEEL ZOOM ---
-        lightboxImg.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const prevScale = scale;
-            scale += e.deltaY < 0 ? 0.1 : -0.1;
-            scale = Math.min(Math.max(1, scale), 3);
-
-            // optional: zoom towards mouse
-            const rect = lightboxImg.getBoundingClientRect();
-            const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
-            const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
-            currentX -= dx;
-            currentY -= dy;
-
-            limitPan();
-            updateTransform();
-        });
-
-        // --- DRAG TO PAN ---
-        lightboxImg.addEventListener('mousedown', (e) => {
-            if (scale <= 1) return;
-            isDragging = true;
-            startX = e.clientX - currentX;
-            startY = e.clientY - currentY;
-            e.preventDefault();
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            currentX = e.clientX - startX;
-            currentY = e.clientY - startY;
-            limitPan();
-            updateTransform();
-        });
-
-        document.addEventListener('mouseup', () => { isDragging = false; });
-
-        // --- INIT GALLERIES PER CARD ---
-        document.querySelectorAll('.highlight-card').forEach(card => {
-            const images = Array.from(card.querySelectorAll('img'));
-            images.forEach((img, index) => {
-                img.style.cursor = 'pointer';
-                img.addEventListener('click', () => {
-                    currentGallery = images;  // only images inside this card
-                    currentIndex = index;
                     scale = 1;
                     currentX = 0;
                     currentY = 0;
-                    openLightbox(currentGallery[currentIndex]);
-                });
+
+                    updateTransform();
+                }
             });
-        });</script>
+
+
+            // --- NAVIGATION ---
+            function showNext() {
+                if (!currentGallery.length) return;
+
+                currentIndex = (currentIndex + 1) % currentGallery.length;
+                openLightbox(currentGallery[currentIndex]);
+            }
+
+            function showPrev() {
+                if (!currentGallery.length) return;
+
+                currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+                openLightbox(currentGallery[currentIndex]);
+            }
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNext();
+            });
+
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrev();
+            });
+
+
+            // --- KEYBOARD NAVIGATION ---
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display !== 'flex') return;
+
+                if (e.key === 'ArrowRight') showNext();
+                else if (e.key === 'ArrowLeft') showPrev();
+                else if (e.key === 'Escape') lightbox.style.display = 'none';
+            });
+
+
+            // --- ZOOM & PAN FUNCTIONS ---
+            function updateTransform() {
+                lightboxImg.style.transform =
+                    `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+            }
+
+            function limitPan() {
+                const rect = lightboxImg.getBoundingClientRect();
+                const parentRect = lightbox.getBoundingClientRect();
+
+                const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+                const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+
+                currentX = Math.min(Math.max(currentX, -maxX), maxX);
+                currentY = Math.min(Math.max(currentY, -maxY), maxY);
+            }
+
+
+            // --- MOUSE WHEEL ZOOM ---
+            lightboxImg.addEventListener('wheel', (e) => {
+                e.preventDefault();
+
+                const prevScale = scale;
+
+                scale += e.deltaY < 0 ? 0.1 : -0.1;
+                scale = Math.min(Math.max(1, scale), 3);
+
+                const rect = lightboxImg.getBoundingClientRect();
+
+                const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+                const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+
+                currentX -= dx;
+                currentY -= dy;
+
+                limitPan();
+                updateTransform();
+            });
+
+
+            // --- DRAG START ---
+            lightboxImg.addEventListener('mousedown', (e) => {
+
+                isDragging = true;
+                dragMoved = false;
+
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+
+                startMouseX = e.clientX;
+                startMouseY = e.clientY;
+
+                e.preventDefault();
+            });
+
+
+            // --- DRAG MOVE ---
+            document.addEventListener('mousemove', (e) => {
+
+                if (!isDragging) return;
+
+                const dx = e.clientX - startMouseX;
+                const dy = e.clientY - startMouseY;
+
+                if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+                    dragMoved = true;
+                }
+
+                if (scale > 1) {
+
+                    currentX = e.clientX - startX;
+                    currentY = e.clientY - startY;
+
+                    limitPan();
+                    updateTransform();
+                }
+            });
+
+
+            // --- DRAG END / CLICK ZOOM ---
+            document.addEventListener('mouseup', (e) => {
+
+                if (!isDragging) return;
+
+                isDragging = false;
+
+                if (!dragMoved) {
+
+                    const prevScale = scale;
+
+                    if (scale === 1) {
+                        scale = 2;
+                    } else {
+                        scale = 1;
+                        currentX = 0;
+                        currentY = 0;
+                    }
+
+                    if (scale > prevScale) {
+
+                        const rect = lightboxImg.getBoundingClientRect();
+
+                        const dx =
+                            (e.clientX - rect.left - rect.width / 2) *
+                            (scale / prevScale - 1);
+
+                        const dy =
+                            (e.clientY - rect.top - rect.height / 2) *
+                            (scale / prevScale - 1);
+
+                        currentX -= dx;
+                        currentY -= dy;
+                    }
+
+                    limitPan();
+                    updateTransform();
+                }
+            });
+
+
+            // --- INIT GALLERIES PER CARD ---
+            document.querySelectorAll('.highlight-card').forEach(card => {
+
+                const images = Array.from(card.querySelectorAll('img'));
+
+                images.forEach((img, index) => {
+
+                    img.style.cursor = 'pointer';
+
+                    img.addEventListener('click', () => {
+
+                        currentGallery = images;
+                        currentIndex = index;
+
+                        scale = 1;
+                        currentX = 0;
+                        currentY = 0;
+
+                        openLightbox(currentGallery[currentIndex]);
+                    });
+                });
+
+            });
+        </script>
 </body>
 </html>
