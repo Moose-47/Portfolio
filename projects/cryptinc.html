@@ -1,11 +1,1213 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta name="color-scheme" content="dark">
+    <meta name="supported-color-schemes" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>CryptInc | Dylan Dixon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body id="top">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="../index.html">
+                <img src="../Images/Logo.png" alt="Dylan Dixon Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-icons">
+            <a href="https://github.com/Moose-47" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:DylanDixon-@outlook.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- PROJECT HEADER -->
+        <div class="project-header">
+            <h3>CryptInc</h3>
+        </div>
+
+        <!-- VIDEO -->
+        <div class="about-video" style="margin-bottom: 1rem;">
+            <video controls preload="metadata">
+                <source src="../videos/CryptIncFull.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="project-buttons" style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+            <a class="btn" href="https://alpineentmt.itch.io/crypt-inc">View on Itch.io</a>
+            <a class="btn" href="https://github.com/Alpine-Entertainment/CryptInc" target="_blank">View on GitHub</a>
+        </div>
+
+        <!-- PROJECT META -->
+        <p class="project-meta">Unity • Multiplayer Horror</p>
+
+        <!-- PROJECT OVERVIEW -->
+        <section>
+            <h2>Project Overview</h2>
+            <p><strong>Co-op horror puzzle game designed for up to 4 players.</strong></p>
+            <p>
+                In Crypt Inc., players collaborate to investigate supernatural occurrences,
+                using specialized equipment to find and analyze evidence to identify cryptids.
+                Once identified, players coordinate to capture the cryptid while surviving.
+                The game emphasizes teamwork, strategy,
+                and replayability through randomized objectives, clues, and enemy encounters.
+            </p>
+        </section>
+
+        <!-- MY ROLE -->
+        <section>
+            <h2>My Role</h2>
+            <p>
+                As the Development Lead and Multiplayer Architect, I was responsible for designing
+                and implementing the entire multiplayer backend, integrating Steamworks with Mirror,
+                and ensuring all systems were properly networked and synchronized across clients.
+            </p>
+            <ul>
+                <li>Designed the server-authoritative networking architecture for player actions, spawns, and state replication.</li>
+                <li>Implemented multiplayer systems for equipment, clues, cryptids, and scoring with full network synchronization.</li>
+                <li>Integrated Steamworks for lobby management, player identification, and session persistence.</li>
+                <li>Ensured reconnection flows and spectator mode worked seamlessly for players mid-match.</li>
+                <li>Coordinated team efforts to maintain consistent, deterministic gameplay across all clients.</li>
+            </ul>
+            <p>
+                The primary goal was to make cooperative gameplay feel smooth, responsive, and
+                fair while maintaining a high degree of replayability and dynamic interaction.
+            </p>
+        </section>
+
+        <!-- KEY TECHNICAL HIGHLIGHTS -->
+        <section>
+            <h2>Key Technical Highlights</h2>
+            <ul>
+                <li>
+                    <strong>Steam Lobby & Matchmaking System:</strong>
+                    Fully integrated Steam + Mirror system for lobby creation, searching, joining, and metadata synchronization.
+                    Async and event-driven architecture keeps UI responsive while bridging Steam matchmaking with server/client networking.
+                </li>
+                <li>
+                    <strong>Seamless Reconnect System:</strong>
+                    Fault-tolerant player reconnection using Mirror + Steam Cloud. Periodic caching and server validation restore
+                    player state after crashes, disconnects, or host failures without gameplay disruption.
+                </li>
+                <li>
+                    <strong>Networked Equipment System:</strong>
+                    Server-authoritative base class for all items. Handles ownership, SyncVar state replication, client authority,
+                    and reconnect-safe restoration for consistent multiplayer equipment handling.
+                </li>
+                <li>
+                    <strong>Equipment Manager & Hotbar UI:</strong>
+                    Fully networked inventory system separating gameplay (server-authoritative EquipmentManager) from UI (Hotbar).
+                    Commands and ClientRPCs ensure equip, drop, and consumption actions are synchronized across all clients.
+                </li>
+                <li>
+                    <strong>Communication Systems (Text & Voice):</strong>
+                    Integrated server-authoritative text and voice chat. Alive and spectator channels maintain privacy, while self-mute
+                    and Steam display name integration provide robust, consistent multiplayer communication.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Gameplay Highlights</h2>
+            <div class="highlights-grid">
+
+                <!-- Highlight Card 1-->
+                <div class="highlight-card">
+
+                    <h4>Steam Lobby & Matchmaking System</h4>
+                    <p>
+                        A fully integrated Steam lobby and matchmaking system built on top of Steamworks and Mirror,
+                        handling initialization, lobby creation, joining, searching, and metadata synchronization.
+                        Designed to support both event-driven and async workflows while cleanly bridging Steam
+                        matchmaking with network session management.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Separates Steam logic from gameplay/network code for maintainability.</li>
+                            <li>Event-driven architecture allows UI and systems to react without tight coupling.</li>
+                            <li>Async lobby searching enables responsive UI without blocking the main thread.</li>
+                            <li>Custom lobby metadata allows flexible filtering and richer lobby presentation.</li>
+                            <li>Clean bridge between Steam matchmaking and Mirror networking simplifies host/client flow.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>InitializeSteam()</code> validates environment, initializes Steam API, and registers callbacks.</li>
+                            <li>Steam callbacks (<code>LobbyCreated</code>, <code>LobbyEnter</code>, etc.) drive all lobby state changes.</li>
+                            <li><code>CreateLobby()</code> stores pending data, then applies metadata once Steam confirms creation.</li>
+                            <li>Lobby metadata (name, host, joinable, password, timestamps) is stored via <code>SetLobbyData()</code>.</li>
+                            <li><code>Lobby</code> wrapper class fetches and caches live Steam lobby data for UI use.</li>
+                            <li><code>SearchLobbies()</code> applies filters and requests lobby lists from Steam.</li>
+                            <li><code>SearchLobbiesAsync()</code> wraps Steam callbacks in <code>TaskCompletionSource</code> for awaitable searches.</li>
+                            <li><code>JoinLobby()</code> connects via Steam ID, while <code>SteamNetworkBridge</code> maps it to Mirror networking.</li>
+                            <li><code>LeaveLobby()</code> safely handles host/client teardown and updates joinability state.</li>
+                            <li>Real-time updates via <code>LobbyChatUpdate</code> keep player counts and state synchronized.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>InitializeSteam()</code> – Handles Steam API validation, initialization, and callback setup.</li>
+                            <li><code>CreateLobby()</code> + <code>OnLobbyCreatedCallback()</code> – Full lobby creation pipeline and metadata setup.</li>
+                            <li><code>SearchLobbiesAsync()</code> – Async/await wrapper around Steam lobby queries.</li>
+                            <li><code>ApplySearchFilter()</code> – Configurable filtering system for matchmaking queries.</li>
+                            <li><code>Lobby.RefreshData()</code> – Pulls and parses live lobby metadata from Steam.</li>
+                            <li><code>OnLobbyMatchListCallback()</code> – Converts raw Steam results into usable lobby objects.</li>
+                            <li><code>SteamNetworkBridge.OnLobbyJoined()</code> – Connects Steam matchmaking to Mirror networking.</li>
+                            <li><code>LeaveLobby()</code> – Handles host/client teardown and state cleanup.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/steam_initialize_snippet.png" alt="Steam Initialization Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_create_lobby_snippet.png" alt="Create Lobby Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_lobby_metadata_snippet.png" alt="Lobby Metadata Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_search_async_snippet.png" alt="Async Lobby Search Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_filter_snippet.png" alt="Lobby Filter Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_match_list_snippet.png" alt="Lobby Match List Callback" class="media-img">
+                        <img src="../Images/CryptInc/steam_join_bridge_snippet.png" alt="Steam to Mirror Bridge Code" class="media-img">
+                        <img src="../Images/CryptInc/steam_leave_lobby_snippet.png" alt="Leave Lobby Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 2-->
+                <div class="highlight-card">
+
+                    <h4>Custom Room Manager & Lobby Flow (Mirror)</h4>
+                    <p>
+                        A customized multiplayer lobby system built on top of Mirror’s NetworkRoomManager,
+                        extended to support player lifecycle control, lobby-to-game transitions, and
+                        Steam-integrated UI. Overrides core room manager behavior to handle item cleanup,
+                        gameplay transitions, and synchronization between lobby and in-game states.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Extending <code>NetworkRoomManager</code> allows reuse of built-in lobby flow while customizing critical behavior.</li>
+                            <li>Server-authoritative overrides ensure consistent state during joins, disconnects, and scene transitions.</li>
+                            <li>Separates lobby players (<code>RoomPlayer</code>) from in-game players for clean state transitions.</li>
+                            <li>Steam integration enables player identity, invites, and external lobby control.</li>
+                            <li>Provides a controlled foundation for reconnection and session recovery systems.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>NetworkRoomManager</code> manages two scenes: a lobby (room) and a gameplay scene.</li>
+                            <li><code>OnServerAddPlayer()</code> spawns either a <code>RoomPlayer</code> (lobby) or gameplay player depending on the active scene.</li>
+                            <li>When spawning gameplay players, start positions are assigned and existing world state is synchronized.</li>
+                            <li><code>RoomPlayer</code> uses <code>SyncVar</code> to replicate Steam usernames across clients.</li>
+                            <li><code>LobbyUI</code> dynamically reflects player readiness and allows toggling ready state via commands.</li>
+                            <li><code>OnRoomServerDisconnect()</code> handles cleanup such as dropping items and updating objectives.</li>
+                            <li><code>OnRoomServerSceneChanged()</code> updates Steam lobby metadata to prevent searching for mid-game lobbies.</li>
+                            <li>Scene transition automatically converts lobby players into gameplay players once all are ready.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>OnServerAddPlayer()</code> – Handles spawning logic for both lobby and gameplay players.</li>
+                            <li><code>OnRoomServerDisconnect()</code> – Cleans up player state and drops equipment on disconnect.</li>
+                            <li><code>OnRoomServerSceneChanged()</code> – Updates Steam lobby joinability when gameplay begins.</li>
+                            <li><code>RoomPlayer (SyncVar + Command)</code> – Synchronizes player identity across clients.</li>
+                            <li><code>LobbyUI.Refresh()</code> – Dynamically builds player list and ready states.</li>
+                            <li><code>ToggleReady()</code> – Sends ready state changes to the server.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/mirror_add_player_snippet.png" alt="OnServerAddPlayer Code" class="media-img">
+                        <img src="../Images/CryptInc/mirror_disconnect_cleanup_snippet.png" alt="Disconnect Cleanup Code" class="media-img">
+                        <img src="../Images/CryptInc/mirror_scene_change_snippet.png" alt="Scene Change Logic" class="media-img">
+                        <img src="../Images/CryptInc/mirror_room_player_snippet.png" alt="RoomPlayer SyncVar Code" class="media-img">
+                        <img src="../Images/CryptInc/mirror_lobby_ui_snippet.png" alt="Lobby UI Code" class="media-img">
+                        <img src="../Images/CryptInc/mirror_room_manager_inspector_snippet.png" alt="Ready System Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 3-->
+                <div class="highlight-card">
+
+                    <h4>Seamless Reconnect System (Mirror + Steam Cloud)</h4>
+                    <p>
+                        A fault-tolerant reconnect system that allows players to recover from crashes,
+                        disconnects, or connection to host failures and seamlessly rejoin their previous multiplayer session.
+                        Player state is periodically cached to Steam Cloud and restored upon reconnection,
+                        ensuring minimal disruption to gameplay.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Steam Cloud storage ensures reconnect data persists across crashes and full application restarts.</li>
+                            <li>Interval-based caching with an additional save on application quit minimizes data loss.</li>
+                            <li>Separating systems (<code>ReconnectManager</code>, <code>DisconnectManager</code>, UI, player restore) keeps responsibilities modular.</li>
+                            <li>Lobby validation prevents reconnecting to invalid or closed sessions.</li>
+                            <li>Temporarily disabling <code>NetworkTransform</code> avoids server corrections overriding restored client state.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>ReconnectManager</code> periodically serializes player data (position, rotation, state, lobby info) to JSON.</li>
+                            <li>Data is written to Steam Cloud using <code>SteamRemoteStorage</code> for persistence.</li>
+                            <li><code>DisconnectManager</code> detects unexpected disconnects (including host crashes) and returns the player to the menu.</li>
+                            <li><code>ReconnectUI</code> checks for cached data on launch and validates the lobby via Steam before prompting the player.</li>
+                            <li>On confirmation, the system rejoins the cached lobby using its SteamID.</li>
+                            <li>After the player object spawns, cached transform and state are restored locally.</li>
+                            <li><code>NetworkTransform</code> is temporarily disabled during restore to prevent desync or correction issues.</li>
+                            <li>Reconnect data is cleared after successful restoration or if the session is invalid.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>CachePlayerData()</code> – Serializes player state and writes it to Steam Cloud.</li>
+                            <li><code>AttemptReconnect()</code> – Rejoins the cached Steam lobby using stored lobby ID.</li>
+                            <li><code>OnDisconnected()</code> – Detects unexpected disconnects and triggers return-to-menu flow.</li>
+                            <li><code>ApplyCachedData()</code> – Restores player transform, state, and model after reconnect.</li>
+                            <li><code>NetworkTransform Toggle</code> – Prevents server overwrite during state restoration.</li>
+                            <li><code>ReconnectUI Validation</code> – Confirms lobby is still active before allowing reconnect.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/reconnect_cache_snippet.png" alt="Cache Player Data Code" class="media-img">
+                        <img src="../Images/CryptInc/reconnect_attempt_snippet.png" alt="Attempt Reconnect Code" class="media-img">
+                        <img src="../Images/CryptInc/reconnect_disconnect_snippet.png" alt="Disconnect Detection Code" class="media-img">
+                        <img src="../Images/CryptInc/reconnect_apply_snippet.png" alt="Apply Cached Data Code" class="media-img">
+                        <img src="../Images/CryptInc/reconnect_network_transform_snippet.png" alt="NetworkTransform Toggle Code" class="media-img">
+                        <img src="../Images/CryptInc/reconnect_ui_validation_snippet.png" alt="Reconnect UI Validation Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 4-->
+                <div class="highlight-card">
+
+                    <h4>Context-Sensitive Interaction & Prompt System</h4>
+                    <p>
+                        A flexible, raycast-driven interaction system that dynamically detects objects in front of the player
+                        and displays context-aware prompts based on current equipment, object state, and gameplay conditions.
+                        Designed to support a wide variety of interactables while remaining scalable and decoupled.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Centralized raycast detection avoids per-object interaction scripts and reduces overhead.</li>
+                            <li>Separating detection (<code>PlayerInteractAndPrompt</code>) from execution (<code>PlayerController</code>) keeps logic modular.</li>
+                            <li>Context-sensitive prompts improve UX by only showing valid actions based on player state and equipment.</li>
+                            <li>Using interfaces (e.g., <code>IBreakable</code>) allows extensible interaction types without tight coupling.</li>
+                            <li>Dynamic input binding strings ensure prompts reflect player-customized controls.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>A raycast is fired from the center of the player camera each frame within a defined interaction range.</li>
+                            <li>Detected objects are evaluated in priority order (breakables, equipment, monitors, analyzers, etc.).</li>
+                            <li>Valid targets are stored on the <code>PlayerController</code> for later interaction handling.</li>
+                            <li>Prompts are dynamically generated based on object type, state, and currently equipped item.</li>
+                            <li>Input bindings are retrieved at runtime to match player key rebinds.</li>
+                            <li><code>PlayerController</code> consumes the detected target and executes the correct interaction via Commands.</li>
+                            <li>If no valid target is found, prompts are hidden to avoid UI clutter.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>UpdateInteractionRaycast()</code> – Core detection loop for all interactable types.</li>
+                            <li><code>ShowPrompt()</code> – Displays context-sensitive interaction messages.</li>
+                            <li><code>GetBindingDisplayString()</code> – Retrieves dynamic input bindings for UI prompts.</li>
+                            <li><code>IBreakable Interface</code> – Enables generic breakable object interactions.</li>
+                            <li><code>HandleInteractPressed()</code> – Routes interaction to the correct system based on detected target.</li>
+                            <li><code>Target Reset Logic</code> – Clears previous targets each frame to prevent stale interactions.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/interact_raycast_snippet.png" alt="Interaction Raycast Code" class="media-img">
+                        <img src="../Images/CryptInc/interact_prompt_snippet.png" alt="Prompt Display Code" class="media-img">
+                        <img src="../Images/CryptInc/interact_binding_snippet.png" alt="Input Binding Code" class="media-img">
+                        <img src="../Images/CryptInc/interact_breakable_snippet.png" alt="Breakable Interface Code" class="media-img">
+                        <img src="../Images/CryptInc/interact_handler_snippet.png" alt="Interaction Handler Code" class="media-img">
+                        <img src="../Images/CryptInc/interact_reset_snippet.png" alt="Target Reset Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 5 -->
+                <div class="highlight-card">
+
+                    <h4>Networked Equipment System (Extensible Base Class)</h4>
+                    <p>
+                        A server-authoritative equipment system built on top of Mirror, designed as a reusable base class
+                        for all in-game items. Handles ownership, synchronization, and lifecycle events while allowing
+                        derived classes to implement custom behavior with minimal boilerplate.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>A shared base class standardizes pickup, equip, drop, and activation logic across all items.</li>
+                            <li>Server-authoritative design ensures consistent state and prevents client-side desync.</li>
+                            <li><code>SyncVar</code> + hooks provide automatic state replication without manual RPC overhead.</li>
+                            <li>Authority is dynamically reassigned to the owning player to enable client-driven interactions.</li>
+                            <li>Virtual methods allow new equipment types to be created rapidly without modifying core systems.</li>
+                            <li>Reconnect handling ensures equipment state is restored correctly after player reconnection.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Players request interactions via Commands (e.g., <code>CmdPickup</code>, <code>CmdUnequip</code>), executed on the server.</li>
+                            <li>The server updates ownership (<code>currentOwner</code>) and state flags (<code>isEquipped</code>, <code>isActive</code>).</li>
+                            <li>Mirror automatically synchronizes these values to all clients using <code>SyncVar</code>.</li>
+                            <li>Hook methods (e.g., <code>OnEquippedChanged</code>, <code>OnStateChanged</code>) trigger client-side visual updates.</li>
+                            <li>Authority is transferred to the owning player, allowing them to control the item locally.</li>
+                            <li>Physics and colliders are adjusted client-side when equipping/unequipping to match gameplay state.</li>
+                            <li>Reconnect logic reattaches equipment to the correct player and restores transforms after delays.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>OnPickup()</code> – Assigns ownership and client authority on the server.</li>
+                            <li><code>OnUnequip()</code> – Clears ownership and removes authority safely.</li>
+                            <li><code>DropOnly()</code> – Handles physical item dropping with physics reactivation.</li>
+                            <li><code>[SyncVar] isEquipped</code> – Automatically synchronizes equipment state across clients.</li>
+                            <li><code>CmdToggle()</code> – Base activation command for derived item behaviors.</li>
+                            <li><code>OnEquippedClient()</code> – Client-side hook for enabling visuals and disabling physics.</li>
+                            <li><code>ReconnectEquipRoutine()</code> – Restores item parenting and state after reconnect.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/equipment_pickup_snippet.png" alt="Equipment Pickup Code" class="media-img">
+                        <img src="../Images/CryptInc/equipment_authority_snippet.png" alt="Authority Assignment Code" class="media-img">
+                        <img src="../Images/CryptInc/equipment_syncvar_snippet.png" alt="SyncVar State Code" class="media-img">
+                        <img src="../Images/CryptInc/equipment_toggle_snippet.png" alt="Toggle Command Code" class="media-img">
+                        <img src="../Images/CryptInc/equipment_hooks_snippet.png" alt="Client Hook Code" class="media-img">
+                        <img src="../Images/CryptInc/equipment_reconnect_snippet.png" alt="Reconnect Handling Code" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 6-->
+                <div class="highlight-card">
+
+                    <h4>Equipment Manager & Hotbar UI (Server-Authoritative Inventory System)</h4>
+                    <p>
+                        A fully networked, server-authoritative inventory and equipment system built with Mirror.
+                        Separates gameplay logic (EquipmentManager) from presentation (HotbarUI), while ensuring
+                        consistent state replication across all clients using Commands and ClientRPCs.
+                        Designed to handle equipping, dropping, consumption, and disconnection scenarios reliably.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Server-authoritative design prevents desyncs and cheating by making the server the single source of truth.</li>
+                            <li>Clear separation between <code>EquipmentManager</code> (gameplay) and <code>HotbarUI</code> (visuals) keeps the system modular and maintainable.</li>
+                            <li>Command → Server → ClientRpc flow ensures all clients receive consistent updates for equip, drop, and inventory changes.</li>
+                            <li><code>SyncVar</code> references (<code>equippedItemId</code>) allow lightweight state tracking without over-reliance on RPCs.</li>
+                            <li>Inventory is stored server-side, preventing clients from spoofing or modifying item ownership.</li>
+                            <li>Built-in handling for disconnection and death ensures items are safely dropped and re-registered in the world.</li>
+                            <li>HotbarUI remains UI-only, avoiding tight coupling with gameplay logic and allowing easy redesign or extension.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Player input calls <code>EquipmentManager.TryPickup()</code>, which validates locally before sending a <code>Command</code>.</li>
+                            <li><code>CmdPickupItem()</code> runs on the server, assigns ownership, updates inventory, and sets <code>equippedItemId</code>.</li>
+                            <li>The server then calls <code>RpcEquipItem()</code> to synchronize the equipped item across all clients.</li>
+                            <li>On each client, the item is parented to the player's <code>itemHolder</code> and physics/colliders are disabled.</li>
+                            <li>HotbarUI updates only on the local player, reflecting inventory changes without affecting gameplay state.</li>
+                            <li>Equipping from the hotbar uses <code>CmdEquipFromHotbar()</code>, repeating the same server-authoritative flow.</li>
+                            <li>Dropping items uses <code>CmdDropItem()</code>, which applies physics server-side and propagates via <code>RpcDropItem()</code>.</li>
+                            <li>On death or disconnect, <code>ServerDropAllItems()</code> ensures all inventory items are safely returned to the world.</li>
+                            <li>Item destruction (consumables) uses delayed server destruction to avoid race conditions with RPC updates.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>TryPickup()</code> – Local validation before sending pickup request to server.</li>
+                            <li><code>CmdPickupItem()</code> – Core server logic for ownership and inventory updates.</li>
+                            <li><code>RpcEquipItem()</code> – Synchronizes equipped item across all clients.</li>
+                            <li><code>CmdEquipFromHotbar()</code> – Server-authoritative re-equipping logic.</li>
+                            <li><code>CmdDropItem()</code> / <code>ServerDropItem()</code> – Handles world drop physics and ownership reset.</li>
+                            <li><code>ServerDropAllItems()</code> – Ensures cleanup on death or disconnect.</li>
+                            <li><code>HotbarUI.AddItem()</code> – UI-only inventory representation with slot rules.</li>
+                            <li><code>HotbarUI.RefreshVisuals()</code> – Centralized visual state updates for hover/equip highlights.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/equipment_manager_pickup_snippet.png" alt="Pickup Command Flow" class="media-img">
+                        <img src="../Images/CryptInc/equipment_manager_equip_rpc_snippet.png" alt="Equip RPC Logic" class="media-img">
+                        <img src="../Images/CryptInc/equipment_manager_drop_snippet.png" alt="Drop Item Logic" class="media-img">
+                        <img src="../Images/CryptInc/equipment_manager_server_drop_all_snippet.png" alt="Drop All Items Logic" class="media-img">
+                        <img src="../Images/CryptInc/hotbar_ui_add_item_snippet.png" alt="Hotbar Add Item" class="media-img">
+                        <img src="../Images/CryptInc/hotbar_ui_refresh_snippet.png" alt="Hotbar Refresh Visuals" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 7-->
+                <div class="highlight-card">
+
+                    <h4>Equipment Placement System (Client Preview → Server Authority)</h4>
+                    <p>
+                        A networked placement system that allows players to preview, rotate, and place equipment
+                        in the world with full server authority. Combines responsive client-side feedback with
+                        authoritative server validation using Mirror’s Command → ClientRpc flow.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Client-side preview provides instant visual feedback without waiting for network round trips.</li>
+                            <li>Server-authoritative placement ensures consistency and prevents invalid or desynced object states.</li>
+                            <li>Separating preview logic from actual placement avoids spawning/despawning network objects unnecessarily.</li>
+                            <li>Each <code>Equipment</code> defines its own <code>previewModel</code>, enabling reusable and scalable placement behavior.</li>
+                            <li>Rotation handled locally keeps input responsive while still syncing final state through the server.</li>
+                            <li>Physics is explicitly controlled (kinematic + constraints) to guarantee stable placed objects across clients.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>While holding a placeable item, the client raycasts from the screen center to detect valid placement surfaces.</li>
+                            <li>If valid, <code>StartPlacement()</code> instantiates a local-only preview using the equipment’s <code>previewModel</code>.</li>
+                            <li>The preview updates every frame, snapping to the hit point and applying player-controlled rotation.</li>
+                            <li>UI prompts are dynamically updated via <code>PlayerInteractAndPrompt</code> to guide placement controls.</li>
+                            <li>When the player confirms placement, <code>Place()</code> sends a <code>Command</code> to the server with position and rotation.</li>
+                            <li><code>CmdPlaceEquipment()</code> runs on the server, unequips the item and applies final transform + physics constraints.</li>
+                            <li>The server then calls <code>RpcPlaceEquipment()</code> to replicate the final placed state to all clients.</li>
+                            <li>Clients apply the same transform and physics locking, ensuring deterministic placement across the network.</li>
+                            <li>Preview object is destroyed locally after placement, keeping network objects clean and minimal.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>HandlePlacementPreview()</code> – Drives raycast detection and preview positioning.</li>
+                            <li><code>StartPlacement()</code> – Spawns local preview using equipment-defined model.</li>
+                            <li><code>Rotate()</code> – Applies scroll-based rotation to preview object.</li>
+                            <li><code>Place()</code> – Finalizes placement and sends server request.</li>
+                            <li><code>CmdPlaceEquipment()</code> – Server-side placement and physics locking.</li>
+                            <li><code>RpcPlaceEquipment()</code> – Replicates final transform to all clients.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/placement_preview_snippet.png" alt="Placement Preview Logic" class="media-img">
+                        <img src="../Images/CryptInc/placement_rotation_snippet.png" alt="Rotation Logic" class="media-img">
+                        <img src="../Images/CryptInc/placement_snippet.png" alt="Placement Logic" class="media-img">
+                        <img src="../Images/CryptInc/placement_place_command_snippet.png" alt="Place Command" class="media-img">
+                        <img src="../Images/CryptInc/placement_rpc_snippet.png" alt="Placement RPC Sync" class="media-img">
+                        <img src="../Images/CryptInc/playerController_place_snippet.png" alt="Player Controller place controls" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 8-->
+                <div class="highlight-card">
+
+                    <h4>Networked Video Camera System (Live Feeds, Monitor Integration & Night Vision)</h4>
+                    <p>
+                        A fully networked video camera system that players can deploy, toggle, and use to capture evidence.
+                        Cameras stream real-time RenderTexture feeds to in-world monitors and a player UI, with synchronized
+                        state across all clients using Mirror. Includes a custom night vision shader and responsive UI feedback.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Each camera owns its own <code>RenderTexture</code>, allowing multiple simultaneous live feeds without conflicts.</li>
+                            <li>Using <code>SyncVar</code> for <code>isActive</code> ensures all clients stay visually consistent when cameras are toggled.</li>
+                            <li>Server-authoritative registration guarantees all monitors share the same camera pool and ordering.</li>
+                            <li>Decoupling cameras from monitors via <code>netId</code> avoids fragile scene references and supports late joiners.</li>
+                            <li>Fallback static textures ensure monitors remain visually stable even when cameras are inactive or missing.</li>
+                            <li>Custom material instances per screen prevent unintended texture sharing across displays.</li>
+                            <li>Night vision is implemented as a shader for performance and flexibility instead of post-processing overhead.</li>
+                            <li>UI is driven by camera ownership and state, ensuring only relevant players see active feeds.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>On spawn, each <code>VideoCamera</code> creates a dedicated <code>RenderTexture</code> and assigns it to its Camera component.</li>
+                            <li>When picked up or spawned, cameras register themselves with the <code>Monitor</code> system (server-side).</li>
+                            <li>The server maintains a <code>SyncList</code> of all camera <code>netId</code>s and assigns them to monitor slots.</li>
+                            <li>Each <code>MonitorDisplaySlot</code> dynamically swaps between a live camera feed or a fallback static texture.</li>
+                            <li>Camera toggling is handled via <code>CmdToggle()</code>, updating <code>isActive</code> across the network.</li>
+                            <li><code>OnStateChanged()</code> enables/disables rendering, updates textures, and clears inactive feeds.</li>
+                            <li>Monitor interactions allow players to swap camera feeds using server-side Commands.</li>
+                            <li>A coroutine-based system waits for late-spawned cameras to ensure correct assignment for joining clients.</li>
+                            <li>The <code>CameraFeedUI</code> displays the active camera feed locally with smooth animated transitions.</li>
+                            <li>Audio feedback (on/off) reinforces camera state changes for player awareness.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>Awake()</code> – Initializes RenderTexture and per-instance materials.</li>
+                            <li><code>RegisterCamera()</code> – Server-side camera registration and slot assignment.</li>
+                            <li><code>CmdToggle()</code> – Networked camera activation toggle.</li>
+                            <li><code>OnStateChanged()</code> – Handles enabling rendering, audio, and texture updates.</li>
+                            <li><code>AssignCameraToSlotWhenReady()</code> – Ensures proper syncing for late joiners.</li>
+                            <li><code>MonitorDisplaySlot.UpdateFeed()</code> – Switches between live feed and static fallback.</li>
+                            <li><code>CameraFeedUI.UpdateVisibility()</code> – Controls UI display and animation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/camera_rendertexture_snippet.png" alt="RenderTexture Setup" class="media-img">
+                        <img src="../Images/CryptInc/camera_statechange_snippet.png" alt="Camera State Sync" class="media-img">
+                        <img src="../Images/CryptInc/monitor_assignment_snippet.png" alt="Monitor Assignment Logic" class="media-img">
+                        <img src="../Images/CryptInc/monitor_swap_snippet.png" alt="Monitor Swap Command" class="media-img">
+                        <img src="../Images/CryptInc/nightvision_shader_snippet.png" alt="Night Vision Shader" class="media-img">
+                        <img src="../Images/CryptInc/camera_ui_snippet.png" alt="Camera Feed UI" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 9-->
+                <div class="highlight-card">
+
+                    <h4>Evidence & Data Analyzer System (Networked Validation & Player Feedback)</h4>
+                    <p>
+                        A networked evidence validation system where players collect physical clues and analyze them using
+                        a shared Data Analyzer device. Combines server-authoritative progression tracking with immediate
+                        client-side audiovisual feedback to reinforce correct discoveries and guide player decision-making.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Evidence objects are treated as <code>Equipment</code>, allowing reuse of pickup, ownership, and consumption systems.</li>
+                            <li>Validation is triggered through the analyzer rather than the evidence itself, centralizing logic and reducing duplication.</li>
+                            <li>Server-side Commands ensure evidence results and progression cannot be spoofed by clients.</li>
+                            <li><code>ClientRpc</code> is used for instant visual/audio feedback across all players, keeping the experience synchronized.</li>
+                            <li><code>MaterialPropertyBlock</code> avoids material instancing overhead while enabling dynamic emission color changes.</li>
+                            <li>Decoupling evidence type (<code>EvidenceType</code>) from validation logic allows scalable addition of new clue types.</li>
+                            <li>Evidence is consumed on the server to prevent duplication or reuse exploits.</li>
+                            <li>Feedback system (color + sound) provides clear, readable results without relying on UI-heavy solutions.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Players collect <code>Evidence</code> objects, each tagged with an <code>EvidenceType</code> and validity (<code>isClue</code>).</li>
+                            <li>When used on a <code>DataAnalyzer</code>, the evidence calls <code>AnalyzeEvidence()</code>.</li>
+                            <li>A <code>Command</code> (<code>CmdAnalyzeEvidence</code>) runs on the server to validate the interaction.</li>
+                            <li>The server triggers <code>RpcPlayResult()</code>, broadcasting the result to all clients.</li>
+                            <li>The analyzer updates its emission color (blue = correct, red = incorrect) using <code>MaterialPropertyBlock</code>.</li>
+                            <li>Audio feedback is played globally to reinforce the result of the analysis.</li>
+                            <li>Correct evidence increments a shared counter, allowing progressive feedback (e.g., turning green after enough correct samples).</li>
+                            <li>If valid, the system notifies the <code>Round</code> manager to track collected evidence for win conditions.</li>
+                            <li>The evidence item is then consumed server-side via <code>ServerConsumeEquippedItem()</code>.</li>
+                            <li>On pickup, evidence removes itself from the spawner queue to prevent duplicate spawning.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>TryUseOn()</code> – Routes evidence interaction into the analyzer system.</li>
+                            <li><code>CmdAnalyzeEvidence()</code> – Server-side validation entry point.</li>
+                            <li><code>RpcPlayResult()</code> – Synchronizes visual and audio feedback across clients.</li>
+                            <li><code>MaterialPropertyBlock</code> usage – Efficient emission color updates.</li>
+                            <li><code>DestroyEvidence()</code> – Server-authoritative item consumption.</li>
+                            <li><code>OnPickup()</code> – Removes evidence from spawn queue.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/evidence_tryuse_snippet.png" alt="Evidence TryUse Logic" class="media-img">
+                        <img src="../Images/CryptInc/analyzer_command_snippet.png" alt="Analyzer Command" class="media-img">
+                        <img src="../Images/CryptInc/analyzer_rpc_snippet.png" alt="Analyzer RPC Feedback" class="media-img">
+                        <img src="../Images/CryptInc/emission_propertyblock_snippet.png" alt="Emission Color Logic" class="media-img">
+                        <img src="../Images/CryptInc/evidence_destroy_snippet.png" alt="Evidence Consumption" class="media-img">
+                        <img src="../Images/CryptInc/round_evidence_tracking_snippet.png" alt="Round Evidence Tracking" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 10-->
+                <div class="highlight-card">
+
+                    <h4>Networked Registry System (Player & Item Tracking Across Server/Clients)</h4>
+                    <p>
+                        A centralized registry system that tracks all active players and items in the game using Mirror’s
+                        SyncLists. Provides a reliable, network-synchronized way to query game state from anywhere,
+                        supporting gameplay systems, UI, and late-joining clients without fragile scene references.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Central registries eliminate the need for expensive <code>Find*</code> calls and scattered references.</li>
+                            <li><code>SyncList</code> automatically propagates changes (join/leave, spawn/despawn) to all clients.</li>
+                            <li>Server-only mutation ensures authoritative and consistent game state.</li>
+                            <li>Using <code>netId</code> instead of direct references avoids invalid pointers across the network.</li>
+                            <li>Supports late joiners by reconstructing world state from synchronized IDs.</li>
+                            <li>Generic access methods (<code>GetPlayerComponents&lt;T&gt;</code>) make the system reusable across gameplay features.</li>
+                            <li>Decouples systems (UI, cameras, gameplay logic) from direct player/item dependencies.</li>
+                            <li>Registry pattern scales cleanly as more networked systems are added.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>PlayerRegistry</code> maintains a <code>SyncList&lt;uint&gt;</code> of all player <code>netId</code>s.</li>
+                            <li>Players are registered/unregistered on the server as they join or disconnect.</li>
+                            <li>Clients resolve these <code>netId</code>s into actual objects using <code>NetworkClient.spawned</code>.</li>
+                            <li><code>GetPlayerComponents&lt;T&gt;</code> dynamically retrieves components (Transform, scripts, etc.) across all players.</li>
+                            <li>A nested <code>PlayerInfo</code> class uses <code>SyncVar</code> to replicate usernames across the network.</li>
+                            <li><code>ItemRegistry</code> tracks all active equipment using a <code>SyncList&lt;NetworkIdentity&gt;</code>.</li>
+                            <li>When a new client joins, the server sends all existing item <code>netId</code>s via a <code>TargetRpc</code>.</li>
+                            <li>The client reconstructs item state locally by resolving IDs and reactivating objects.</li>
+                            <li>This ensures late joiners see the correct world state without needing full scene resyncs.</li>
+                            <li>All systems (UI, monitors, gameplay) can query registries instead of maintaining their own lists.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>Register() / Unregister()</code> – Server-side player tracking.</li>
+                            <li><code>GetPlayerComponents&lt;T&gt;()</code> – Generic system-wide component access.</li>
+                            <li><code>PlayerInfo SyncVar</code> – Networked username synchronization.</li>
+                            <li><code>RegisterItem()</code> – Tracks active networked equipment.</li>
+                            <li><code>SendExistingItemsToClient()</code> – Late join synchronization.</li>
+                            <li><code>TargetSpawnExistingItems()</code> – Client-side reconstruction of world items.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/player_registry_snippet.png" alt="Player Registry Logic" class="media-img">
+                        <img src="../Images/CryptInc/player_components_snippet.png" alt="GetPlayerComponents Logic" class="media-img">
+                        <img src="../Images/CryptInc/playerinfo_syncvar_snippet.png" alt="Player Username Sync" class="media-img">
+                        <img src="../Images/CryptInc/item_registry_snippet.png" alt="Item Registry Logic" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 11-->
+                <div class="highlight-card">
+
+                    <h4>Dynamic Initialization System (Server-Driven Randomization & Replayability)</h4>
+                    <p>
+                        A server-authoritative initialization system that randomizes core gameplay elements at match start,
+                        including player models, enemy type, spawn locations, and evidence distribution. Ensures every session
+                        feels fresh while maintaining full network consistency across all clients.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>All randomization is performed on the server to guarantee deterministic and synchronized game state.</li>
+                            <li><code>SyncVar</code> usage ensures player-specific choices (like models) propagate cleanly to all clients.</li>
+                            <li>Disabling models before assignment prevents visual flicker during network initialization.</li>
+                            <li>Randomized spawn points increase replayability without requiring additional handcrafted content.</li>
+                            <li>Separating spawners (<code>ClueSpawner</code>, <code>EnemyRandomizer</code>) keeps systems modular and scalable.</li>
+                            <li>Using shuffled spawn point lists ensures no overlapping or duplicated placements.</li>
+                            <li>Supports reconnection flows by avoiding re-randomization when players rejoin mid-session.</li>
+                            <li>Server-controlled spawning via <code>NetworkServer.Spawn()</code> ensures all clients receive identical world state.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>On match start, the server initializes all dynamic systems (<code>OnStartServer()</code> entry points).</li>
+                            <li><code>ModelSelector</code> randomly assigns each player a character model using a <code>SyncVar</code>.</li>
+                            <li>The <code>OnModelChanged</code> hook applies the correct model and refreshes dependent systems (animation, equipment).</li>
+                            <li><code>EnemyRandomizer</code> selects a random cryptid type and spawn location, then spawns it on the server.</li>
+                            <li><code>ClueSpawner</code> gathers all valid spawn points and shuffles them to ensure randomized placement.</li>
+                            <li>A fixed number of clues and evidence are distributed across unique spawn points.</li>
+                            <li>All spawned objects are registered via <code>NetworkServer.Spawn()</code>, syncing them to every client.</li>
+                            <li>Clients automatically receive the initialized state and apply visuals through SyncVar hooks and spawn events.</li>
+                            <li>Reconnect logic prevents re-randomization, ensuring session continuity.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>OnStartServer()</code> – Entry point for all server-side initialization.</li>
+                            <li><code>selectedModel SyncVar + hook</code> – Player model synchronization.</li>
+                            <li><code>ApplyModel()</code> – Activates correct model and refreshes dependencies.</li>
+                            <li><code>SpawnObjects()</code> – Randomized clue/evidence distribution.</li>
+                            <li><code>SpawnRandomEnemy()</code> – Random cryptid selection and spawn.</li>
+                            <li><code>NetworkServer.Spawn()</code> – Replicates all initialized objects to clients.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/model_selector_snippet.png" alt="Model Selection Logic" class="media-img">
+                        <img src="../Images/CryptInc/model_syncvar_snippet.png" alt="Model SyncVar Hook" class="media-img">
+                        <img src="../Images/CryptInc/clue_spawner_snippet.png" alt="Clue Spawning Logic" class="media-img">
+                        <img src="../Images/CryptInc/enemy_randomizer_snippet.png" alt="Enemy Randomization" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 12 -->
+                <div class="highlight-card">
+
+                    <h4>Communication Systems (Text & Voice)</h4>
+                    <p>
+                        A fully integrated in-game communication system, combining <strong>text chat</strong> and <strong>voice chat</strong> for alive players and spectators.
+                        Ensures real-time interaction, server-authoritative messaging, and player-controlled muting while maintaining network consistency.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Text messages are server-authoritative (<code>CmdSendMessage</code>) to prevent desync or cheating.</li>
+                            <li>ClientRpc updates (<code>RpcReceiveMessage</code>) ensure all clients see messages identically.</li>
+                            <li>Chat UI auto-scrolls and auto-hides after a delay for unobtrusive gameplay.</li>
+                            <li>Dissonance voice chat separates channels for <code>Alive</code> (proximity) and <code>Spectator</code> (global), keeping alive players private while spectators can listen.</li>
+                            <li>Self-mute functionality gives players control without requiring push-to-talk.</li>
+                            <li>Integration with Steamworks provides real player names when available, with fallback to network ID.</li>
+                            <li>Input system integration ensures smooth toggling between typing, sending messages, and gameplay control.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Player opens chat → <code>PlayerTextChat</code> captures input → validates → <code>CmdSendMessage</code> → <code>TextChatUIManager.RpcReceiveMessage</code>.</li>
+                            <li>Chat UI spawns messages dynamically, rebuilds layout, and scrolls to the latest message.</li>
+                            <li>Voice controller assigns channels based on player state (<code>SetAlive()</code> vs <code>SetSpectator()</code>).</li>
+                            <li>Self-mute toggling updates both alive and spectator channels instantly and shows a visual mute icon.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>CmdSendMessage(string message, string senderName)</code> – Server-authoritative message relay.</li>
+                            <li><code>RpcReceiveMessage(string sender, string message)</code> – ClientRpc updates all clients’ chat UI.</li>
+                            <li><code>TextChatUIManager.SpawnMessageUI()</code> – Instantiates message prefab, updates layout, auto-scrolls, starts auto-hide.</li>
+                            <li><code>PlayerVoiceController.SetAlive()</code> / <code>SetSpectator()</code> – Dynamically enables/disables voice channels based on player role.</li>
+                            <li><code>PlayerVoiceController.ToggleSelfMute()</code> – Mutes/unmutes all channels and updates visual indicator.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/text_chat_CmdSendMessage_snippet.png" alt="Command Send Message" class="media-img">
+                        <img src="../Images/CryptInc/text_chat_RpcReceiveMessage_snippet.png" alt="Rpc Receive Message" class="media-img">
+                        <img src="../Images/CryptInc/text_chat_spawn_message_ui_snippet.png" alt="Spawn Message UI" class="media-img">
+                        <img src="../Images/CryptInc/voice_chat_set_alive_and_spectator.png" alt="Voice controller set alive and spectator" class="media-img">
+                        <img src="../Images/CryptInc/player_voice_Toggle_self_mute.png" alt="Toggle self mute" class="media-img">
+                        <img src="../Images/CryptInc/player_voice_inspector.png" alt="Voice inspector" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 13 -->
+                <div class="highlight-card">
+
+                    <h4>Spectator System (Player-Focused Tracking & UI Feedback)</h4>
+                    <p>
+                        A spectator system that allows players to observe matches after elimination. The camera is always locked to a player,
+                        starting with the spectator's own body, and can cycle through all active players. Integrates UI elements to clearly
+                        indicate which player is being observed.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Camera is always anchored to a player to maintain consistent perspective of in-game action.</li>
+                            <li>Starting on the spectator's own body provides continuity and prevents disorientation.</li>
+                            <li>Player cycling allows observers to follow different participants seamlessly.</li>
+                            <li>Spectator UI clearly shows the currently observed player, improving clarity in multiplayer matches.</li>
+                            <li>Input system ensures intuitive controls for cycling between players.</li>
+                            <li>Dynamic player list updates ensure spectators can track all active players in real-time.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Activating spectator mode locks the camera to the spectator’s own player model.</li>
+                            <li>Camera follows each targeted player using a configurable offset for consistent framing.</li>
+                            <li><code>OnPlayerCycle</code> input cycles forward or backward through all active players.</li>
+                            <li><code>FollowPlayer()</code> calculates position and rotation relative to the target player only.</li>
+                            <li><code>SnapToNextPlayer()</code> ensures smooth transitions when entering spectator mode or after a player leaves.</li>
+                            <li>Spectator UI updates dynamically to display the name of the currently observed player.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>EnterSpectatorMode()</code> – Locks camera to your body and enables cycling input.</li>
+                            <li><code>FollowPlayer()</code> – Keeps camera positioned and rotated relative to the currently observed player.</li>
+                            <li><code>OnPlayerCycle(InputAction.CallbackContext)</code> – Switches camera to the next or previous player.</li>
+                            <li><code>SnapToNextPlayer()</code> – Ensures proper player focus when starting or updating spectator view.</li>
+                            <li><code>PlayerRegistry.Instance.GetPlayerTransforms()</code> – Retrieves all active player positions for cycling.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/spectator_enter_spectator_snippet.png" alt="Enter spectator" class="media-img">
+                        <img src="../Images/CryptInc/spectator_follow_player.png" alt="Camera Following Player" class="media-img">
+                        <img src="../Images/CryptInc/spectator_cycle_snippet.png" alt="Player Cycling Logic" class="media-img">
+                        <img src="../Images/CryptInc/spectator_snap_to_next_player_snippet.png" alt="Snap to next player" class="media-img">
+                    </div>
+                </div>
+
+                <!-- Highlight Card 14 -->
+                <div class="highlight-card">
+
+                    <h4>Score System (Dynamic Player & Team Performance)</h4>
+                    <p>
+                        A networked score system that dynamically calculates individual and team performance based on objectives,
+                        including cryptid identification, capture, and player survival. Integrates with UI elements to provide
+                        immediate feedback and handles post-match continuation through a synchronized “Continue” system.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h5 style="color: #1da1f2;">Why it’s done this way</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li>Tracks multiple objectives simultaneously, giving players clear feedback on success and contribution.</li>
+                            <li>Uses multipliers to differentiate score for alive versus dead players, reflecting performance impact.</li>
+                            <li>UI elements dynamically update to reflect objective completion and team totals.</li>
+                            <li>SyncVar hooks ensure all clients see consistent score updates in real-time.</li>
+                            <li>Post-match continue system is networked to prevent desyncs and ensure unanimous player readiness before proceeding.</li>
+                            <li>Integration with Steam allows host-controlled lobby state and player continuation tracking.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">How it works</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem; margin-bottom: 1rem;">
+                            <li><code>Score.UpdateScore()</code> calculates player totals based on team objectives and alive/dead status.</li>
+                            <li>Cryptid objectives toggle UI indicators (<code>crypIdenTrue/False</code>, <code>crypCaptTrue/False</code>).</li>
+                            <li>Mission survival is displayed as a fraction of alive players over total.</li>
+                            <li>Player total score applies a multiplier based on alive or dead state, updating the <code>TMP_Text</code> display.</li>
+                            <li><code>ScoreBtn</code> listens for player “Continue” presses and updates text via <code>ContinueManager</code>.</li>
+                            <li><code>ContinueManager.CmdPressContinue()</code> increments a synchronized count; once all players are ready, the server ends the game or leaves the lobby.</li>
+                            <li>SyncVar hooks and events (<code>OnContinueUpdated</code>) propagate updates to all clients.</li>
+                        </ul>
+
+                        <h5 style="color: #1da1f2;">Code Snippets</h5>
+                        <ul style="color: #ccc; font-size: 0.95rem;">
+                            <li><code>UpdateScore()</code> – Calculates player score dynamically based on alive status and completed objectives.</li>
+                            <li><code>crypIdenTrue/False, crypCaptTrue/False</code> – Visual indicators of cryptid objectives.</li>
+                            <li><code>missionSurvivalText.text</code> – Displays number of surviving players in real-time.</li>
+                            <li><code>ScoreBtn.OnPressed()</code> – Handles “Continue” button press and communicates with server.</li>
+                            <li><code>ContinueManager.CmdPressContinue()</code> – Tracks which players pressed continue and triggers end-of-game.</li>
+                            <li><code>OnContinueCountChanged()</code> – SyncVar hook that updates all clients when continue count changes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="snippet-images" style="margin-top: 1rem;">
+                        <img src="../Images/CryptInc/score_update_snippet.png" alt="Score Update Logic" class="media-img">
+                        <img src="../Images/CryptInc/score_ui_snippet.png" alt="Objective UI Indicators" class="media-img">
+                        <img src="../Images/CryptInc/score_continue_snippet.png" alt="Continue Button Logic" class="media-img">
+                        <img src="../Images/CryptInc/continue_manager_snippet.png" alt="Continue Manager SyncVar" class="media-img">
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <!-- BACK TO MAIN -->
+        <div class="back-to-top">
+            <a href="../index.html">Back to Projects</a>
+        </div>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-icons">
+                <a href="https://github.com/Moose-47" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/dylan-dixon-870052372/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:DylanDixon-@outlook.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Dylan Dixon</p>
+    </footer>
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="prevBtn" class="nav-btn">&#10094;</button>
+        <img src="" alt="Full View" id="lightboxImg">
+        <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <style>
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+                border-radius: 8px;
+                transition: transform 0.2s;
+                cursor: zoom-in;
+            }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            background: rgba(0,0,0,0.4);
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 1010;
+            user-select: none;
+        }
+
+        #prevBtn {
+            left: 2%;
+        }
+
+        #nextBtn {
+            right: 2%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(29,161,242,0.8);
+        }
+    </style>
+
+    <script>
+        // LIGHTBOX ELEMENTS
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        let scale = 1;
+        let isDragging = false;
+        let dragMoved = false;
+
+        let startX = 0;
+        let startY = 0;
+
+        let startMouseX = 0;
+        let startMouseY = 0;
+
+        let currentX = 0;
+        let currentY = 0;
+
+        const DRAG_THRESHOLD = 5;
+
+
+        // --- OPEN LIGHTBOX ---
+        function openLightbox(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+
+            scale = 1;
+            currentX = 0;
+            currentY = 0;
+
+            updateTransform();
+        }
+
+
+        // --- CLOSE LIGHTBOX ---
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+
+                updateTransform();
+            }
+        });
+
+
+        // --- NAVIGATION ---
+        function showNext() {
+            if (!currentGallery.length) return;
+
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+
+        function showPrev() {
+            if (!currentGallery.length) return;
+
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            openLightbox(currentGallery[currentIndex]);
+        }
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showNext();
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showPrev();
+        });
+
+
+        // --- KEYBOARD NAVIGATION ---
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display !== 'flex') return;
+
+            if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'Escape') lightbox.style.display = 'none';
+        });
+
+
+        // --- ZOOM & PAN FUNCTIONS ---
+        function updateTransform() {
+            lightboxImg.style.transform =
+                `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        }
+
+        function limitPan() {
+            const rect = lightboxImg.getBoundingClientRect();
+            const parentRect = lightbox.getBoundingClientRect();
+
+            const maxX = Math.max(0, (rect.width - parentRect.width) / 2);
+            const maxY = Math.max(0, (rect.height - parentRect.height) / 2);
+
+            currentX = Math.min(Math.max(currentX, -maxX), maxX);
+            currentY = Math.min(Math.max(currentY, -maxY), maxY);
+        }
+
+
+        // --- MOUSE WHEEL ZOOM ---
+        lightboxImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+
+            const prevScale = scale;
+
+            scale += e.deltaY < 0 ? 0.1 : -0.1;
+            scale = Math.min(Math.max(1, scale), 3);
+
+            const rect = lightboxImg.getBoundingClientRect();
+
+            const dx = (e.clientX - rect.left - rect.width / 2) * (scale / prevScale - 1);
+            const dy = (e.clientY - rect.top - rect.height / 2) * (scale / prevScale - 1);
+
+            currentX -= dx;
+            currentY -= dy;
+
+            limitPan();
+            updateTransform();
+        });
+
+
+        // --- DRAG START ---
+        lightboxImg.addEventListener('mousedown', (e) => {
+
+            isDragging = true;
+            dragMoved = false;
+
+            startX = e.clientX - currentX;
+            startY = e.clientY - currentY;
+
+            startMouseX = e.clientX;
+            startMouseY = e.clientY;
+
+            e.preventDefault();
+        });
+
+
+        // --- DRAG MOVE ---
+        document.addEventListener('mousemove', (e) => {
+
+            if (!isDragging) return;
+
+            const dx = e.clientX - startMouseX;
+            const dy = e.clientY - startMouseY;
+
+            if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+                dragMoved = true;
+            }
+
+            if (scale > 1) {
+
+                currentX = e.clientX - startX;
+                currentY = e.clientY - startY;
+
+                limitPan();
+                updateTransform();
+            }
+        });
+
+
+        // --- DRAG END / CLICK ZOOM ---
+        document.addEventListener('mouseup', (e) => {
+
+            if (!isDragging) return;
+
+            isDragging = false;
+
+            if (!dragMoved) {
+
+                const prevScale = scale;
+
+                if (scale === 1) {
+                    scale = 2;
+                } else {
+                    scale = 1;
+                    currentX = 0;
+                    currentY = 0;
+                }
+
+                if (scale > prevScale) {
+
+                    const rect = lightboxImg.getBoundingClientRect();
+
+                    const dx =
+                        (e.clientX - rect.left - rect.width / 2) *
+                        (scale / prevScale - 1);
+
+                    const dy =
+                        (e.clientY - rect.top - rect.height / 2) *
+                        (scale / prevScale - 1);
+
+                    currentX -= dx;
+                    currentY -= dy;
+                }
+
+                limitPan();
+                updateTransform();
+            }
+        });
+
+
+        // --- INIT GALLERIES PER CARD ---
+        document.querySelectorAll('.highlight-card').forEach(card => {
+
+            const images = Array.from(card.querySelectorAll('img'));
+
+            images.forEach((img, index) => {
+
+                img.style.cursor = 'pointer';
+
+                img.addEventListener('click', () => {
+
+                    currentGallery = images;
+                    currentIndex = index;
+
+                    scale = 1;
+                    currentX = 0;
+                    currentY = 0;
+
+                    openLightbox(currentGallery[currentIndex]);
+                });
+            });
+
+        });</script>
 </body>
 </html>
