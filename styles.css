@@ -119,9 +119,9 @@ h2 {
 
 /* ABOUT GRID */
 .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    max-width: 800px; /* controls how wide it can get */
+    margin: 0 auto; /* centers it horizontally */
+    text-align: center; /* optional: centers text */
 }
 
 .about-text p + p {
